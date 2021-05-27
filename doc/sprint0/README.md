@@ -43,7 +43,24 @@ Step2:
 
 Step3:
 
-## Contribution
+## Contributing
+When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository or other teammates before making a change.
+
+*Note*: Please make pull request instead of directly merging into the master branch.
+
+### Responsibility
+Core contributors should attend daily standup, actively communicate with other project members, and push meaningful commit messages that well describe the code changes.
+
+### Our Standards
+Examples of behavior that contributes to creating a positive environment
+include:
+
+* Using welcoming and inclusive language
+* Being respectful of differing viewpoints and experiences
+* Gracefully accepting constructive criticism
+* Focusing on what is best for the community
+* Showing empathy towards other community members
+
 
 ## Project Members
 - JunXing Xu
