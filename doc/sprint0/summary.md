@@ -5,9 +5,9 @@ The objective of this project is to develop a community and e-learning platform 
 
 ### Key users
 The key users of this project are:
-- African entrepreneurs
-- Companies
-- Partners (investors, service providers, corporations)
+- African entrepreneurs that want to share their thoughts, deliver their products, learn different skills and have close relationship with companies.
+- Companies that want to promote themselves and have contact with entrepreneurs.
+- Partners (investors, service providers, corporations) that want to interact with entrepreneurs and companies or provide them with services.
 
 ### Scenarios
 Some of the scenarios are:
