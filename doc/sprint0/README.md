@@ -8,7 +8,7 @@ You can explore following topics in this file:
 - Project Members
 
 ## Introduction
-This is a course project of group **EZ4.0** at UTSC in 2021 Summer.
+This is a course project of group **EZ4.0** for CSCC01 at UTSC in 2021 Summer.
 
 ## Motivation
 
