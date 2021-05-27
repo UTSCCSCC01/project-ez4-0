@@ -3,6 +3,7 @@ You can explore following topics in this file:
 - Introduction
 - Motivation
 - Installation
+- Getting Started
 - Contribution
 - Project Members
 
@@ -12,6 +13,8 @@ This is a team project of group **EZ4.0**.
 ## Motivation
 
 ## Installation
+
+## Getting Started
 
 ## Contribution
 
