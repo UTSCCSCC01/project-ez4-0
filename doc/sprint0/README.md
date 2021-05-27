@@ -1,5 +1,5 @@
 # "FANCYNAME": A Community and E-Learning Virtual Platform
-You can explore following topics in this file:
+You can explore the following topics in this file:
 - Introduction
 - Motivation
 - Installation
@@ -8,11 +8,11 @@ You can explore following topics in this file:
 - Project Members
 
 ## Introduction
-This is a course project of group **EZ4.0** for CSCC01 at UTSC in 2021 Summer.
+This is a course project of group **EZ4.0** for CSCC01 at UTSC in the 2021 Summer.
 
 The goal of this platform will be to provide the end to end experience for our target users (aspiring, first time
 African entrepreneurs) - where they can come in with their problem/need identified, learn how to build
-their solution, get involved into bigger communities and build their companies.
+their solution, get involved in bigger communities and build their companies.
 
 ## Motivation
 As mentioned by the African Impact Initiative:
@@ -20,14 +20,14 @@ As mentioned by the African Impact Initiative:
 platform that integrates the various jobs to be done which the challenge provides to those aspiring entrepreneurs who we
 support.
 
-We realized that it is a great chance for us to utilize our enhanced technical skills, and this project indeed meet our desire of helping people of developing area.
+We realized that it is a great chance for us to utilize our enhanced technical skills, and this project indeed meets our desires of helping people in developing areas.
 
-As such, we decided to build a virtual platform mainly focus on
+As such, we decided to build a virtual platform that mainly focuses on the community and E-Learning features for our potential users, since efficient learning experiences and effective communications play a crucial role for first-time entrepreneurs, registered companies and partners.
 
 
 
 ## Installation
-The following softwares should be downloaded for this virtual platform:
+The following software should be downloaded for this virtual platform:
 1. software 1
 2. software 2
 3. software 3
