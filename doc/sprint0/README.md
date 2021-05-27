@@ -1,4 +1,4 @@
-# Community and E-Learning Virtual Platform
+# "FANCYNAME": A Community and E-Learning Virtual Platform
 You can explore following topics in this file:
 - Introduction
 - Motivation
