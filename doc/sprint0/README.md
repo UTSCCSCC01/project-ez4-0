@@ -48,10 +48,10 @@ When contributing to this repository, please first discuss the change you wish t
 
 *Note*: Please make pull request instead of directly merging into the master branch.
 
-### Responsibility
+#### Responsibility
 Core contributors should attend daily standup, actively communicate with other project members, and push meaningful commit messages that well describe the code changes.
 
-### Our Standards
+#### Our Standards
 Examples of behavior that contributes to creating a positive environment
 include:
 
