@@ -24,7 +24,7 @@ We realized that it is a great chance for us to utilize our enhanced technical s
 
 As such, we decided to build a virtual platform that mainly focuses on the community and E-Learning features for our potential users, since efficient learning experiences and effective communications play a crucial role for first-time entrepreneurs, registered companies and partners.
 
-
+That is how "FANCYNAME" comes into our minds.
 
 ## Installation
 The following software should be downloaded for this virtual platform:
