@@ -28,7 +28,7 @@ As such, we decided to build a virtual platform that mainly focuses on the commu
 That is how "FANCYNAME" comes into our minds.
 
 ## Demo
-
+Here is a quick demo video for the project.
 
 ## Installation
 The following software should be downloaded for this virtual platform:
