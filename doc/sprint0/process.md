@@ -8,14 +8,14 @@ First of all, roles is divided clearly in our team.
 - developers:JunXing Xu, Zhenye Zhu,  Houde Liu, Jiale Yu, Xianghu Dai
 - testers: Zhenye Zhu,  Houde Liu, Jiale Yu, Xianghu Dai
 
-This might change as the project is developing.
+These roles might change as the project is developing.
 
 
 
-As for decision making, for those crucial decisions which are decisive for our project, we will first brain storm and come up with some possible ideas. We will carefully discuss those ideas and try to reach an agreement. However, whenever there is a conflict, we have decided to simply use voting to decide if we should make the decision or which decision should be made.
+As for decision making, for those crucial decisions which are decisive for our project, we will first brain storm and come up with some possible ideas. We will  then carefully discuss those ideas and try to reach an agreement. However, whenever there is a conflict, we have decided to simply use voting to decide if we should make the decision or which decision should be made.
 
 Prioritizing user stories is vital for our project. 
-The priorities are evaluated based on the following criteria:
+The priorities of a user story are evaluated based on the following criteria:
 
 -   Value: what value does the story add to application
 -   Cost: the cost of adding the desire feature. Some features may prove too costly to implement.
