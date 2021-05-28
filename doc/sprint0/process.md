@@ -29,6 +29,6 @@ In this way, we put all our user stories into 4 categories and prioritize them a
 -   **C**ould Have: the user story has value and is desirable, but ultimately is not necessary.
 -   **W**on’t Have: the user story is understood to be amongst the least-critical or lowest value.
 
-Moreover, as for the meetings, our team has decided to meet every two days using the discord channel. That is the normal meeting frequency. And we are always always prepared to meet everyday if it is needed.
+Moreover, as for the meetings, our team has decided to hold stand up meeting everyday using the discord channel. This might change as the project is proceeding.
 
 Since while our team are discussing about the product backlog, we found that some of the features might involve knowledge and algorithms related to machine learning and artificial intelligence. So for the next phase, our team members are all looking forward to learn the required knowledge and perfect our project.
