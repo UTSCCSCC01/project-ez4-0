@@ -3,7 +3,6 @@
 This section is for our team reflect on how we have worked together and decide what we should do to improve the working efficiency of our team.
 
 First of all, roles is divided clearly in our team. 
-- product owner: JunXing Xu
 - scrum master: JunXing Xu
 - developers:JunXing Xu, Zhenye Zhu,  Houde Liu, Jiale Yu, Xianghu Dai
 - testers: Zhenye Zhu,  Houde Liu, Jiale Yu, Xianghu Dai
