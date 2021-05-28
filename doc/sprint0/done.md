@@ -4,7 +4,7 @@ This section is what our team agrees as what ”done” means for the features o
 
 
 The bullet points below is the definition of done our team agrees.
--   the code is well-written and documented. That is, the team does not have to immediately refactor or rewrite it.
+-   the code is well-written and documented. That is, the team does not have to rewrite it.
 -   the code is checked in on the repository.
 -   the code passed all automated tests at each appropriate levels.
 -   the code has been either pair programmed or has been code inspected.
