@@ -59,7 +59,7 @@ $ source venv/bin/activate
 
 4. Install the necessary packages specified in `requirements.txt`
 ```
-(venv) $ pip install -r requirement.txt
+(venv) $ pip install -r requirements.txt
 ```
 
 5. Setup `config.py` for server configurations and modify them as needed. The reason why we want to do this is to allow each developer to have a customizable running at their local and wouldn't affect other environments
