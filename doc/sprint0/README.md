@@ -50,6 +50,8 @@ Require `Python 3.8+` (Suggest using [pyenv](https://github.com/pyenv/pyenv))
 ```
 $ cd backend    # The following commands assumed you are in backend/
 $ python -m venv venv
+# or, if the above command does not work
+python -m virtualenv venv
 ```
 
 3. Activate the virtualenv by
