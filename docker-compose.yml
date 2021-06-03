@@ -1,6 +1,6 @@
 version: '3.5'
 services:
-  postgres:
+  project-postgres:
     restart: always
     image: postgres:12
     ports:
@@ -10,7 +10,7 @@ services:
       - POSTGRES_PASSWORD=password
     volumes:
       - postgres-volume:/var/lib/postgresql/data
-  verto-mongo:
+  project-mongo:
     image: mongo:4.2.7-bionic
     ports:
       - 27017:27017
