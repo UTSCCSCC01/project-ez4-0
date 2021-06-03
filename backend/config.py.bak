@@ -1,2 +1,16 @@
 """All configurations should go here"""
+
 ORIGINS = ['*']
+
+# CORS
+ORIGINS = ['*']
+
+# MongoDB
+MONGODB_URL = "mongodb://admin:password@localhost:27017/project?authSource=admin"
+MONGO_DB = "project"
+MONGODB_MAX_IDLE_TIME_MS = 120000
+
+# PostgreSQL
+SQLALCHEMY_ECHO = False  # do not show SQL statements
+SQLALCHEMY_TRACK_MODIFICATIONS = False  # suppress warnings
+SQLALCHEMY_DATABASE_URI = "postgresql://admin:password@localhost:5432/project"
