@@ -1,4 +1,4 @@
-# "FANCYNAME": A Community and E-Learning Virtual Platform
+# EntreE: A Community and E-Learning Virtual Platform
 You can explore the following topics in this file:
 - Introduction
 - Motivation
@@ -25,7 +25,7 @@ We realized that it is a great chance for us to utilize our enhanced technical s
 
 As such, we decided to build a virtual platform that mainly focuses on the community and E-Learning features for our potential users, since efficient learning experiences and effective communications play a crucial role for first-time entrepreneurs, registered companies and partners.
 
-That is how "FANCYNAME" comes into our minds.
+That is how EntreE comes into our minds.
 
 ## Demo
 Here is a quick demo video for the project.
