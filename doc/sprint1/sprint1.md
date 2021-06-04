@@ -41,8 +41,11 @@ The reason why we choose this 5 stories is because they are the top priorities a
     - User database schema setup
     - Frontend registration form
 3. As a user, I want to sign in to my account so that I can enjoy the services on the platform
+    - Get account number and password entered by users
+    - Check the correctness of sign in information with database
+    -  UI design of the sign in page
+4. As a logged-in user, I want to reset my password through email so that I don’t need to worry if I forget it
     - Send e-mail with resetting password link
     - Get the new password typed by user
     - Update password in the database
-4. As a logged-in user, I want to reset my password through email so that I don’t need to worry if I forget it
-5. As a logged-in user, I want to see other users’ profiles so that I can know better about other users
+6. As a logged-in user, I want to see other users’ profiles so that I can know better about other users
