@@ -1,0 +1,25 @@
+version: '3.5'
+services:
+  project-postgres:
+    restart: always
+    image: postgres:12
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data
+  project-mongo:
+    image: mongo:4.2.7-bionic
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo-volume:/data/db/
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: admin
+volumes:
+  postgres-volume:
+  mongo-volume:

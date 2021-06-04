@@ -31,17 +31,69 @@ That is how "FANCYNAME" comes into our minds.
 Here is a quick demo video for the project.
 
 ## Installation
-The following software should be downloaded for this virtual platform:
-1. software 1
-2. software 2
-3. software 3
+The stack for this project is:
+- Backend: flask
+- Frontend: react
+- Database: MongoDB, PostgreSQL
+- VM: docker
 
-## Getting Started
-Step1:
+### Docker Setup
+We use docker to manage databases instead of directly downloading them. Checkout [Here](https://docs.docker.com/get-started/) for docker setup. After you successfully setting it up, run the command to spin up the database images:
+```
+$ docker-compose up -d
+```
 
-Step2:
+### Backend Setup
+Require `Python 3.8+` (Suggest using [pyenv](https://github.com/pyenv/pyenv))
 
-Step3:
+1. First create a virtualenv named `venv` under the `backend` folder, see [here](https://virtualenv.pypa.io/en/latest/installation.html) for more information about `virtualenv` and how to install it
+```
+$ cd backend    # The following commands assumed you are in backend/
+$ python -m venv venv
+# or, if the above command does not work
+python -m virtualenv venv
+```
+
+3. Activate the virtualenv by
+```
+$ source venv/bin/activate
+```
+
+4. Install the necessary packages specified in `requirements.txt`
+```
+(venv) $ pip install -r requirements.txt
+```
+
+5. Setup `config.py` for server configurations and modify them as needed. The reason why we want to do this is to allow each developer to have a customizable running at their local and wouldn't affect other environments
+```
+(venv) $ cp config.py.bak config.py
+```
+
+6. Finally, start the server. The `FLASK_ENV=development` flag here specifies that you are running at a development mode at local so that whenever you saved a file the server will be automatically reloaded
+```
+(venv) $ FLASK_ENV=development flask run
+```
+
+7. Test if your server is successfully running by checking out [http://localhost:5000/](http://localhost:5000/). You should see:
+```
+{
+  "success": true
+}
+```
+
+### Frontend Setup
+Require `yarn 1.22+` (Installation guide [here](https://classic.yarnpkg.com/en/docs/install/#mac-stable))
+
+1. Install the packages using yarn
+```
+cd frontend    # The following commands assumed you are in frontend/
+$ yarn
+```
+
+2. Start the frontend
+```
+$ yarn start
+```
 
 ## Contributing
 When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository or other teammates before making a change.

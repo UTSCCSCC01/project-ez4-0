@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./backend"
+    ],
+    "python.pythonPath": "backend/venv/bin/python"
+}
