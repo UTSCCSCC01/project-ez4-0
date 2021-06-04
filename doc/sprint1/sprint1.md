@@ -1,5 +1,5 @@
 # Sprint 1
-The following are information about our sprint 1 including goal, 
+The following are information about our sprint 1 planning
 
 ### Meeting Date
 June 4, 2021
