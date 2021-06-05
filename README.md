@@ -69,12 +69,17 @@ $ source venv/bin/activate
 (venv) $ cp config.py.bak config.py
 ```
 
-6. Finally, start the server. The `FLASK_ENV=development` flag here specifies that you are running at a development mode at local so that whenever you saved a file the server will be automatically reloaded
+6. We use [Flask-Migrate](https://flask-migrate.readthedocs.io/en/latest/) to manage the PostgreSql database schemas. Upgrade the database by running the following command
+```
+(venv) $ flask db upgrade
+```
+
+7. Finally, start the server. The `FLASK_ENV=development` flag here specifies that you are running at a development mode at local so that whenever you saved a file the server will be automatically reloaded
 ```
 (venv) $ FLASK_ENV=development flask run
 ```
 
-7. Test if your server is successfully running by checking out [http://localhost:5000/](http://localhost:5000/). You should see:
+8. Test if your server is successfully running by checking out [http://localhost:5000/](http://localhost:5000/). You should see:
 ```
 {
   "success": true

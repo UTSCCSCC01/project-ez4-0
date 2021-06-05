@@ -11,6 +11,7 @@ import config as c
 
 
 logger = logging.Logger(logging.INFO)
+db = SQLAlchemy()
 
 
 def create_app():
@@ -55,8 +56,10 @@ def register_blueprints(app):
 
 def register_extensions(app):
     """Extensions(Databases) registrations"""
+    # Import models from Flask Migrate
+    from models import User
+
     # PostgreSQL
-    db = SQLAlchemy()
     db.init_app(app)
     # Migrations
     Migrate(app, db)
