@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import landingPage from "./LandingPage";
+const generateItemList = (num) => {
+  const itemList = [];
+  var i;
+  for (i = 0; i < num; i++) {
+    itemList.push({ id: i, name: `Item #${i}`, value: 1 });
+    // console.log(i);
+  }
+  return itemList;
+};
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const defaultNum = 3;
+
+const App = () => {
+  // useEffect(() => {
+  //   document.body.style.backgroundColor = "#1791FF";
+  // }, []);
+  return landingPage();
+};
 
 export default App;
