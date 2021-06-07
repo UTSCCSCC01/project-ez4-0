@@ -32,6 +32,8 @@ jobs:
         run: cp config.py.bak config.py
       - name: Setup docker-compose containers
         run: docker-compose up -d
+      - name: Setup PostgreSQL schemas
+        run: flask db upgrade
       - name: Test with pytest
         run: |
           pytest tests
