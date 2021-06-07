@@ -29,9 +29,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Setup server config
-          run: cp config.py.bak config.py
+        run: cp config.py.bak config.py
       - name: Setup docker-compose containers
-          run: docker-compose up -d
+        run: docker-compose up -d
       - name: Test with pytest
         run: |
           pytest tests
