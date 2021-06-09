@@ -6,6 +6,7 @@ when we publish new APIs we will use v2, v3, ...
 """
 from flask import Blueprint
 from .user_controller import UserController, UsersController
+from .auth_controller import AuthController
 
 
 user_bp_name = "user"
@@ -19,3 +20,13 @@ def set_user_routes(api, docs):
 
     api.add_resource(UsersController, "/users")
     docs.register(UsersController, blueprint=user_bp_name)
+
+
+auth_bp_name = "auth"
+auth_bp = Blueprint(auth_bp_name, __name__, url_prefix="/api/v1")
+def set_auth_routes(api, docs):
+    """
+    Setup routes for the Auth API
+    """
+    api.add_resource(AuthController, "/auth")
+    docs.register(AuthController, blueprint=auth_bp_name)

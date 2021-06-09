@@ -56,7 +56,12 @@ def create_app(test=False):
 
 def register_blueprints(app):
     """Blueprints(APIs) registrations"""
-    from controllers.v1 import user_bp, set_user_routes
+    from controllers.v1 import (
+        user_bp,
+        set_user_routes,
+        auth_bp,
+        set_auth_routes,
+    )
 
     APISPEC_SPEC = APISpec(
         title="EntreE API",
@@ -77,6 +82,11 @@ def register_blueprints(app):
     user_api = Api(user_bp)
     app.register_blueprint(user_bp)
     set_user_routes(user_api, docs)
+
+    # Auth API
+    auth_api = Api(auth_bp)
+    app.register_blueprint(auth_bp)
+    set_auth_routes(auth_api, docs)
 
 
 def register_extensions(app):

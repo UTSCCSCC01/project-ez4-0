@@ -16,6 +16,7 @@ from .base_controller import BaseController
 from models import User
 
 
+@doc(tags=["User"])
 class UserController(BaseController):
     @doc(description="Get a single user by ID")
     @marshal_with(UserSchema, code=200)
@@ -50,6 +51,7 @@ class UserController(BaseController):
         return {"description": "User not found"}, 404
 
 
+@doc(tags=["User"])
 class UsersController(BaseController):
     @doc(description="Create a new user")
     @use_kwargs(CreateUserSchema)
