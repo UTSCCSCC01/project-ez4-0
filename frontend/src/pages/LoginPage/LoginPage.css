@@ -1,0 +1,8 @@
+.customize-signin-form-signin-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.customize-signin-form-signin-btn:disabled:hover {
+  background-color: rgba(99, 102, 241, 1);
+}
