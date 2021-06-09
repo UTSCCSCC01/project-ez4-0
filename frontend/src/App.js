@@ -1,11 +1,10 @@
 import "./css/App.css";
-import Example from "./Example.jsx";
-import LoginForm from './components/LoginForm/LoginForm';
+import Router from './Router';
 
 function App() {
   return (
     <div>
-      <LoginForm />
+      <Router/>
     </div>
   );
 }
