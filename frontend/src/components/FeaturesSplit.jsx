@@ -6,10 +6,10 @@ const Card = ({ title, subtitle, content, img }) => {
     <>
       <div className="flex flex-wrap">
         {/* // p-8 rounded-md border shadow-md"> */}
-        <div className="mr-32">
+        <div className="mr-0 md:mr-24">
           <div className=" text-indigo-500 font-medium mb-1">{subtitle}</div>
           <h3 className=" text-2xl font-bold mb-8">{title}</h3>
-          <p className="w-96">{content}</p>
+          <p className=" w-72 md:w-96">{content}</p>
         </div>
         <div className="mt-12 lg:mt-0">
           <img className="w-96" src={img} />

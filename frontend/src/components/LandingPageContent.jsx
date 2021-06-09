@@ -8,7 +8,7 @@ export default function LandingPageContent() {
         <div>
           <h1
             className="leading-tight md:leading-snug 
-          font-cg text-4xl md:text-4xl font-bold text-gray-900"
+          font-cg text-3xl md:text-4xl font-bold text-gray-900"
           >
             <span className="block">Start your business</span>{" "}
             <span className="block">

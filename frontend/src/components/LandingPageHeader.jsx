@@ -18,7 +18,7 @@ import {
   XIcon,
 } from "@heroicons/react/outline";
 import { ChevronDownIcon } from "@heroicons/react/solid";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const solutions = [
   {
@@ -121,7 +121,7 @@ function NavBar() {
       <div className="flex justify-between items-center  border-gray-100 py-6 md:justify-start md:space-x-10">
         <div className="flex justify-start lg:w-0 lg:flex-1">
           <a href="#">
-            <img className="h-7 md:h-8" src={logo} alt="EntreE Logo" />
+            <img className="ml-4 h-7 md:h-8" src={logo} alt="EntreE Logo" />
           </a>
         </div>
         <div className="-mr-2 -my-2 md:hidden">
