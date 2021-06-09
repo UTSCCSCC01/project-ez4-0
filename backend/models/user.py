@@ -34,7 +34,7 @@ class User(BaseModel):
         """
         Verify the given password with the hashed passowrd stored
         """
-        return check_password_hash(self.hash_password, password)
+        return check_password_hash(self.password, password)
 
     @classmethod
     def create(cls, email, password):

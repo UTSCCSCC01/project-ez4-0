@@ -1,10 +1,9 @@
 from flask_restful import Resource
-from flask_apispec import doc, marshal_with
+from flask_apispec import marshal_with
 from schemas import ErrorResponseSchema
 from flask_apispec.views import MethodResourceMeta
 
 
-@doc(tags=["User"])
 @marshal_with(ErrorResponseSchema, code=404)
 @marshal_with(ErrorResponseSchema, code=403)
 @marshal_with(ErrorResponseSchema, code=401)
