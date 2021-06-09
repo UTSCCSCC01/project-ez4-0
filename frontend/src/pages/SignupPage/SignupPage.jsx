@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import './SignupPage.css';
 
 export default function SignupPage() {
@@ -7,6 +8,7 @@ export default function SignupPage() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [signupSuccess, setSignupSuccess] = useState(false);
 
   const signUpDisabled = () => {
     const fieldFilled = email === "" || password === "" || firstName === "" || lastName === "";
@@ -42,8 +44,12 @@ export default function SignupPage() {
     fetch("http://localhost:5000/api/v1/users", requestOptions)
       .then(response => response.json())
       .then(result => {
-        console.log(result);
+        setSignupSuccess(true);
       });
+  }
+
+  if (signupSuccess) {
+    return <Redirect to="/" />
   }
 
   return (

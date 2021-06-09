@@ -1,15 +1,16 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
-import SignupPage from "./pages/SignupPage/SignupPage";
-import ResetPasswordPage from "./pages/ResetPasswordPage/ResetPasswordPage";
-import ResetPasswordConfirmPage from "./pages/ResetPasswordConfirmPage/ResetPasswordConfirmPage";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import SignupPage from './pages/SignupPage/SignupPage';
+import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage';
+import ResetPasswordConfirmPage from './pages/ResetPasswordConfirmPage/ResetPasswordConfirmPage';
+import LoginPage from './pages/LoginPage/LoginPage';
 
 export default function AppRouter() {
   return (
     <Router>
       <Switch>
-        <Route>
-          <LandingPage />
+        <Route path="/login">
+          <LoginPage/>  
         </Route>
         <Route path="/signup">
           <SignupPage />
@@ -19,6 +20,9 @@ export default function AppRouter() {
         </Route>
         <Route path="/reset_confirm">
           <ResetPasswordConfirmPage />
+        </Route>
+        <Route exact path="/">
+          <LandingPage />
         </Route>
       </Switch>
     </Router>
