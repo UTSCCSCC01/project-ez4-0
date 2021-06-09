@@ -2,10 +2,7 @@ import illustration from "../img/landing-illustration.png";
 export default function LandingPageContent() {
   return (
     <>
-      <div
-        className="justify-center mx-auto items-center flex flex-wrap
-"
-      >
+      <div className="justify-center mx-auto items-center flex flex-wrap">
         <div>
           <h1
             className="leading-tight md:leading-snug 
