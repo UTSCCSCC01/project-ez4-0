@@ -1,4 +1,6 @@
 import illustration from "../img/landing-illustration.png";
+import FeaturesSplit from "./FeaturesSplit";
+import { ChevronRightIcon } from "@heroicons/react/outline";
 export default function LandingPageContent() {
   return (
     <>
@@ -25,7 +27,21 @@ export default function LandingPageContent() {
             text-base font-medium text-white 
             bg-indigo-500 hover:bg-indigo-600"
           >
-            Get started for free
+            Get Started{" "}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="ml-1 h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
           </a>
         </div>
         {/* <img src={illustration} /> */}
@@ -40,6 +56,9 @@ export default function LandingPageContent() {
           src={illustration}
           alt=""
         />
+      </div>
+      <div className="justify-center mx-auto flex my-40">
+        <FeaturesSplit />
       </div>
     </>
   );
