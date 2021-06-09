@@ -1,11 +1,11 @@
 import logo from "./logo.svg";
 import "./css/App.css";
-import Example from "./components/Example.jsx";
+import Reset from "./components/Reset.jsx";
 
 function App() {
   return (
     <div>
-      <Example />
+      <Reset />
     </div>
   );
 }
