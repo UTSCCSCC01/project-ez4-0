@@ -13,15 +13,18 @@ export default function AppRouter() {
           <LoginPage/>  
         </Route>
         <Route path="/signup">
-          <SignupPage/>
+          <SignupPage />
         </Route>
         <Route path="/reset">
-          <ResetPasswordPage/>
+          <ResetPasswordPage />
         </Route>
         <Route path="/reset_confirm">
-          <ResetPasswordConfirmPage/>
+          <ResetPasswordConfirmPage />
+        </Route>
+        <Route exact path="/">
+          <LandingPage />
         </Route>
       </Switch>
     </Router>
-  )
+  );
 }
