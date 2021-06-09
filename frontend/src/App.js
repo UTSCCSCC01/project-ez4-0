@@ -1,11 +1,10 @@
-import logo from "./logo.svg";
 import "./css/App.css";
-import Reset from "./components/Reset.jsx";
+import Router from './Router';
 
 function App() {
   return (
     <div>
-      <Reset />
+      <Router/>
     </div>
   );
 }
