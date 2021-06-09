@@ -45,13 +45,15 @@ class User(BaseModel):
         return check_password_hash(self.password, password)
 
     @classmethod
-    def create(cls, email, password):
+    def create(cls, email, password, first_name, last_name):
         """
         Create a new user given the email and raw(unhashed) password.
         """
         user = User(
             email=email,
-            password=generate_password_hash(password)
+            password=generate_password_hash(password),
+            first_name=first_name,
+            last_name=last_name
         )
         db.session.add(user)
         db.session.commit()

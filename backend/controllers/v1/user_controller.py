@@ -42,11 +42,19 @@ class UserController(BaseController):
         user = User.query.filter_by(id=user_id).first()
         if user:
             email = kwargs.get("email", None)
+            first_name = kwargs.get("first_name", None)
+            last_name = kwargs.get("last_name", None)
+            # Update user email
             if email:
                 if User.email_exists(email):
                     return {"description": f"User with email {email} already exists"}, 400
                 user.email = email
-                user.save()
+            # Update user first name / last name
+            if first_name:
+                user.first_name = first_name
+            if last_name:
+                user.last_name = last_name
+            user.save()
             return user
         return {"description": "User not found"}, 404
 
@@ -56,8 +64,8 @@ class UsersController(BaseController):
     @doc(description="Create a new user")
     @use_kwargs(CreateUserSchema)
     @marshal_with(UserSchema)
-    def post(self, email, password, **_):
+    def post(self, email, password, first_name, last_name, **_):
         if User.email_exists(email):
             return {"description": f"User with email {email} already exists"}, 400
-        user = User.create(email, password)
+        user = User.create(email, password, first_name, last_name)
         return user
