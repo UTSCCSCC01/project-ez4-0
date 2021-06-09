@@ -1,8 +1,8 @@
-.customize-login-form-create-btn:disabled {
+.customize-signup-form-create-btn:disabled {
   opacity: 0.5;
   cursor: default;
 }
 
-.customize-login-form-create-btn:disabled:hover {
-  background-color: rgba(59, 130, 246, 1);
+.customize-signup-form-create-btn:disabled:hover {
+  background-color: rgba(99, 102, 241, 1);
 }
