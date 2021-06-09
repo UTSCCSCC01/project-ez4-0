@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './LoginForm.css';
+import './SignupPage.css';
 
-export default function LoginForm() {
+export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassowrd] = useState("");
   const [firstName, setFirstName] = useState("");
