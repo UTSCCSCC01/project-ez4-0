@@ -1,7 +1,5 @@
 """All configurations should go here"""
 
-ORIGINS = ['*']
-
 # CORS
 ORIGINS = ['*']
 

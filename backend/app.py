@@ -1,20 +1,25 @@
-from flask import Flask, json, jsonify
+# Flask
+from flask import Flask, jsonify
 from flask_cors import CORS
-
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+# Database
 import mongoengine
-
+# Config and logging
 import logging
-
 import config as c
+# APIs
+from flask_apispec import FlaskApiSpec
+from flask_restful import Api
+from apispec import APISpec
+from apispec.ext.marshmallow import MarshmallowPlugin
 
 
 logger = logging.Logger(logging.INFO)
-db = SQLAlchemy()
+db = SQLAlchemy(session_options={'expire_on_commit': False})
 
 
-def create_app():
+def create_app(test=False):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(c)
 
@@ -51,7 +56,37 @@ def create_app():
 
 def register_blueprints(app):
     """Blueprints(APIs) registrations"""
-    pass
+    from controllers.v1 import (
+        user_bp,
+        set_user_routes,
+        auth_bp,
+        set_auth_routes,
+    )
+
+    APISPEC_SPEC = APISpec(
+        title="EntreE API",
+        version="v1",
+        plugins=[MarshmallowPlugin()],
+        produces=["application/json"],
+        openapi_version="2.0.0",
+        tags=[
+            {
+                "name": "User"
+            }
+        ],
+    )
+    app.config.update({"APISPEC_SPEC": APISPEC_SPEC})
+    docs = FlaskApiSpec(app)
+
+    # User API
+    user_api = Api(user_bp)
+    app.register_blueprint(user_bp)
+    set_user_routes(user_api, docs)
+
+    # Auth API
+    auth_api = Api(auth_bp)
+    app.register_blueprint(auth_bp)
+    set_auth_routes(auth_api, docs)
 
 
 def register_extensions(app):

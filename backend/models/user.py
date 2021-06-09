@@ -1,11 +1,11 @@
-from flask_sqlalchemy import SQLAlchemy
+from .base import BaseModel
 from app import db
 from sqlalchemy.dialects.postgresql import UUID
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
 
 
-class User(db.Model):
+class User(BaseModel):
     """
     User type in the database.
     """
@@ -34,20 +34,20 @@ class User(db.Model):
         """
         Verify the given password with the hashed passowrd stored
         """
-        return check_password_hash(self.hash_password, password)
+        return check_password_hash(self.password, password)
 
     @classmethod
-    def create(cls, username, password):
+    def create(cls, email, password):
         """
-        Create a new user given the username and raw(unhashed)
-        password.
+        Create a new user given the email and raw(unhashed) password.
         """
         user = User(
-            username=username,
+            email=email,
             password=generate_password_hash(password)
         )
         db.session.add(user)
         db.session.commit()
+        return user
 
     @classmethod
     def hash_password(cls, password):
@@ -56,3 +56,9 @@ class User(db.Model):
         """
         return generate_password_hash(password)
 
+    @classmethod
+    def email_exists(cls, email):
+        """
+        Check if email exists already
+        """
+        return User.query.filter_by(email=email).first() is not None
