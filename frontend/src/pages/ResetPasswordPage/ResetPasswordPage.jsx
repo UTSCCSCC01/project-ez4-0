@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './ResetPasswordPage.css';
 
 export default function ResetPasswordPage() {
   const [email, setEmail] = useState("");
@@ -24,18 +25,6 @@ export default function ResetPasswordPage() {
 
   const onResetFormSubmit = (e) => {
     e.preventDefault();
-    const requestOptions = {
-      method: "POST",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email,
-      })
-    }
-    fetch("http://localhost:5000/api/v1/users", requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        console.log(result);
-      });
   }
 
   return (
@@ -62,7 +51,7 @@ export default function ResetPasswordPage() {
           </div>
           <div className="flex items-center justify-center">
             <button
-              className="customize-login-form-create-btn bg-blue-500 hover:bg-blue-600 text-md text-white font-bold py-3 px-8 rounded focus:outline-none focus:ring focus:border-blue-300"
+              className="customize-login-form-reset-btn bg-indigo-500 hover:bg-indigo-600 text-md text-white font-bold py-3 px-8 rounded focus:outline-none focus:ring focus:border-indigo-300"
               type="submit"
               disabled={resetDisabled()}
             >

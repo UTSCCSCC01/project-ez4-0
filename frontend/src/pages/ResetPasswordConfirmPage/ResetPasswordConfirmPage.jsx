@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './ResetPasswordConfirmPage.css';
 
 export default function ResetPasswordConfirmPage() {
   const [password, setPassword] = useState("");
@@ -73,7 +74,7 @@ export default function ResetPasswordConfirmPage() {
           </div>
           <div className="flex items-center justify-center">
             <button
-              className="customize-login-form-create-btn bg-blue-500 hover:bg-blue-600 text-md text-white font-bold py-3 px-8 rounded focus:outline-none focus:ring focus:border-blue-300"
+              className="customize-login-form-reset-confirm-btn bg-indigo-500 hover:bg-indigo-600 text-md text-white font-bold py-3 px-8 rounded focus:outline-none focus:ring focus:border-indigo-300"
               type="submit"
               disabled={resetDisabled()}
             >
