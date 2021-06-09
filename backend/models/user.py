@@ -30,6 +30,14 @@ class User(BaseModel):
         nullable=False,
     )
 
+    first_name = db.Column(
+        db.String
+    )
+
+    last_name = db.Column(
+        db.String
+    )
+
     def verify_password(self, password):
         """
         Verify the given password with the hashed passowrd stored
