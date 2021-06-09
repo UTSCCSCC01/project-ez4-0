@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import "./LoginPage.css";
 
 export default function SignupPage() {
@@ -102,12 +102,12 @@ export default function SignupPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center"></div>
             <div className="text-sm mb-2">
-              <a
-                href="#"
+              <Link
+                to="/reset"
                 className="font-medium text-indigo-500 hover:text-indigo-600"
               >
                 Forgot your password?
-              </a>
+              </Link>
             </div>
           </div>
 
