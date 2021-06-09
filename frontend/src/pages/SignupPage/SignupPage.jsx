@@ -60,34 +60,7 @@ export default function SignupPage() {
           <div className="mt-3 text-gray-400 font-medium">Join EntreE Now</div>
         </div>
         <form className="p-8 md:pl-36 md:pr-36" onSubmit={onSignUpFormSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-md font-bold mb-2" htmlFor="email">
-              Email
-            </label>
-            <input
-              className={`shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-300 ${emailError? 'border-red-500' : ''}`}
-              id="email"
-              type="text"
-              placeholder="example@email.com"
-              onChange={onEmailChange}
-              value={email}
-            />
-            <p className="text-red-500 text-sm italic">{emailError}</p>
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 text-md font-bold mb-2" htmlFor="password">
-              Password
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:ring focus:border-blue-300"
-              id="password"
-              type="password"
-              placeholder="***********"
-              onChange={e => setPassowrd(e.target.value)}
-              value={password}
-            />
-          </div>
-          <div className="mb-6 md:mb-12 flex flex-wrap">
+          <div className="mb-4 flex flex-wrap">
             <div className="w-full md:w-1/2 md:pr-3 mb-6 md:mb-0">
               <label className="block text-gray-700 text-md font-bold mb-2" htmlFor="firstName">
                 First Name
@@ -114,6 +87,33 @@ export default function SignupPage() {
                 value={lastName}
               />
             </div>
+          </div>
+          <div className="mb-4">
+            <label className="block text-gray-700 text-md font-bold mb-2" htmlFor="email">
+              Email
+            </label>
+            <input
+              className={`shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring focus:border-blue-300 ${emailError? 'border-red-500' : ''}`}
+              id="email"
+              type="text"
+              placeholder="example@email.com"
+              onChange={onEmailChange}
+              value={email}
+            />
+            <p className="text-red-500 text-sm italic">{emailError}</p>
+          </div>
+          <div className="mb-6 md:mb-12">
+            <label className="block text-gray-700 text-md font-bold mb-2" htmlFor="password">
+              Password
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:ring focus:border-blue-300"
+              id="password"
+              type="password"
+              placeholder="***********"
+              onChange={e => setPassowrd(e.target.value)}
+              value={password}
+            />
           </div>
           <div className="flex items-center justify-center">
             <button
