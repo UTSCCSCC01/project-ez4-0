@@ -1,11 +1,10 @@
-import logo from "./logo.svg";
 import "./css/App.css";
-import Example from "./components/loginPage.jsx";
+import Router from './Router';
 
 function App() {
   return (
     <div>
-      <Example />
+      <Router/>
     </div>
   );
 }
