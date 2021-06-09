@@ -4,6 +4,7 @@ import SignupPage from './pages/SignupPage/SignupPage';
 import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage';
 import ResetPasswordConfirmPage from './pages/ResetPasswordConfirmPage/ResetPasswordConfirmPage';
 import LoginPage from './pages/LoginPage/LoginPage';
+import LandingPage from './pages/LandingPage/LandingPage';
 
 export default function AppRouter() {
   return (

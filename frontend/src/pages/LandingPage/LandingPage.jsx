@@ -1,5 +1,5 @@
-import LandingPageContent from "../components/LandingPageContent";
-import LandingPageHeader from "../components/LandingPageHeader";
+import LandingPageContent from "../../components/LandingPageContent";
+import LandingPageHeader from "../../components/LandingPageHeader";
 
 const LandingPage = () => {
   return (
