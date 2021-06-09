@@ -7,6 +7,7 @@ export default function SignupPage() {
   const [password, setPassowrd] = useState("");
   const [emailError, setEmailError] = useState("");
   const [loginSuccess, setLoginSuccess] = useState(false);
+  const [loginAttempted, setLoginAttempted] = useState(false);
 
   const signUpDisabled = () => {
     const fieldFilled = email === "" || password === "";
@@ -40,7 +41,12 @@ export default function SignupPage() {
     fetch("http://localhost:5000/api/v1/auth", requestOptions)
       .then(response => response.json())
       .then(result => {
-        setLoginSuccess(true);
+        if (result.hasOwnProperty("success")) {
+          setLoginSuccess(true);
+        } else {
+          setLoginAttempted(true);
+          setLoginSuccess(false);
+        }
       });
   }
 
@@ -89,10 +95,17 @@ export default function SignupPage() {
               type="submit"
               disabled={signUpDisabled()}
             >
-              Create Account
+              Login
             </button>
           </div>
         </form>
+        {
+          (loginAttempted && !loginSuccess) && (
+            <div className="md:ml-36 md:mr-36 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+              <span className="block sm:inline v">Incorrect email or password, please try again</span>
+            </div>
+          )
+        }
       </div>
     </div>
   )
