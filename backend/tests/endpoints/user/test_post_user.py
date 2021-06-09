@@ -17,7 +17,9 @@ def test_create_user(app):
         USER_ENDPOINT,
         data={
             "email": "example@abc.com",
-            "password": "x1234"
+            "password": "x1234",
+            "first_name": "Foo",
+            "last_name": "Bar"
         }
     )
     assert response.status_code == 200
@@ -34,7 +36,9 @@ def test_create_user_exists_email(app):
         USER_ENDPOINT,
         data={
             "email": "example@abc.com",
-            "password": "x1234"
+            "password": "x1234",
+            "first_name": "Foo",
+            "last_name": "Bar"
         }
     )
     assert response.status_code == 400

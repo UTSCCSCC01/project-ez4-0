@@ -19,9 +19,9 @@ def clear_db(func):
     return wrapper
 
 
-def create_user(app, email, password):
+def create_user(app, email, password, first_name="Foo", last_name="Bar"):
     """
     Helper method to create user
     """
     with app.app_context():
-        return User.create(email, password)
+        return User.create(email, password, first_name, last_name)
