@@ -16,7 +16,7 @@ export default function Profile() {
                 {/* <!-- Left Side --> */}
                 <div className="w-full md:w-3/12 md:mx-2">
                     {/* <!-- Profile Card --> */}
-                    <div className="bg-white p-3 border-t-4 border-green-400">
+                    <div className="bg-white p-3 border-t-4 border-indigo-400">
                         <div className="image overflow-hidden">
                             <img className="h-auto w-full mx-auto"
                                 src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
@@ -32,7 +32,7 @@ export default function Profile() {
                             <li className="flex items-center py-3">
                                 <span>Status</span>
                                 <span className="ml-auto"><span
-                                        className="bg-green-500 py-1 px-2 rounded text-white text-sm">Active</span></span>
+                                        className="bg-indigo-500 py-1 px-2 rounded text-white text-sm">Active</span></span>
                             </li>
                             <li className="flex items-center py-3">
                                 <span>Member since</span>
@@ -45,7 +45,7 @@ export default function Profile() {
                     {/* <!-- Friends card --> */}
                     <div className="bg-white p-3 hover:shadow">
                         <div className="flex items-center space-x-3 font-semibold text-gray-900 text-xl leading-8">
-                            <span className="text-green-500">
+                            <span className="text-indigo-600">
                                 <svg className="h-5 fill-current" xmlns="http://www.w3.org/2000/svg" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -89,7 +89,7 @@ export default function Profile() {
                     <!-- About Section --> */}
                     <div className="bg-white p-3 shadow-sm rounded-sm">
                         <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
-                            <span clas="text-green-500">
+                            <span className="text-indigo-600">
                                 <svg className="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -150,7 +150,7 @@ export default function Profile() {
                         <div className="grid grid-cols-2">
                             <div>
                                 <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
-                                    <span clas="text-green-500">
+                                    <span className="text-indigo-600">
                                         <svg className="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -161,26 +161,26 @@ export default function Profile() {
                                 </div>
                                 <ul className="list-inside space-y-2">
                                     <li>
-                                        <div className="text-teal-600">Owner at Her Company Inc.</div>
+                                        <div className="text-indigo-600">Owner at Her Company Inc.</div>
                                         <div className="text-gray-500 text-xs">March 2020 - Now</div>
                                     </li>
                                     <li>
-                                        <div className="text-teal-600">Owner at Her Company Inc.</div>
+                                        <div className="text-indigo-600">Owner at Her Company Inc.</div>
                                         <div className="text-gray-500 text-xs">March 2020 - Now</div>
                                     </li>
                                     <li>
-                                        <div className="text-teal-600">Owner at Her Company Inc.</div>
+                                        <div className="text-indigo-600">Owner at Her Company Inc.</div>
                                         <div className="text-gray-500 text-xs">March 2020 - Now</div>
                                     </li>
                                     <li>
-                                        <div className="text-teal-600">Owner at Her Company Inc.</div>
+                                        <div className="text-indigo-600">Owner at Her Company Inc.</div>
                                         <div className="text-gray-500 text-xs">March 2020 - Now</div>
                                     </li>
                                 </ul>
                             </div>
                             <div>
                                 <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
-                                    <span clas="text-green-500">
+                                    <span className="text-indigo-600">
                                         <svg className="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke="currentColor">
                                             <path fill="#fff" d="M12 14l9-5-9-5-9 5 9 5z" />
@@ -194,11 +194,11 @@ export default function Profile() {
                                 </div>
                                 <ul className="list-inside space-y-2">
                                     <li>
-                                        <div className="text-teal-600">Masters Degree in Oxford</div>
+                                        <div className="text-indigo-600">Masters Degree in Oxford</div>
                                         <div className="text-gray-500 text-xs">March 2020 - Now</div>
                                     </li>
                                     <li>
-                                        <div className="text-teal-600">Bachelors Degreen in LPU</div>
+                                        <div className="text-indigo-600">Bachelors Degreen in LPU</div>
                                         <div className="text-gray-500 text-xs">March 2020 - Now</div>
                                     </li>
                                 </ul>
