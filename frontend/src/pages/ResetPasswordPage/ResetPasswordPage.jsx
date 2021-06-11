@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './ResetPasswordPage.css';
 
 export default function ResetPasswordPage() {
@@ -49,7 +50,7 @@ export default function ResetPasswordPage() {
             />
             <p className="text-red-500 text-sm italic">{emailError}</p>
           </div>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center flex-col">
             <button
               className="customize-login-form-reset-btn bg-indigo-500 hover:bg-indigo-600 text-md text-white font-bold py-3 px-8 rounded focus:outline-none focus:ring focus:border-indigo-300"
               type="submit"
@@ -57,6 +58,13 @@ export default function ResetPasswordPage() {
             >
               Send Reset Email
             </button>
+            <Link
+              to="/login"
+              className="mt-6 font-medium text-indigo-500 hover:text-indigo-600"
+              type="submit"
+            >
+              Back to login
+            </Link>
           </div>
         </form>
       </div>
