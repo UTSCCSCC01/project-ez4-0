@@ -1,6 +1,7 @@
 import illustration from "../img/landing-illustration.png";
 import FeaturesSplit from "./FeaturesSplit";
-import { ChevronRightIcon } from "@heroicons/react/outline";
+import { Link } from 'react-router-dom';
+
 export default function LandingPageContent() {
   return (
     <>
@@ -19,8 +20,8 @@ export default function LandingPageContent() {
               </span>
             </span>
           </h1>
-          <a
-            href="#"
+          <Link
+            to="/signup"
             className="mt-5 whitespace-nowrap inline-flex 
             items-center justify-center px-4 py-2 border 
             border-transparent rounded-full shadow-sm 
@@ -42,7 +43,7 @@ export default function LandingPageContent() {
                 d="M9 5l7 7-7 7"
               />
             </svg>
-          </a>
+          </Link>
         </div>
         {/* <img src={illustration} /> */}
         {/* <div

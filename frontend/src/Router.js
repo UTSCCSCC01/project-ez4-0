@@ -6,9 +6,12 @@ import ResetPasswordConfirmPage from './pages/ResetPasswordConfirmPage/ResetPass
 import LoginPage from './pages/LoginPage/LoginPage';
 import LandingPage from './pages/LandingPage/LandingPage';
 
+import UnAuthPageHeader from "./components/UnAuthPageHeader";
+
 export default function AppRouter() {
   return (
     <Router>
+      <UnAuthPageHeader/>
       <Switch>
         <Route path="/login">
           <LoginPage/>  
