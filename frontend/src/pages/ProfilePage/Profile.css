@@ -1,0 +1,15 @@
+:root {
+    --main-color: #a84a9b;
+}
+
+.bg-main-color {
+    background-color: var(--main-color);
+}
+
+.text-main-color {
+    color: var(--main-color);
+}
+
+.border-main-color {
+    border-color: var(--main-color);
+}
