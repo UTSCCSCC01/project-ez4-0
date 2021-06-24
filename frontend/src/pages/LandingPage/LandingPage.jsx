@@ -1,11 +1,14 @@
 import LandingPageContent from "../../components/LandingPageContent";
+import LandingPageHeader from "../../components/UnAuthPageHeader";
 
 const LandingPage = () => {
   return (
     <>
-      <LandingPageHeader />
-      <main className=" mt-24">
-        <LandingPageContent />
+      <main>
+        <LandingPageHeader />
+        <div className=" pt-32">
+        <LandingPageContent/>
+        </div>
       </main>
     </>
   );
