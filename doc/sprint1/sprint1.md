@@ -49,3 +49,5 @@ The reason why we choose this 5 stories is because they are the top priorities a
     - Get the new password typed by user
     - Update password in the database
 6. As a logged-in user, I want to see other users’ profiles so that I can know better about other users
+    - User profile UI design
+    - Backend endpoint to get user profile

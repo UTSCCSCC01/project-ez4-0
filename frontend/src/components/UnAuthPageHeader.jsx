@@ -104,7 +104,7 @@ function classNames(...classes) {
 export default function LandingPageHeader() {
   return (
     <>
-      <Popover className="relative bg-white">
+      <Popover className="fixed bg-white w-full z-50">
         {({ open }) => (
           <>
             {NavBar()}
@@ -120,9 +120,9 @@ function NavBar() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6">
       <div className="flex justify-between items-center  border-gray-100 py-6 md:justify-start md:space-x-10">
         <div className="flex justify-start lg:w-0 lg:flex-1">
-          <a href="#">
+          <Link to="/">
             <img className="ml-4 h-7 md:h-8" src={logo} alt="EntreE Logo" />
-          </a>
+          </Link>
         </div>
         <div className="-mr-2 -my-2 md:hidden">
           <Popover.Button
@@ -421,17 +421,17 @@ function NarrowPanel({ open }) {
               ))}
             </div>
             <div>
-              <a
-                href="#"
+              <Link
+                to="/signup"
                 className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-500 hover:bg-indigo-600"
               >
                 Sign up
-              </a>
+              </Link>
               <p className="mt-6 text-center text-base font-medium text-gray-500">
                 Existing customer?{" "}
-                <a href="#" className="text-indigo-500 hover:text-indigo-500">
+                <Link to="/login" className="text-indigo-500 hover:text-indigo-500">
                   Sign in
-                </a>
+                </Link>
               </p>
             </div>
           </div>

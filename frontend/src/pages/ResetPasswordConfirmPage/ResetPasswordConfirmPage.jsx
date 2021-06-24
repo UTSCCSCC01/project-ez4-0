@@ -39,7 +39,7 @@ export default function ResetPasswordConfirmPage() {
 
   return (
     <div className="flex h-screen bg-gray-100">
-      <div className="container bg-white mx-auto rounded-md shadow-md md:shadow-xl md:h-4/5 my-auto p-5 max-w-3xl">
+      <div className="container bg-white mx-auto rounded-md shadow-md md:shadow-xl md:h-4/5 my-auto md:mt-28 p-5 max-w-3xl">
         <div className="text-center md:mt-10">
           <div className="text-3xl font-semibold">Reset Password</div>
           <div className="mt-3 text-gray-400 font-medium">Enter your new password</div>
