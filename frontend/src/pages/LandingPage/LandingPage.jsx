@@ -5,7 +5,7 @@ const LandingPage = () => {
   return (
     <>
       <LandingPageHeader />
-      <main className="mt-16">
+      <main className=" mt-24">
         <LandingPageContent />
       </main>
     </>

@@ -2,10 +2,12 @@ module.exports = {
   purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    extend: {
     fontFamily: {
-      cg: ["Century Gothic", "Century Gothic Bold"],
+      'cg': ["CenturyGothic"],
+      'cgbold': ["CenturyGothic-Bold"],
     },
-    extend: {},
+    },
   },
   variants: {
     extend: {},
