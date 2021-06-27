@@ -1,5 +1,7 @@
 from app import db
 from models import User
+from documents import Post
+from datetime import datetime
 import functools
 
 
@@ -19,9 +21,33 @@ def clear_db(func):
     return wrapper
 
 
+def clear_mongo_db(func):
+    """
+    Decorator to clear the mongodb before executing the test.
+    """
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        Post.drop_collection()
+        return func(*args, **kwargs)
+    return wrapper
+
+
 def create_user(app, email, password, first_name="Foo", last_name="Bar"):
     """
     Helper method to create user
     """
     with app.app_context():
         return User.create(email, password, first_name, last_name)
+
+
+def create_post(app, content, user_id, **kwargs):
+    """
+    Helper method to create post
+    """
+    with app.app_context():
+        return Post(
+            content=content,
+            user_id=user_id,
+            posted_at=datetime.now(),
+            **kwargs
+        ).save()
