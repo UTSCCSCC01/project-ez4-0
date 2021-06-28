@@ -35,6 +35,12 @@ class CreatePostSchema(Schema):
     )
 
 
+class QueryPostsSchema(Schema):
+    posted_by = fields.UUID(description="Filter posts by the user id")
+    tags = fields.Str(description="Filter posts by tags separated by comma")
+    keyword = fields.Str(description="Filter posts by keyword")
+
+
 class GetPostsSchema(Schema):
     posts = fields.List(fields.Nested(PostSchema), description="A list of posts")
 
