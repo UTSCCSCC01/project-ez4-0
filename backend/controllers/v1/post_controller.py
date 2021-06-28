@@ -11,6 +11,7 @@ from schemas import (
     CreatePostSchema,
     GetPostsSchema,
     DeletePostSchema,
+    QueryPostsSchema,
 )
 from .base_controller import BaseController
 from models import User
@@ -37,10 +38,26 @@ class PostsController(BaseController):
         )
         return post.save()
 
-    @doc(description="Get posts")
+    @doc(description="Get posts", location=("query",))
+    @use_kwargs(QueryPostsSchema)
     @marshal_with(GetPostsSchema)
-    def get(self, **_):
-        return {"posts": Post.objects.all()}
+    def get(self, **kwargs):
+        query = {}
+        # Query by tags
+        tags = kwargs.get("tags")
+        if tags:
+            query["tags__in"] = tags.split(",")
+        # Query by posts onwer
+        posted_by = kwargs.get("posted_by")
+        if posted_by:
+            query["user_id"] = posted_by
+        # Query by keyword
+        keyword = kwargs.get("keyword")
+        if keyword:
+            query["content__contains"] = keyword
+        return {
+            "posts": Post.objects(**query)
+        }
 
 
 @doc(tags=["Post"])
