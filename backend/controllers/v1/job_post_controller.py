@@ -63,9 +63,9 @@ class JobPostsController(BaseController):
         # Query by active or not
         active = kwargs.get("active")
         if active:
-            query["active"] = active == "true"
+            query["active"] = active
         return {
-            "posts": JobPost.objects(**query)
+            "job_posts": JobPost.objects(**query)
         }
 
 
