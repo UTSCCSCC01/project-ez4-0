@@ -18,7 +18,7 @@ class JobPost(Document):
     """
     Job description
     """
-    description = StringField(required=True)
+    description = StringField()
 
     """
     A list of requirements described in String

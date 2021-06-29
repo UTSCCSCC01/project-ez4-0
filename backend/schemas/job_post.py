@@ -60,7 +60,7 @@ class QueryJobPostsSchema(Schema):
 
 
 class GetJobPostsSchema(Schema):
-    posts = fields.List(fields.Nested(JobPostSchema), description="A list of job posts")
+    job_posts = fields.List(fields.Nested(JobPostSchema), description="A list of job posts")
 
 
 class DeleteJobPostSchema(Schema):
