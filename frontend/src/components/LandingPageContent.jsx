@@ -1,6 +1,6 @@
 import illustration from "../img/landing-illustration.png";
 import FeaturesSplit from "./FeaturesSplit";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export default function LandingPageContent() {
   return (

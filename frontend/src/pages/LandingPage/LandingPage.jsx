@@ -1,13 +1,14 @@
 import LandingPageContent from "../../components/LandingPageContent";
-import LandingPageHeader from "../../components/UnAuthPageHeader";
-
+import UnAuthPageHeader from "../../components/UnAuthPageHeader";
+import SearchBar from "../../components/SearchBar";
 const LandingPage = () => {
   return (
     <>
       <main>
-        <LandingPageHeader />
+        <UnAuthPageHeader />
         <div className=" pt-32">
-        <LandingPageContent/>
+          <SearchBar />
+          <LandingPageContent />
         </div>
       </main>
     </>
