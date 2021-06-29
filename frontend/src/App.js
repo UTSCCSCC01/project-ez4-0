@@ -1,10 +1,10 @@
 import "./css/App.css";
-import Router from "./Router";
+import Post from "./components/Postboxcomponent"
 
 function App() {
   return (
     <div>
-      <Router/>
+      <Post/>
     </div>
   );
 }
