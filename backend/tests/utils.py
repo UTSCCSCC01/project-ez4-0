@@ -42,12 +42,13 @@ def create_user(app, email, password, first_name="Foo", last_name="Bar"):
         return User.create(email, password, first_name, last_name)
 
 
-def create_post(app, content, user_id, **kwargs):
+def create_post(app, title, user_id, content="", **kwargs):
     """
     Helper method to create post
     """
     with app.app_context():
         return Post(
+            title=title,
             content=content,
             user_id=user_id,
             posted_at=datetime.now(),

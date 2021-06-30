@@ -10,6 +10,11 @@ from models import User
 
 class Post(Document):
     """
+    Title of the post
+    """
+    title = StringField(required=True)
+
+    """
     Content of the post
     """
     content = StringField(required=True)
