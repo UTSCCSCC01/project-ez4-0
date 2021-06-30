@@ -3,39 +3,75 @@ import React, { Component } from "react";
 class JobPosting extends Component {
   render() {
     return (
-      <div>
-        <div className="flex border ml-5 mr-5 p-3">
-          <img src={this.props.img} width="30" height="30" />
-          <text className="text text-primary ml-2">{this.props.name}</text>
-          {/* <span className = "ml-3">It is a time.</span> */}
-          <div>
-            <p className="mt-2">{this.props.context1}</p>
-          </div>
-          <img
-            style={{
-              flex: 1,
-              width: "100%",
-              height: "100%",
-              resizeMode: "contain",
-            }}
-            src={this.props.context2}
-            className=""
-          />
-
-          <hr />
-          <div>
-            <button
-              style={{
-                backgroundColor: "transparent",
-                border: "none",
-              }}
-            >
-              ❤ Like
-            </button>
+      <div class="mx-auto bg-white border-t-2">
+        <div class="flex ">
+          <div class="h-full text-left px-4 py-4 w-full justify-end border-b-2 border-indigo-50">
+            <a to="jobdet" class="flex items-center flex-wrap">
+              <img
+                alt="testimonial"
+                class="inline-block object-cover object-center w-16 h-16 mb-4 bg-indigo-100 rounded"
+                src={this.props.img}
+              />{" "}
+              <span class="flex flex-col flex-grow pl-4">
+                <span class="font-bold text-xl text-indigo-500 hover:text-indigo-600 -mt-4">
+                  Software developer{" "}
+                </span>
+                <span class="text-sm text-indigo-300 ">IBM</span>
+                <span class="text-sm text-indigo-300">
+                  Location: Lomndon sdf
+                </span>
+              </span>
+            </a>
+            <div class="flex items-center flex-wrap ">
+              <a
+                to="jobdet"
+                class="text-indigo-500 inline-flex items-center mb-0 px-2 py-1 border-2 border-indigo-500 rounded-full text-sm"
+              >
+                Remote Full Time
+              </a>
+              <span class="text-indigo-800 mr-3 inline-flex items-center ml-auto leading-none text-sm pr-3 py-1 px-2 bg-yellow-500 rounded-full">
+                New
+              </span>
+              <span class="text-indigo-400 inline-flex items-center leading-none text-sm">
+                6 days
+              </span>
+            </div>
           </div>
         </div>
-
-        <div className="card">123</div>
+        <div class="flex ">
+          <div class="h-full text-left px-4 py-4 w-full justify- border-b-2 border-indigo-50">
+            <a to="jobdet" class="flex items-center flex-wrap">
+              <img
+                alt="testimonial"
+                class="inline-block object-cover object-center w-16 h-16 mb-4 bg-indigo-100 rounded"
+                src={this.props.img}
+              />{" "}
+              <span class="flex flex-col flex-grow pl-4">
+                <span class="font-bold text-xl text-indigo-500 hover:text-indigo-600 -mt-4">
+                  Software developer{" "}
+                </span>
+                <span class="text-sm text-indigo-300 ">IBM</span>
+                <span class="text-sm text-indigo-300">
+                  Location: Lomndon sdf
+                </span>
+              </span>
+            </a>
+            <div class="flex items-center flex-wrap ">
+              <a
+                to="jobdet"
+                class="text-indigo-500 inline-flex items-center mb-0 px-2 py-1 border-2 border-indigo-500 rounded-full text-sm"
+              >
+                Remote Full Time
+              </a>
+              <span class="text-indigo-800 mr-3 inline-flex items-center ml-auto leading-none text-sm pr-3 py-1 px-2 bg-yellow-500 rounded-full">
+                New
+              </span>
+              <span class="text-indigo-400 inline-flex items-center leading-none text-sm">
+                6 days
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
