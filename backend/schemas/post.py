@@ -3,6 +3,7 @@ from marshmallow import Schema, fields
 
 class PostSchema(Schema):
     id = fields.UUID(description="Post ID")
+    title = fields.Str(description="Title of the post")
     content = fields.Str(description="Text content of the post")
     resources = fields.List(
         fields.Str(),
@@ -17,6 +18,11 @@ class PostSchema(Schema):
 
 
 class CreatePostSchema(Schema):
+    title = fields.Str(
+        description="Title of the post",
+        required=True
+    )
+
     content = fields.Str(
         description="Text content of the post",
         required=True
