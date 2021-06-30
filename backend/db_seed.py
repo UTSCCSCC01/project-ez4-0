@@ -1,4 +1,4 @@
-from app import create_app
+from app import create_app, db
 from models import User
 from documents import Post, JobPost
 from datetime import datetime
@@ -13,11 +13,12 @@ def create_user(email, password, first_name, last_name):
     return User.create(email, password, first_name, last_name)
 
 
-def create_post(content, user_id, **kwargs):
+def create_post(title, user_id, content="", **kwargs):
     """
     Helper method to create post
     """
     return Post(
+        title=title,
         content=content,
         user_id=user_id,
         posted_at=datetime.now(),
@@ -74,5 +75,24 @@ def db_seed():
         )
 
 
+def clear_dbs():
+    """
+    Helper method to clear both mongodb and postgres
+    """
+    with app.app_context():
+        # Mongo
+        Post.drop_collection()
+        JobPost.drop_collection()
+        # Postgres
+        db.drop_all()
+        db.create_all()
+    
+
+
 if __name__ == "__main__":
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] == "--clear":
+        clear_dbs()
+        print("Successfully cleared MongoDB and Postgres")
     db_seed()
+    print("Successfully inserted seeds")
