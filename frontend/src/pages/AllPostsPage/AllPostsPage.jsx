@@ -25,9 +25,26 @@ export default class AllPostsPage extends Component {
       });
   }
 
+  deletePost = (id) => {
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    };
+    const api = `http://localhost:5000/api/v1/posts/${id}`;
+    fetch(api, requestOptions)
+      .then(response => {
+        if (response.status === 200) {
+          this.getPosts();
+        }
+      });
+  }
+
   renderPosts() {
     return this.state.posts.map((post) => (
-      <UserPost post={post} key={post.id}/>
+      <UserPost
+        post={post} key={post.id}
+        onDeletePost={() => this.deletePost(post.id)}
+      />
     ));
   }
 

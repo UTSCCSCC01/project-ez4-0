@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import UserPost from "../../components/UserPost.jsx";
 import PostBoxComponent from "../../components/PostBoxComponent"
 import { Link } from "react-router-dom";
+import AuthPageHeader from "../../components/AuthPageHeader.jsx";
 
 export default class DashboardPage extends Component {
   constructor(props) {
@@ -48,31 +49,50 @@ export default class DashboardPage extends Component {
       });
   }
 
+  deletePost = (id) => {
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    };
+    const api = `http://localhost:5000/api/v1/posts/${id}`;
+    fetch(api, requestOptions)
+      .then(response => {
+        if (response.status === 200) {
+          this.getPosts();
+        }
+      });
+  }
+
   renderPosts() {
     return this.state.posts.map((post) => (
-      <UserPost post={post} key={post.id}/>
+      <UserPost
+        post={post} key={post.id}
+        onDeletePost={() => this.deletePost(post.id)}
+      />
     ));
   }
 
   render() {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-3 bg-gray-50">
-        <div>
-          {/* Left thing here */}
-        </div>
-        <div>
-          <div class="mb-7">
-            <PostBoxComponent onCreatePost={this.createPost}/>
+      <div>
+        <div className="grid grid-cols-1 md:grid-cols-3 bg-gray-50">
+          <div>
+            {/* Left thing here */}
           </div>
-          {this.renderPosts()}
-          <div className="grid justify-items-center mb-7">
-            <Link to="/posts" className="text-indigo-500 background-transparent font-bold px-3 py-1 text-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
-              See More
-            </Link>
+          <div>
+            <div class="mb-7">
+              <PostBoxComponent onCreatePost={this.createPost}/>
+            </div>
+            {this.renderPosts()}
+            <div className="grid justify-items-center mb-7">
+              <Link to="/posts" className="text-indigo-500 background-transparent font-bold px-3 py-1 text-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+                See More
+              </Link>
+            </div>
           </div>
-        </div>
-        <div>
-          {/* Right thing here */}
+          <div>
+            {/* Right thing here */}
+          </div>
         </div>
       </div>
     );
