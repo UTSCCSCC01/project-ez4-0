@@ -5,7 +5,7 @@ import UserPost from "./components/UserPost";
 function App() {
   return (
     <div>
-      <Router/>
+      <UserPost/>
     </div>
   );
 }
