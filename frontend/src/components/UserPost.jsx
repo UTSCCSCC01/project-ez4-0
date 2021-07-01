@@ -28,14 +28,14 @@ class UserPost extends Component {
                                         {/* <div className='text-indigo-700 font-base text-xs mr-1 cursor-pointer'>
                                             UX Design
                                         </div>  */}
-                                        <div className='text-gray-400 font-thin text-xs'>
-                                            May 29 at 9:10 am
-                                        </div>
+                                        <span className='text-gray-400 font-thin text-xs'>
+                                            {this.getDate()}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
                             {/* <div className="border-b border-gray-100"></div>  */}
-                            <div className='text-gray-500 font-thin text-sm mb-6 mx-3 px-2'>lasdcfuiopwsvnoi oiasmsv o nmo jafeojicnop oierjdmopav noeiwd xopqwv nop eocmqwiop cfoiamsopdc oae;kj opaws yudco;jal;sd nawe hco</div>
+                            <div className='text-gray-500 font-thin text-sm mb-6 mx-3 px-2'>{this.getContent()}</div>
                             <div className='text-gray-400 font-medium text-sm mb-7 mt-6 mx-3 px-2'><img className="rounded" src="https://picsum.photos/536/354"/></div>
                             {/* <div className='text-gray-600 font-semibold text-lg mb-2 mx-3 px-2'>Dummy text of the printing and typesetting industry</div> */}
                             <div className="flex justify-start mb-4">
@@ -90,21 +90,15 @@ class UserPost extends Component {
     );
   }
 
-  getTitle() {
-    return this.props.title === undefined ? "UNKNOWN" : this.props.title;
+  getDate() {
+    return this.props.posted_at === undefined ? "UNKNOWN" : this.props.posted_at;
   }
 
   getContent() {
     return this.props.content === undefined ? "UNKNOWN" : this.props.content;
   }
 
-  getLocation() {
-    return this.props.Location === undefined ? "UNKNOWN" : this.props.Location;
-  }
-
-  getType() {
-    return this.props.Type === undefined ? "UNKNOWN" : this.props.Type;
-  }
+  
 }
 
 export default UserPost;

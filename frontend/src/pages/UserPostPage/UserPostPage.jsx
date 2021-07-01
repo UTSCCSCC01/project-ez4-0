@@ -19,7 +19,7 @@ class AllUserPosting extends Component {
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
-        this.setState({ user_posts: result.user_posts });
+        this.setState({ user_posts: result.posts });
       });
   }
 
@@ -27,9 +27,9 @@ class AllUserPosting extends Component {
     return (
       <div>
         {this.state.user_posts.map((post) => {
-          if (post.active === true) {
-            console.log(post);
-            return <UserPost key={post.id} title={post.title} />;
+          if (true) {
+            // console.log(post);
+            return <UserPost posted_at={post.posted_at} content={post.content} />;
           }
         })}
       </div>
