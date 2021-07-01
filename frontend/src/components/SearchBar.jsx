@@ -7,7 +7,6 @@ const SearchBar = ({ input, updateInput, handleSearch }) => {
     }
   };
   return (
-    // <div className="h-32 p-4 bg-indigo-700 flex place-items-center">
     <div className="px-4 p-2 w-96 rounded-md bg-opacity-20 bg-white flex place-items-center">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +21,7 @@ const SearchBar = ({ input, updateInput, handleSearch }) => {
         />
       </svg>
       <input
-        className="bg-transparent border-0 ring-0
+        className="focus:outline-none bg-transparent border-0 ring-0
           block w-full mx-2 px-2 border-gray-300 rounded-md
           text-white placeholder-white text-sm"
         value={input}
@@ -31,7 +30,6 @@ const SearchBar = ({ input, updateInput, handleSearch }) => {
         onKeyDown={handleKeyDown}
       />
     </div>
-    // </div>
   );
 };
 
