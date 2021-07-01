@@ -5,10 +5,12 @@ module.exports = {
     fontFamily: {
       cg: ["Century Gothic", "Century Gothic Bold"],
     },
+    
     extend: {},
   },
   variants: {
     extend: {},
   },
+  
   plugins: [],
 };
