@@ -95,9 +95,13 @@ def db_seed():
         create_post_like(bob.id, foo_post_3)
 
         # Create comment for Foo -> Alice posts
-        create_post_comment(foo.id, "I like it!", alice_post_1)
-        create_post_comment(foo.id, "It is true?", alice_post_2)
+        create_post_comment(foo.id, "I really like your post, do you think we can chat?", alice_post_1)
+        create_post_comment(foo.id, "This looks amazing.", alice_post_2)
         
+        # Create comment for Bob -> Alice posts
+        create_post_comment(bob.id, "What's your next plan?", alice_post_1)
+        create_post_comment(bob.id, "LGTM", alice_post_2)
+
         # Create job post for Bob
         create_job_post(
             "Software Engineer for UTSC",
