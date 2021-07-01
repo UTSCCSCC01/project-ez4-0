@@ -6,8 +6,7 @@ import AllJobPosting from "./components/AllJobPosting";
 function App() {
   return (
     <div>
-      {/* <Router/> */}
-      <JobPost />
+      <Router />
     </div>
   );
 }
