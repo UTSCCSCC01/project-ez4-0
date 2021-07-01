@@ -21,3 +21,10 @@ class BaseModel(db.Model):
         """
         db.session.delete(self)
         db.session.commit()
+    
+    @classmethod
+    def find_by_id(cls, id):
+        """
+        Find the first object matches the id
+        """
+        return db.session.query(cls).filter_by(id=id).first()

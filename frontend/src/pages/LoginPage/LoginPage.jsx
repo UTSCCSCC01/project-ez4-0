@@ -42,6 +42,7 @@ export default function SignupPage() {
       .then((response) => response.json())
       .then((result) => {
         if (result.hasOwnProperty("success")) {
+          localStorage.setItem("userId", result.user_id);
           setLoginSuccess(true);
         } else {
           setLoginAttempted(true);
@@ -51,7 +52,7 @@ export default function SignupPage() {
   };
 
   if (loginSuccess) {
-    return <Redirect to="/" />;
+    return <Redirect to="/dashboard" />;
   }
 
   return (
