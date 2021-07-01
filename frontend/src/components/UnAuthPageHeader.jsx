@@ -101,7 +101,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function LandingPageHeader() {
+export default function UnAuthPageHeader() {
   return (
     <>
       <Popover className="fixed bg-white w-full z-50">
