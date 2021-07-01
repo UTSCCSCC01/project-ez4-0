@@ -53,3 +53,52 @@ class GetPostsSchema(Schema):
 
 class DeletePostSchema(Schema):
     success = fields.Bool(description="If the post is successfully deleted")
+
+
+class DeleteCommentSchema(Schema):
+    success = fields.Bool(description="If the comment is successfully deleted")
+
+
+class UndoLikeSchema(Schema):
+    success = fields.Bool(description="If the like is successfully undo")
+
+
+class PostCommentSchema(Schema):
+    content = fields.Str(description="Content of the comment")
+    resources = fields.Str(description="A list of resource URLs related to this comment")
+    user_id = fields.UUID(description="The user ID of the comment poster")
+    posted_at = fields.DateTime(description="The timestamp of the comment")
+
+
+class PostLikeSchema(Schema):
+    user_id = fields.UUID(description="The user ID of the liker")
+    liked_at = fields.DateTime(description="The timestamp of the like")
+
+
+class CreatePostCommentSchema(Schema):
+    content = fields.Str(
+        description="Content of the comment",
+        required=True
+    )
+    resources = fields.Str(
+        description="A list of resource URLs related to this comment"
+    )
+    user_id = fields.UUID(
+        description="The user ID of the comment poster",
+        required=True
+    )
+
+
+class CreatePostLikeSchema(Schema):
+    user_id = fields.UUID(
+        description="The user ID of the liker",
+        required=True
+    )
+
+
+class GetPostCommentsSchema(Schema):
+    comments = fields.List(fields.Nested(PostCommentSchema))
+
+
+class GetPostLikesSchema(Schema):
+    likes = fields.List(fields.Nested(PostLikeSchema))
