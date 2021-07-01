@@ -3,10 +3,14 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-    fontFamily: {
-      'cg': ["CenturyGothic"],
-      'cgbold': ["CenturyGothic-Bold"],
-    },
+      spacing: {
+        "post-width": "36rem",
+        "post-height": "30rem",
+      },
+      fontFamily: {
+        cg: ["CenturyGothic"],
+        cgbold: ["CenturyGothic-Bold"],
+      },
     },
   },
   variants: {
