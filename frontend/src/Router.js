@@ -6,14 +6,18 @@ import ResetPasswordConfirmPage from './pages/ResetPasswordConfirmPage/ResetPass
 import LoginPage from './pages/LoginPage/LoginPage';
 import LandingPage from './pages/LandingPage/LandingPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
+import AllUserPosting from './pages/UserPostPage/UserPostPage';
 
 import UnAuthPageHeader from "./components/UnAuthPageHeader";
 
 export default function AppRouter() {
   return (
     <Router>
-      <UnAuthPageHeader/>
+      {/* <UnAuthPageHeader/> */}
       <Switch>
+        <Route path="/posts">
+          <AllUserPosting />
+        </Route>
         <Route path="/profile">
           <ProfilePage />
         </Route>
