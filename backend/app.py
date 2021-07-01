@@ -61,6 +61,10 @@ def register_blueprints(app):
         set_user_routes,
         auth_bp,
         set_auth_routes,
+        post_bp,
+        set_post_routes,
+        job_post_bp,
+        set_job_post_routes,
     )
 
     APISPEC_SPEC = APISpec(
@@ -87,6 +91,16 @@ def register_blueprints(app):
     auth_api = Api(auth_bp)
     app.register_blueprint(auth_bp)
     set_auth_routes(auth_api, docs)
+
+    # Post API
+    post_api = Api(post_bp)
+    app.register_blueprint(post_bp)
+    set_post_routes(post_api, docs)
+
+    # Job Post API
+    job_post_api = Api(job_post_bp)
+    app.register_blueprint(job_post_bp)
+    set_job_post_routes(job_post_api, docs)
 
 
 def register_extensions(app):
