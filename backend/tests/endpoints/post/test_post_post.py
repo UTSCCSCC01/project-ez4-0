@@ -18,7 +18,8 @@ def test_create_post(app):
     response = client.post(
         POST_ENDPOINT,
         data={
-            "content": "Example post",
+            "title": "Example post",
+            "content": "",
             "user_id": user.id
         }
     )
