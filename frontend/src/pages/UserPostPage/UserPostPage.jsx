@@ -1,15 +1,40 @@
-import UserPost from "../../components/UserPost";
+  
+import React, { Component } from "react";
+import UserPost from "../../components/UserPost.jsx";
 
-export default function UserPostPage() {
+class AllUserPosting extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user_posts: [],
+    };
+  }
 
+  componentDidMount() {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch("http://localhost:5000/api/v1/posts", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        this.setState({ user_posts: result.user_posts });
+      });
+  }
 
-
-
+  render() {
     return (
-        // <!-- This is an example component -->
-        <div class="">
-            <UserPost pid={"60dc82329a9c7667f72cc5b0"}/>
-        </div>
-
+      <div>
+        {this.state.user_posts.map((post) => {
+          if (post.active === true) {
+            console.log(post);
+            return <UserPost key={post.id} title={post.title} />;
+          }
+        })}
+      </div>
     );
   }
+}
+
+export default AllUserPosting;
