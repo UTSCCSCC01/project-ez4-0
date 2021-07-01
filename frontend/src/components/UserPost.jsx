@@ -1,14 +1,41 @@
+import React, {useState} from "react";
 
+export default function UserPost({props}) {
 
-export default function UserPost({post}) {
+    // const [like,setLike] = useState(post.like)
+    // const [isLiked,setIsLiked] = useState(false)
 
-    const [like,setLike] = useState(post.like)
-    const [isLiked,setIsLiked] = useState(false)
+    // const likeHandler =()=>{
+    //     setLike(isLiked ? like-1 : like+1)
+    //     setIsLiked(!isLiked)
+    // }
 
-    const likeHandler =()=>{
-        setLike(isLiked ? like-1 : like+1)
-        setIsLiked(!isLiked)
-    }
+    // const getPostInformation = (post.id) => {
+    //     fetch('http://localhost:5000/api/v1/posts/{post.id}')
+    //         .then(response => response.json())
+    //         .then(data => {this.setState({postContent:data.content});})
+    // }
+    
+
+    const [content, setContent] = useState("");
+    const ID = this.props.pid;
+    const TT = "asdfsdafasdf";
+    
+    const getContent = (e) => {
+        e.preventDefault();
+        const requestOptions = {
+          method: "GET",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            
+          })
+        }
+        fetch("http://localhost:5000/api/v1/posts/{post.id}", requestOptions)
+          .then(response => response.json())
+          .then(result => {
+            
+          });
+      }
 
     return (
         // <!-- This is an example component -->
@@ -43,14 +70,14 @@ export default function UserPost({post}) {
                                 </div>
                             </div>
                             {/* <div class="border-b border-gray-100"></div>  */}
-                            <div class='text-gray-500 font-thin text-sm mb-6 mx-3 px-2'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500</div>
+                            <div class='text-gray-500 font-thin text-sm mb-6 mx-3 px-2'>{ID}</div>
                             <div class='text-gray-400 font-medium text-sm mb-7 mt-6 mx-3 px-2'><img class="rounded" src="https://picsum.photos/536/354"/></div>
                             {/* <div class='text-gray-600 font-semibold text-lg mb-2 mx-3 px-2'>Dummy text of the printing and typesetting industry</div> */}
                             <div class="flex justify-start mb-4">
                                 <div class="flex w-full mt-1 pt-2 pl-5">
                                     
                                     
-                                    <botton class="bg-white transition ease-out duration-300 hover:text-red-500 border w-8 h-8 px-2 pt-2 text-center rounded-full text-gray-400 cursor-pointer mr-2">
+                                    <botton class="bg-white transition ease-out duration-300 hover:text-red-500 border w-8 h-8 px-2 pt-2 text-center rounded-full text-gray-400 cursor-pointer mr-2" >
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="14px" viewBox="0 0 20 20" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.19,4.155c-1.672-1.534-4.383-1.534-6.055,0L10,5.197L8.864,4.155c-1.672-1.534-4.382-1.534-6.054,0
                                                                     c-1.881,1.727-1.881,4.52,0,6.246L10,17l7.19-6.599C19.07,8.675,19.07,5.881,17.19,4.155z" />
