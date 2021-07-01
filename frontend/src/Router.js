@@ -11,11 +11,11 @@ import AllPostsPage from './pages/AllPostsPage/AllPostsPage';
 import AuthRoute from './components/AuthRoute';
 
 import UnAuthPageHeader from "./components/UnAuthPageHeader";
+import AuthPageHeader from "./components/AuthPageHeader";
 
 export default function AppRouter() {
   return (
     <Router>
-      {/* <UnAuthPageHeader/> */}
       <Switch>
         <Route path="/dashboard">
           <AuthRoute>
@@ -36,22 +36,27 @@ export default function AppRouter() {
         </Route>
 
         <Route path="/login">
-          <LoginPage/>  
+          <UnAuthPageHeader />
+          <LoginPage />
         </Route>
 
         <Route path="/signup">
+          <UnAuthPageHeader />
           <SignupPage />
         </Route>
 
         <Route path="/reset">
+          <UnAuthPageHeader />
           <ResetPasswordPage />
         </Route>
 
         <Route path="/reset_confirm">
+          <UnAuthPageHeader />
           <ResetPasswordConfirmPage />
         </Route>
 
         <Route exact path="/">
+          <UnAuthPageHeader />
           <LandingPage />
         </Route>
 

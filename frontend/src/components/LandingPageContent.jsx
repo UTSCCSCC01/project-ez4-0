@@ -1,6 +1,6 @@
 import illustration from "../img/landing-illustration.png";
 import FeaturesSplit from "./FeaturesSplit";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export default function LandingPageContent() {
   return (
@@ -9,14 +9,14 @@ export default function LandingPageContent() {
         <div>
           <h1
             className="leading-tight md:leading-snug 
-          font-cg text-3xl md:text-4xl font-bold text-gray-900"
+          font-cgbold text-3xl md:text-4xl text-gray-900"
           >
             <span className="block">Start your business</span>{" "}
             <span className="block">
               with
-              <span className="font-cg font-thin text-indigo-500">
+              <span className="font-cg text-indigo-500">
                 {" "}
-                Entre<span className="font-bold">E</span>
+                Entre<span className="font-cgbold">E</span>
               </span>
             </span>
           </h1>
@@ -53,9 +53,9 @@ export default function LandingPageContent() {
         </div> */}
 
         <img
-          className="ml-16 mt-10 lg:mt-0 w-80 lg:w-96 "
+          className="ml-4 md:ml-16 mt-10 lg:mt-0 w-72 md:w-96 "
           src={illustration}
-          alt=""
+          alt="man in front of a laptop"
         />
       </div>
       <div className="justify-center mx-auto flex my-40">

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import moment from 'moment';
+import moment from "moment";
 
 class UserPost extends Component {
   constructor(props) {
@@ -95,12 +95,11 @@ class UserPost extends Component {
     };
     const id = this.props.post.id;
     const api = `http://localhost:5000/api/v1/posts/${id}/comments`;
-    fetch(api, requestOptions)
-      .then(response => {
-        if (response.status === 200) {
-          this.getComments();
-        }
-      });
+    fetch(api, requestOptions).then((response) => {
+      if (response.status === 200) {
+        this.getComments();
+      }
+    });
   }
 
   deleteComment(commentId) {
@@ -126,7 +125,7 @@ class UserPost extends Component {
   }
 
   getContent() {
-    return this.props.post.content || "No content"
+    return this.props.post.content || "No content";
   }
 
   getTitle() {
@@ -134,17 +133,17 @@ class UserPost extends Component {
   }
 
   onKeyDown = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       if (this.state.comment) {
         this.postComment(this.state.comment);
         this.setState({ comment: "" });
       }
     }
-  }
+  };
 
   onCommentChange = (e) => {
     this.setState({ comment: e.target.value });
-  }
+  };
 
   onCommentDelete = (commentId) => {
     this.deleteComment(commentId);
@@ -153,18 +152,23 @@ class UserPost extends Component {
   renderComments() {
     const userId = localStorage.getItem("userId");
     if (this.state.comments.length === 0) {
-      return
+      return;
     }
     return this.state.comments.map((comment) => {
       return (
-        <div key={comment.id} className="relative flex items-center self-center w-full max-w-xl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400">
-          <img className='w-6 h-6 object-cover rounded-full shadow mr-2 cursor-pointer' alt='User avatar' src='https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200' alt="User avatar" />
-          <span className="absolute inset-y-0 right-0 flex items-center pr-6">
-          </span>
+        <div
+          key={comment.id}
+          className="relative flex items-center self-center w-full max-w-xl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400"
+        >
+          <img
+            className="w-6 h-6 object-cover rounded-full shadow mr-2 cursor-pointer"
+            alt="User avatar"
+            src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200"
+            alt="User avatar"
+          />
+          <span className="absolute inset-y-0 right-0 flex items-center pr-6"></span>
           <div className="flex flex-row justify-between w-full text-sm">
-            <div>
-              {comment.content}
-            </div>
+            <div>{comment.content}</div>
             <div className="text-gray-600 font-light text-xs mx-5">
               {
                 comment.user_id === userId && (
@@ -178,7 +182,7 @@ class UserPost extends Component {
             </div>
           </div>
         </div>
-      )
+      );
     });
   }
 
@@ -235,8 +239,16 @@ class UserPost extends Component {
                   }
                 </div>
               </div>
-              <div className='text-gray-500 font-normal text-sm mb-6 mx-3 px-2'>{this.getContent()}</div>
-              <div className='text-gray-400 font-medium text-sm mb-7 mt-6 mx-3 px-2'><img className="rounded" src="https://picsum.photos/536/354" alt="User post image"/></div>
+              <div className="text-gray-500 font-normal text-sm mb-6 mx-3 px-2">
+                {this.getContent()}
+              </div>
+              <div className="text-gray-400 font-medium text-sm mb-7 mt-6 mx-3 px-2">
+                <img
+                  className="rounded"
+                  src="https://picsum.photos/536/354"
+                  alt="User post image"
+                />
+              </div>
               <div className="flex justify-start mb-4">
                 <div className="flex w-full mt-1 pt-2 pl-5">
                   <button onClick={this.onLikeClick}
@@ -251,19 +263,45 @@ class UserPost extends Component {
                   </button>
                   {/* Show users who liked this post, at most four */}
                   <div className="flex ">
-                    <img className="inline-block object-cover w-8 h-8 text-white border-2 border-white rounded-full shadow-sm cursor-pointer" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                    <img className="inline-block object-cover w-8 h-8 -ml-2 text-white border-2 border-white rounded-full shadow-sm cursor-pointer" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-                    <img className="inline-block object-cover w-8 h-8 -ml-2 text-white border-2 border-white rounded-full shadow-sm cursor-pointer" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="" />
-                    <img className="inline-block object-cover w-8 h-8 -ml-2 text-white border-2 border-white rounded-full shadow-sm cursor-pointer" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80" alt="" />
+                    <img
+                      className="inline-block object-cover w-8 h-8 text-white border-2 border-white rounded-full shadow-sm cursor-pointer"
+                      src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      alt=""
+                    />
+                    <img
+                      className="inline-block object-cover w-8 h-8 -ml-2 text-white border-2 border-white rounded-full shadow-sm cursor-pointer"
+                      src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      alt=""
+                    />
+                    <img
+                      className="inline-block object-cover w-8 h-8 -ml-2 text-white border-2 border-white rounded-full shadow-sm cursor-pointer"
+                      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+                      alt=""
+                    />
+                    <img
+                      className="inline-block object-cover w-8 h-8 -ml-2 text-white border-2 border-white rounded-full shadow-sm cursor-pointer"
+                      src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
+                      alt=""
+                    />
                   </div>
                 </div>
               </div>
               <div className="flex w-full ">
                 <div className="mt-3 mx-5 flex flex-row">
-                  <div className='flex text-gray-700 font-normal text-sm rounded-md mb-2 mr-4 items-center'>Comments:<div className="ml-1 text-gray-400 font-normal text-ms">{this.state.comments.length}</div></div>
+                  <div className="flex text-gray-700 font-normal text-sm rounded-md mb-2 mr-4 items-center">
+                    Comments:
+                    <div className="ml-1 text-gray-400 font-normal text-ms">
+                      {this.state.comments.length}
+                    </div>
+                  </div>
                 </div>
                 <div className="mt-3 mx-5 w-full flex justify-end">
-                  <div className='flex text-gray-700 font-normal text-sm rounded-md mb-2 mr-4 items-center'>Likes: <div className="ml-1 text-gray-400 font-normal text-ms">{this.state.likes.length}</div></div>
+                  <div className="flex text-gray-700 font-normal text-sm rounded-md mb-2 mr-4 items-center">
+                    Likes:{" "}
+                    <div className="ml-1 text-gray-400 font-normal text-ms">
+                      {this.state.likes.length}
+                    </div>
+                  </div>
                 </div>
               </div>
               {/* Show comments */}
@@ -278,7 +316,18 @@ class UserPost extends Component {
             </div>
           </div>
         </div>
-        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="matheusgongo" data-description="Support me on Buy me a coffee!" data-message="Thank you for visiting! :D" data-color="#BD5FFF" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
+        <script
+          data-name="BMC-Widget"
+          data-cfasync="false"
+          src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
+          data-id="matheusgongo"
+          data-description="Support me on Buy me a coffee!"
+          data-message="Thank you for visiting! :D"
+          data-color="#BD5FFF"
+          data-position="Right"
+          data-x_margin="18"
+          data-y_margin="18"
+        ></script>
       </div>
     );
   }
