@@ -2,34 +2,37 @@ import React, { Component } from "react";
 import JobPost from "./JobPost.jsx";
 
 class AllJobPosting extends Component {
-  state = {};
-  render() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      job_posts: [],
+    };
+  }
+
+  componentDidMount() {
     const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({}),
     };
+    fetch("http://localhost:5000/api/v1/job_posts", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        this.setState({ job_posts: result.job_posts });
+      });
+  }
 
-    let response = fetch(
-      "http://localhost:5000/api/v1/job-posts",
-      requestOptions
+  render() {
+    return (
+      <div>
+        {this.state.job_posts.map((post) => {
+          if (post.active === true) {
+            console.log(post);
+            return <JobPost key={post.id} title={post.title} />;
+          }
+        })}
+      </div>
     );
-    let JSresponse = response.json();
-    if (
-      response.status == 400 ||
-      response.status == 401 ||
-      response.status == 403 ||
-      response.status == 404
-    ) {
-      return JSresponse.description();
-    } else {
-      return JSresponse.job_posts.map((post) => (
-        <JobPost title={post.title} />
-        /* if (post.active == true) {
-          <JobPost title={post.title} />
-      } */
-      ));
-    }
   }
 }
 
