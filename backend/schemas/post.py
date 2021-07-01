@@ -64,6 +64,7 @@ class UndoLikeSchema(Schema):
 
 
 class PostCommentSchema(Schema):
+    id = fields.Str(description="ID of the comment")
     content = fields.Str(description="Content of the comment")
     resources = fields.Str(description="A list of resource URLs related to this comment")
     user_id = fields.UUID(description="The user ID of the comment poster")
@@ -71,6 +72,7 @@ class PostCommentSchema(Schema):
 
 
 class PostLikeSchema(Schema):
+    id = fields.Str(description="ID of the like")
     user_id = fields.UUID(description="The user ID of the liker")
     liked_at = fields.DateTime(description="The timestamp of the like")
 
