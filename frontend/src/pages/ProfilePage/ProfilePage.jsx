@@ -9,7 +9,7 @@ export default function Profile() {
     <div>
       <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"/>
   
-      <div className="bg-gray-100">
+      <div className="bg-gray-100 pt-20">
           <div className="container mx-auto my-5 p-5">
               <div className="md:flex no-wrap md:-mx-2 ">
                   {/* <!-- Left Side --> */}

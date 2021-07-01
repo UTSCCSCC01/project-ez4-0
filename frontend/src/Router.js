@@ -7,6 +7,7 @@ import LoginPage from './pages/LoginPage/LoginPage';
 import LandingPage from './pages/LandingPage/LandingPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 import UserPost from './components/UserPost';
+import UserPostPage from './pages/UserPostPage/UserPostPage';
 
 import UnAuthPageHeader from "./components/UnAuthPageHeader";
 
@@ -15,8 +16,11 @@ export default function AppRouter() {
     <Router>
       {/* <UnAuthPageHeader/> */}
       <Switch>
-        <Route path="/profile">
+        <Route path="/post">
           <UserPost />
+        </Route>
+        <Route path="/profile">
+          <ProfilePage />
         </Route>
         <Route path="/login">
           <LoginPage/>  

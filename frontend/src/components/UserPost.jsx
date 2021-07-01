@@ -8,18 +8,16 @@ export default function UserPost() {
     return (
         // <!-- This is an example component -->
         <div class="">
-            <div class='w-96 m-10 border rounded-lg  overflow-hidden mx-auto'>
-                <div class = 'flex flex-row w-max mt-3 mx-3'>
+            {/* <div class='mx-w-xl my-10 border rounded-lg  overflow-hidden mx-auto'> */}
+                {/* <div class = 'flex flex-row w-max mt-3 mx-3'>
                     <div class = 'mr-40 text-grey-600 font-bold'>
-                        {/* <button type="button">Posts</button> */}
                         Posts
                     </div>
                     <div class = 'ml-20 text-gray-600'>
                         <button type="button">see all</button>
                     </div>
-
-                </div>
-                <div class='flex w-11/12 mt-3 mb-10 bg-white border rounded-lg  overflow-hidden mx-auto'>
+                </div> */}
+                <div class='flex flex-wrap max-w-xl mt-3 mb-10 bg-white border rounded-lg  overflow-hidden mx-auto'>
                     {/* post */}
                     <div class='flex items-center w-full '>
                         <div class='w-full'>
@@ -57,7 +55,7 @@ export default function UserPost() {
                                     
 
                                     {/* Show users who liked this post, at most four */}
-                                    <div>
+                                    <div class="flex ">
                                         <img class="inline-block object-cover w-8 h-8 text-white border-2 border-white rounded-full shadow-sm cursor-pointer" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
                                         <img class="inline-block object-cover w-8 h-8 -ml-2 text-white border-2 border-white rounded-full shadow-sm cursor-pointer" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
                                         <img class="inline-block object-cover w-8 h-8 -ml-2 text-white border-2 border-white rounded-full shadow-sm cursor-pointer" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="" />
@@ -90,7 +88,7 @@ export default function UserPost() {
                     </div>
                 </div>
                 <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="matheusgongo" data-description="Support me on Buy me a coffee!" data-message="Thank you for visiting! :D" data-color="#BD5FFF" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
-            </div>
+            {/* </div> */}
         </div>
     );
   }
