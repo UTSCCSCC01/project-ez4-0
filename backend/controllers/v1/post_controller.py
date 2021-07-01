@@ -67,8 +67,15 @@ class PostsController(BaseController):
         keyword = kwargs.get("keyword")
         if keyword:
             query["title__contains"] = keyword
+        
+        posts = Post.objects(**query).order_by("-posted_at")
+        limit = kwargs.get("limit")
+        if limit:
+            return {
+                "posts": posts[:limit]
+            }
         return {
-            "posts": Post.objects(**query)
+            "posts": posts
         }
 
 
