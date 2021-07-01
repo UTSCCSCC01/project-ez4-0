@@ -17,7 +17,7 @@ from schemas import (
 )
 from .base_controller import BaseController
 from models import User
-from documents import JobPost
+from documents.job_post import JobPost
 from datetime import datetime
 from bson import ObjectId
 

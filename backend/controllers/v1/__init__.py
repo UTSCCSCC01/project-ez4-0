@@ -7,7 +7,14 @@ when we publish new APIs we will use v2, v3, ...
 from flask import Blueprint
 from .user_controller import UserController, UsersController
 from .auth_controller import AuthController
-from .post_controller import PostController, PostsController
+from .post_controller import (
+    PostController,
+    PostsController,
+    PostLikesController,
+    PostLikeController,
+    PostCommentsController,
+    PostCommentController,
+)
 from .job_post_controller import JobPostsController, JobPostController
 
 
@@ -45,6 +52,18 @@ def set_post_routes(api, docs):
 
     api.add_resource(PostController, "/posts/<post_id>")
     docs.register(PostController, blueprint=post_bp_name)
+
+    api.add_resource(PostCommentsController, "/posts/<post_id>/comments")
+    docs.register(PostCommentsController, blueprint=post_bp_name)
+
+    api.add_resource(PostLikesController, "/posts/<post_id>/likes")
+    docs.register(PostLikesController, blueprint=post_bp_name)
+
+    api.add_resource(PostCommentController, "/posts/<post_id>/comments/<comment_id>")
+    docs.register(PostCommentController, blueprint=post_bp_name)
+
+    api.add_resource(PostLikeController, "/posts/<post_id>/likes/<like_id>")
+    docs.register(PostLikeController, blueprint=post_bp_name)
 
 
 job_post_bp_name = "job_post"

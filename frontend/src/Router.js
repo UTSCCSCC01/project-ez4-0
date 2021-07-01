@@ -15,22 +15,33 @@ export default function AppRouter() {
   return (
     <Router>
       <Switch>
-        <Route path="/profile">
-          <UnAuthPageHeader />
-          <ProfilePage />
+        <Route path="/posts">
+          <AuthRoute>
+            <AllUserPosting/>
+          </AuthRoute>
         </Route>
+
+        <Route path="/profile">
+          <AuthRoute>
+            <ProfilePage />
+          </AuthRoute>
+        </Route>
+
         <Route path="/login">
           <UnAuthPageHeader />
           <LoginPage />
         </Route>
+
         <Route path="/signup">
           <UnAuthPageHeader />
           <SignupPage />
         </Route>
+
         <Route path="/reset">
           <UnAuthPageHeader />
           <ResetPasswordPage />
         </Route>
+
         <Route path="/reset_confirm">
           <UnAuthPageHeader />
           <ResetPasswordConfirmPage />
@@ -38,10 +49,12 @@ export default function AppRouter() {
         <Route path="/home">
           <Dashboard />
         </Route>
+
         <Route exact path="/">
           <UnAuthPageHeader />
           <LandingPage />
         </Route>
+
       </Switch>
     </Router>
   );
