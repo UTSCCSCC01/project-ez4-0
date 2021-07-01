@@ -1,11 +1,11 @@
 import "./css/App.css";
-import Router from "./Router";
+import PostBoxComponent from "./components/PostBoxComponent"
 
 
 function App() {
   return (
     <div>
-      <Router/>
+      <PostBoxComponent/>
     </div>
   );
 }
