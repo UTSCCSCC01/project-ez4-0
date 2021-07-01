@@ -25,11 +25,12 @@ class PostsController(BaseController):
     @doc(description="Create a post")
     @use_kwargs(CreatePostSchema)
     @marshal_with(PostSchema)
-    def post(self, content, user_id, **kwargs):
+    def post(self, title, content, user_id, **kwargs):
         user =  User.find_by_id(user_id)
         if not user:
             return {"description": f"User with id {user_id} not found"}, 404
         post = Post(
+            title=title,
             content=content,
             user_id=user_id,
             posted_at=datetime.now(),
@@ -54,7 +55,7 @@ class PostsController(BaseController):
         # Query by keyword
         keyword = kwargs.get("keyword")
         if keyword:
-            query["content__contains"] = keyword
+            query["title__contains"] = keyword
         return {
             "posts": Post.objects(**query)
         }

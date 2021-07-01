@@ -8,6 +8,7 @@ from flask import Blueprint
 from .user_controller import UserController, UsersController
 from .auth_controller import AuthController
 from .post_controller import PostController, PostsController
+from .job_post_controller import JobPostsController, JobPostController
 
 
 user_bp_name = "user"
@@ -44,3 +45,16 @@ def set_post_routes(api, docs):
 
     api.add_resource(PostController, "/posts/<post_id>")
     docs.register(PostController, blueprint=post_bp_name)
+
+
+job_post_bp_name = "job_post"
+job_post_bp = Blueprint(job_post_bp_name, __name__, url_prefix="/api/v1")
+def set_job_post_routes(api, docs):
+    """
+    Setup routes for the Job post API
+    """
+    api.add_resource(JobPostsController, "/job_posts")
+    docs.register(JobPostsController, blueprint=job_post_bp_name)
+
+    api.add_resource(JobPostController, "/job_posts/<job_post_id>")
+    docs.register(JobPostController, blueprint=job_post_bp_name)

@@ -4,20 +4,26 @@ from mongoengine import (
     ListField,
     DateTimeField,
     UUIDField,
+    BooleanField
 )
 from models import User
 
 
-class Post(Document):
+class JobPost(Document):
     """
-    Title of the post
+    Job title
     """
     title = StringField(required=True)
 
     """
-    Content of the post
+    Job description
     """
-    content = StringField(required=True)
+    description = StringField()
+
+    """
+    A list of requirements described in String
+    """
+    requirements = ListField(StringField())
 
     """
     A list of resource URLs
@@ -39,8 +45,14 @@ class Post(Document):
     """
     posted_at = DateTimeField(required=True)
 
+    """
+    Whether this post is active or not, if it is False,
+    this job post is view only
+    """
+    active = BooleanField(required=True)
+
     def get_poster(self):
         """
-        Get the user who posted the post
+        Get the user who posted the job post
         """
         return User.find_by_id(self.user_id)
