@@ -6,7 +6,8 @@ import ResetPasswordConfirmPage from './pages/ResetPasswordConfirmPage/ResetPass
 import LoginPage from './pages/LoginPage/LoginPage';
 import LandingPage from './pages/LandingPage/LandingPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
-import AllUserPosting from './pages/UserPostPage/UserPostPage';
+import DashboardPage from './pages/DashboardPage/DashboardPage';
+import AllPostsPage from './pages/AllPostsPage/AllPostsPage';
 import AuthRoute from './components/AuthRoute';
 
 import UnAuthPageHeader from "./components/UnAuthPageHeader";
@@ -16,9 +17,15 @@ export default function AppRouter() {
     <Router>
       {/* <UnAuthPageHeader/> */}
       <Switch>
+        <Route path="/dashboard">
+          <AuthRoute>
+            <DashboardPage/>
+          </AuthRoute>
+        </Route>
+
         <Route path="/posts">
           <AuthRoute>
-            <AllUserPosting/>
+            <AllPostsPage/>
           </AuthRoute>
         </Route>
 

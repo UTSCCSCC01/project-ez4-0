@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import UserPost from "../../components/UserPost.jsx";
 
-class AllUserPosting extends Component {
+export default class DashboardPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,6 +10,10 @@ class AllUserPosting extends Component {
   }
 
   componentDidMount() {
+    this.getPosts();
+  }
+
+  getPosts() {
     const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -35,5 +39,3 @@ class AllUserPosting extends Component {
     );
   }
 }
-
-export default AllUserPosting;

@@ -45,16 +45,32 @@ class UserPost extends Component {
   }
 
   postComment(comment) {
+    const userId = localStorage.getItem("userId");
     const requestOptions = {
-      method: "GET",
+      method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: {
-        content: comment,
-        user_id: "",
-      }
+      body: JSON.stringify({
+          content: comment,
+          user_id: userId,
+      })
     };
     const id = this.props.post.id;
     const api = `http://localhost:5000/api/v1/posts/${id}/comments`;
+    fetch(api, requestOptions)
+      .then(response => {
+        if (response.status === 200) {
+          this.getComments();
+        }
+      });
+  }
+
+  deleteComment(commentId) {
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" }
+    };
+    const id = this.props.post.id;
+    const api = `http://localhost:5000/api/v1/posts/${id}/comments/${commentId}`;
     fetch(api, requestOptions)
       .then(response => {
         if (response.status === 200) {
@@ -88,7 +104,8 @@ class UserPost extends Component {
   onKeyDown = (e) => {
     if (e.key === 'Enter') {
       if (this.state.comment) {
-
+        this.postComment(this.state.comment);
+        this.setState({ comment: "" });
       }
     }
   }
@@ -97,7 +114,12 @@ class UserPost extends Component {
     this.setState({ comment: e.target.value });
   }
 
+  onCommentDelete = (commentId) => {
+    this.deleteComment(commentId);
+  }
+
   renderComments() {
+    const userId = localStorage.getItem("userId");
     if (this.state.comments.length === 0) {
       return
     }
@@ -112,6 +134,15 @@ class UserPost extends Component {
               {comment.content}
             </div>
             <div className="text-gray-600 font-light text-xs mx-5">
+              {
+                comment.user_id === userId && (
+                  <button onClick={() => this.onCommentDelete(comment.id)} className="bg-white transition ease-out duration-300 hover:text-red-500 w-6 h-6 px-1 border text-center rounded-full text-gray-400 cursor-pointer mr-2" >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                )
+              }
               {this.getCommentDate(comment)}
             </div>
           </div>
@@ -175,7 +206,7 @@ class UserPost extends Component {
                 <img className='w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer' alt='User avatar' src='https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200' alt="User avatar" />
                 <span className="absolute inset-y-0 right-0 flex items-center pr-6">
                 </span>
-                <input onChange={this.onCommentChange} onKeyDown={this.onKeyDown} className="w-full py-2 pl-4 pr-10 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400 focus:bg-white focus:outline-none focus:border-blue-500 focus:text-gray-900 focus:shadow-outline-blue" placeholder="Post a comment..." autoComplete="off" />
+                <input onChange={this.onCommentChange} value={this.state.comment} onKeyDown={this.onKeyDown} className="w-full py-2 pl-4 pr-10 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400 focus:bg-white focus:outline-none focus:border-blue-500 focus:text-gray-900 focus:shadow-outline-blue" placeholder="Post a comment..." autoComplete="off" />
               </div>
             </div>
           </div>
