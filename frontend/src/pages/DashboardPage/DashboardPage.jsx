@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import UserPost from "../../components/UserPost.jsx";
+import PostBoxComponent from "../../components/PostBoxComponent"
+import { Link } from "react-router-dom";
 
 export default class DashboardPage extends Component {
   constructor(props) {
@@ -18,10 +20,31 @@ export default class DashboardPage extends Component {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     };
-    fetch("http://localhost:5000/api/v1/posts", requestOptions)
+    fetch("http://localhost:5000/api/v1/posts?limit=3", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         this.setState({ posts: result.posts });
+      });
+  }
+
+  createPost = (content, title, tags) => {
+    const userId = localStorage.getItem("userId");
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+          title,
+          content,
+          tags,
+          user_id: userId,
+      })
+    };
+    const api = `http://localhost:5000/api/v1/posts`;
+    fetch(api, requestOptions)
+      .then(response => {
+        if (response.status === 200) {
+          this.getPosts();
+        }
       });
   }
 
@@ -33,8 +56,24 @@ export default class DashboardPage extends Component {
 
   render() {
     return (
-      <div>
-        {this.renderPosts()}
+      <div className="grid grid-cols-1 md:grid-cols-3 bg-gray-50">
+        <div>
+          {/* Left thing here */}
+        </div>
+        <div>
+          <div class="mb-7">
+            <PostBoxComponent onCreatePost={this.createPost}/>
+          </div>
+          {this.renderPosts()}
+          <div className="grid justify-items-center mb-7">
+            <Link to="/posts" className="text-indigo-500 background-transparent font-bold px-3 py-1 text-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+              See More
+            </Link>
+          </div>
+        </div>
+        <div>
+          {/* Right thing here */}
+        </div>
       </div>
     );
   }

@@ -8,6 +8,7 @@ class UserPost extends Component {
       likes: [],
       comments: [],
       comment: "",
+      liked: false,
     }
   }
 
@@ -26,7 +27,45 @@ class UserPost extends Component {
     fetch(api, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        this.setState({ likes: result.likes });
+        if (this.isUserLiked(result.likes)) {
+          this.setState({ likes: result.likes, liked: true });
+        } else {
+          this.setState({ likes: result.likes, liked: false });
+        }
+      });
+  }
+
+  likePost() {
+    const userId = localStorage.getItem("userId");
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+          user_id: userId,
+      })
+    };
+    const id = this.props.post.id;
+    const api = `http://localhost:5000/api/v1/posts/${id}/likes`;
+    fetch(api, requestOptions)
+      .then(response => {
+        if (response.status === 200) {
+          this.getLikes();
+        }
+      });
+  }
+
+  unLikePost(likeId) {
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" }
+    };
+    const id = this.props.post.id;
+    const api = `http://localhost:5000/api/v1/posts/${id}/likes/${likeId}`;
+    fetch(api, requestOptions)
+      .then(response => {
+        if (response.status === 200) {
+          this.getLikes();
+        }
       });
   }
 
@@ -86,13 +125,6 @@ class UserPost extends Component {
     return "Unknwon date";
   }
 
-  getCommentDate(comment) {
-    if (comment.posted_at) {
-      return moment(comment.posted_at).format("YYYY-MM-DD hh:mm:ss");
-    }
-    return "Unknwon date";
-  }
-
   getContent() {
     return this.props.post.content || "No content"
   }
@@ -138,12 +170,11 @@ class UserPost extends Component {
                 comment.user_id === userId && (
                   <button onClick={() => this.onCommentDelete(comment.id)} className="bg-white transition ease-out duration-300 hover:text-red-500 w-6 h-6 px-1 border text-center rounded-full text-gray-400 cursor-pointer mr-2" >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                      <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                      <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
                     </svg>
                   </button>
                 )
               }
-              {this.getCommentDate(comment)}
             </div>
           </div>
         </div>
@@ -151,32 +182,68 @@ class UserPost extends Component {
     });
   }
 
+  isUserLiked = (likes) => {
+    const userId = localStorage.getItem("userId");
+    for (let i = 0; i < likes.length; i++) {
+      if (userId === likes[i].user_id) {
+        return likes[i].id;
+      }
+    }
+  }
+
+  onLikeClick = () => {
+    const likeId = this.isUserLiked(this.state.likes);
+    if (likeId) {
+      this.unLikePost(likeId);
+    } else {
+      this.likePost();
+    }
+  }
+
   render() {
+    const userId = localStorage.getItem("userId");
     return (
       // <!-- This is an example component -->
       <div className="">
-        <div className='flex flex-wrap max-w-xl mt-3 mb-10 bg-white border rounded-lg  overflow-hidden mx-auto'>
+        <div className='flex flex-wrap max-w-xl mt-3 mb-10 bg-white border rounded-lg overflow-hidden mx-auto'>
           {/* post */}
           <div className='flex items-center w-full'>
             <div className='w-full'>
-              <div className="flex flex-row mt-2 px-2 py-3 mx-3">
-                <div className="w-auto h-auto border-2 border-white-500">
-                  <img className='w-12 h-12 object-cover shadow cursor-pointer' alt='User avatar' src='https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200' />
-                </div>
-                <div className="flex flex-col mb-2 ml-4 mt-1">
-                  <div className='text-gray-600 text-sm font-semibold'>{this.props.post.title}</div>
-                  <div className='flex w-full mt-1'>
-                    <span className='text-gray-400 font-normal text-xs'>
-                      {this.getDate()}
-                    </span>
+              <div className="flex flex-row mt-2 px-2 py-3 mx-3 justify-between">
+                <div className="flex flex-row">
+                  <div className="w-auto h-auto border-2 border-white-500">
+                    <img className='w-12 h-12 object-cover shadow cursor-pointer' alt='User avatar' src='https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200' />
                   </div>
+                  <div className="flex flex-col mb-2 ml-4 mt-1">
+                    <div className='text-gray-600 text-sm font-semibold'>{this.props.post.title}</div>
+                    <div className='flex w-full mt-1'>
+                      <span className='text-gray-400 font-normal text-xs'>
+                        {this.getDate()}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  {
+                    this.props.post.user_id === userId && (
+                      <button className="bg-white transition ease-out duration-300 hover:text-red-500 w-9 h-9 px-2 border text-center rounded-full text-gray-400 cursor-pointer mr-2" >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+                        </svg>
+                      </button>
+                    )
+                  }
                 </div>
               </div>
               <div className='text-gray-500 font-normal text-sm mb-6 mx-3 px-2'>{this.getContent()}</div>
               <div className='text-gray-400 font-medium text-sm mb-7 mt-6 mx-3 px-2'><img className="rounded" src="https://picsum.photos/536/354" alt="User post image"/></div>
               <div className="flex justify-start mb-4">
                 <div className="flex w-full mt-1 pt-2 pl-5">
-                  <button className="bg-white transition ease-out duration-300 hover:text-red-500 border w-8 h-8 px-2 text-center rounded-full text-gray-400 cursor-pointer mr-2" >
+                  <button onClick={this.onLikeClick}
+                    className={
+                      this.state.liked?
+                      "focus:outline-none bg-white transition ease-out duration-300 border w-8 h-8 px-2 text-center rounded-full text-red-500 cursor-pointer mr-2"
+                      :"focus:outline-none bg-white transition ease-out duration-300 border w-8 h-8 px-2 text-center rounded-full text-gray-400 hover:text-red-500 cursor-pointer mr-2"} >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="14px" viewBox="0 0 20 20" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.19,4.155c-1.672-1.534-4.383-1.534-6.055,0L10,5.197L8.864,4.155c-1.672-1.534-4.382-1.534-6.054,0
                                                                     c-1.881,1.727-1.881,4.52,0,6.246L10,17l7.19-6.599C19.07,8.675,19.07,5.881,17.19,4.155z" />
