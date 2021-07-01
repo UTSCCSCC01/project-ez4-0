@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import JobPost from "./JobPost.jsx";
 
-class AddJobPosting extends Component {
+class AllJobPosting extends Component {
   state = {};
   render() {
     const requestOptions = {
@@ -14,23 +14,23 @@ class AddJobPosting extends Component {
       "http://localhost:5000/api/v1/job-posts",
       requestOptions
     );
-    let JSresponse = reponse.json();
+    let JSresponse = response.json();
     if (
-      reponse.status == 400 ||
-      reponse.status == 401 ||
-      reponse.status == 403 ||
-      reponse.status == 404
+      response.status == 400 ||
+      response.status == 401 ||
+      response.status == 403 ||
+      response.status == 404
     ) {
       return JSresponse.description();
     } else {
       return JSresponse.job_posts.map((post) => (
-        <Jobpost title={title} />
+        <JobPost title={post.title} />
         /* if (post.active == true) {
-          <Jobpost title={title} />
+          <JobPost title={post.title} />
       } */
       ));
     }
   }
 }
 
-export default AddJobPosting;
+export default AllJobPosting;

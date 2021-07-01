@@ -3,9 +3,9 @@ import React, { Component } from "react";
 class JobPost extends Component {
   render() {
     return (
-      <div class="mx-auto bg-white border-t-2">
+      <div class="max-w-4xl mx-auto bg-white border-2">
         <div class="flex ">
-          <div class="h-full text-left px-4 py-4 w-full justify-end border-b-2 border-indigo-50">
+          <div class="h-full text-left px-4 py-4 w-full justify-end border-indigo-50">
             <a to="jobdet" class="flex items-center flex-wrap">
               <img
                 alt=""
