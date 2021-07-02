@@ -52,7 +52,7 @@ export default function SignupPage() {
   };
 
   if (loginSuccess) {
-    return <Redirect to="/" />;
+    return <Redirect to="/dashboard" />;
   }
 
   return (

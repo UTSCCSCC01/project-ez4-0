@@ -45,6 +45,7 @@ class QueryPostsSchema(Schema):
     posted_by = fields.UUID(description="Filter posts by the user id")
     tags = fields.Str(description="Filter posts by tags separated by comma")
     keyword = fields.Str(description="Filter posts by keyword")
+    limit = fields.Int(description="Limit the number of posts return")
 
 
 class GetPostsSchema(Schema):

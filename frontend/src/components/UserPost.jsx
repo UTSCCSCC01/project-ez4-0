@@ -8,6 +8,7 @@ class UserPost extends Component {
       likes: [],
       comments: [],
       comment: "",
+      liked: false,
     };
   }
 
@@ -26,8 +27,44 @@ class UserPost extends Component {
     fetch(api, requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        this.setState({ likes: result.likes });
+        if (this.isUserLiked(result.likes)) {
+          this.setState({ likes: result.likes, liked: true });
+        } else {
+          this.setState({ likes: result.likes, liked: false });
+        }
       });
+  }
+
+  likePost() {
+    const userId = localStorage.getItem("userId");
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_id: userId,
+      }),
+    };
+    const id = this.props.post.id;
+    const api = `http://localhost:5000/api/v1/posts/${id}/likes`;
+    fetch(api, requestOptions).then((response) => {
+      if (response.status === 200) {
+        this.getLikes();
+      }
+    });
+  }
+
+  unLikePost(likeId) {
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    };
+    const id = this.props.post.id;
+    const api = `http://localhost:5000/api/v1/posts/${id}/likes/${likeId}`;
+    fetch(api, requestOptions).then((response) => {
+      if (response.status === 200) {
+        this.getLikes();
+      }
+    });
   }
 
   getComments() {
@@ -45,13 +82,14 @@ class UserPost extends Component {
   }
 
   postComment(comment) {
+    const userId = localStorage.getItem("userId");
     const requestOptions = {
-      method: "GET",
+      method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: {
+      body: JSON.stringify({
         content: comment,
-        user_id: "",
-      },
+        user_id: userId,
+      }),
     };
     const id = this.props.post.id;
     const api = `http://localhost:5000/api/v1/posts/${id}/comments`;
@@ -62,16 +100,23 @@ class UserPost extends Component {
     });
   }
 
+  deleteComment(commentId) {
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    };
+    const id = this.props.post.id;
+    const api = `http://localhost:5000/api/v1/posts/${id}/comments/${commentId}`;
+    fetch(api, requestOptions).then((response) => {
+      if (response.status === 200) {
+        this.getComments();
+      }
+    });
+  }
+
   getDate() {
     if (this.props.post.posted_at) {
       return moment(this.props.post.posted_at).format("YYYY-MM-DD hh:mm:ss");
-    }
-    return "Unknwon date";
-  }
-
-  getCommentDate(comment) {
-    if (comment.posted_at) {
-      return moment(comment.posted_at).format("YYYY-MM-DD hh:mm:ss");
     }
     return "Unknwon date";
   }
@@ -87,6 +132,8 @@ class UserPost extends Component {
   onKeyDown = (e) => {
     if (e.key === "Enter") {
       if (this.state.comment) {
+        this.postComment(this.state.comment);
+        this.setState({ comment: "" });
       }
     }
   };
@@ -95,7 +142,12 @@ class UserPost extends Component {
     this.setState({ comment: e.target.value });
   };
 
+  onCommentDelete = (commentId) => {
+    this.deleteComment(commentId);
+  };
+
   renderComments() {
+    const userId = localStorage.getItem("userId");
     if (this.state.comments.length === 0) {
       return;
     }
@@ -115,7 +167,25 @@ class UserPost extends Component {
           <div className="flex flex-row justify-between w-full text-sm">
             <div>{comment.content}</div>
             <div className="text-gray-600 font-light text-xs mx-5">
-              {this.getCommentDate(comment)}
+              {comment.user_id === userId && (
+                <button
+                  onClick={() => this.onCommentDelete(comment.id)}
+                  className="bg-white transition ease-out duration-300 hover:text-red-500 w-6 h-6 px-1 border text-center rounded-full text-gray-400 cursor-pointer mr-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -123,31 +193,73 @@ class UserPost extends Component {
     });
   }
 
+  isUserLiked = (likes) => {
+    const userId = localStorage.getItem("userId");
+    for (let i = 0; i < likes.length; i++) {
+      if (userId === likes[i].user_id) {
+        return likes[i].id;
+      }
+    }
+  };
+
+  onLikeClick = () => {
+    const likeId = this.isUserLiked(this.state.likes);
+    if (likeId) {
+      this.unLikePost(likeId);
+    } else {
+      this.likePost();
+    }
+  };
+
   render() {
+    const userId = localStorage.getItem("userId");
     return (
       // <!-- This is an example component -->
       <div className="">
-        <div className="flex flex-wrap max-w-xl mt-3 mb-4 bg-white border rounded-md overflow-hidden mx-auto shadow-post">
+        <div className="flex flex-wrap max-w-xl mt-3 mb-10 bg-white border rounded-lg overflow-hidden mx-auto">
           {/* post */}
           <div className="flex items-center w-full">
             <div className="w-full">
-              <div className="flex flex-row mt-2 px-2 py-3 mx-3">
-                <div className="w-auto h-auto border-2 border-white-500">
-                  <img
-                    className="w-12 h-12 object-cover shadow cursor-pointer"
-                    alt="User avatar"
-                    src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200"
-                  />
+              <div className="flex flex-row mt-2 px-2 py-3 mx-3 justify-between">
+                <div className="flex flex-row">
+                  <div className="w-auto h-auto border-2 border-white-500">
+                    <img
+                      className="w-12 h-12 object-cover shadow cursor-pointer"
+                      alt="User avatar"
+                      src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200"
+                    />
+                  </div>
+                  <div className="flex flex-col mb-2 ml-4 mt-1">
+                    <div className="text-gray-600 text-sm font-semibold">
+                      {this.props.post.title}
+                    </div>
+                    <div className="flex w-full mt-1">
+                      <span className="text-gray-400 font-normal text-xs">
+                        {this.getDate()}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex flex-col mb-2 ml-4 mt-1">
-                  <div className="text-gray-600 text-sm font-semibold">
-                    {this.props.post.title}
-                  </div>
-                  <div className="flex w-full mt-1">
-                    <span className="text-gray-400 font-normal text-xs">
-                      {this.getDate()}
-                    </span>
-                  </div>
+                <div>
+                  {this.props.post.user_id === userId && (
+                    <button
+                      onClick={this.props.onDeletePost}
+                      className="focus:outline-none bg-white transition ease-out duration-300 hover:text-red-500 w-9 h-9 px-2 border text-center rounded-full text-gray-400 cursor-pointer mr-2"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </button>
+                  )}
                 </div>
               </div>
               <div className="text-gray-500 font-normal text-sm mb-6 mx-3 px-2">
@@ -162,7 +274,14 @@ class UserPost extends Component {
               </div>
               <div className="flex justify-start mb-4">
                 <div className="flex w-full mt-1 pt-2 pl-5">
-                  <button className="bg-white transition ease-out duration-300 hover:text-red-500 border w-8 h-8 px-2 text-center rounded-full text-gray-400 cursor-pointer mr-2">
+                  <button
+                    onClick={this.onLikeClick}
+                    className={
+                      this.state.liked
+                        ? "focus:outline-none bg-white transition ease-out duration-300 border w-8 h-8 px-2 text-center rounded-full text-red-500 cursor-pointer mr-2"
+                        : "focus:outline-none bg-white transition ease-out duration-300 border w-8 h-8 px-2 text-center rounded-full text-gray-400 hover:text-red-500 cursor-pointer mr-2"
+                    }
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -235,6 +354,7 @@ class UserPost extends Component {
                 <span className="absolute inset-y-0 right-0 flex items-center pr-6"></span>
                 <input
                   onChange={this.onCommentChange}
+                  value={this.state.comment}
                   onKeyDown={this.onKeyDown}
                   className="w-full py-2 pl-4 pr-10 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400 focus:bg-white focus:outline-none focus:border-blue-500 focus:text-gray-900 focus:shadow-outline-blue"
                   placeholder="Post a comment..."

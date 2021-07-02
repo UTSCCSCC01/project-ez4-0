@@ -6,9 +6,10 @@ import ResetPasswordConfirmPage from "./pages/ResetPasswordConfirmPage/ResetPass
 import LoginPage from "./pages/LoginPage/LoginPage";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
-import AllUserPosting from "./pages/UserPostPage/UserPostPage";
+import DashboardPage from "./pages/DashboardPage/DashboardPage";
+import AllPostsPage from "./pages/AllPostsPage/AllPostsPage";
 import AuthRoute from "./components/AuthRoute";
-import Dashboard from "./pages/Dashboard/Dashboard";
+
 import UnAuthPageHeader from "./components/UnAuthPageHeader";
 import AuthPageHeader from "./components/AuthPageHeader";
 
@@ -16,9 +17,15 @@ export default function AppRouter() {
   return (
     <Router>
       <Switch>
+        <Route path="/dashboard">
+          <AuthRoute>
+            <DashboardPage />
+          </AuthRoute>
+        </Route>
+
         <Route path="/posts">
           <AuthRoute>
-            <AllUserPosting />
+            <AllPostsPage />
           </AuthRoute>
         </Route>
 
@@ -46,11 +53,6 @@ export default function AppRouter() {
         <Route path="/reset_confirm">
           <UnAuthPageHeader />
           <ResetPasswordConfirmPage />
-        </Route>
-        <Route path="/home">
-          <AuthRoute>
-            <Dashboard />
-          </AuthRoute>
         </Route>
 
         <Route exact path="/">

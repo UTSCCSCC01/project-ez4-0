@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import UserPost from "../../components/UserPost.jsx";
 
-class AllUserPosting extends Component {
+export default class AllPostsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,6 +10,10 @@ class AllUserPosting extends Component {
   }
 
   componentDidMount() {
+    this.getPosts();
+  }
+
+  getPosts() {
     const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -21,9 +25,26 @@ class AllUserPosting extends Component {
       });
   }
 
+  deletePost = (id) => {
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    };
+    const api = `http://localhost:5000/api/v1/posts/${id}`;
+    fetch(api, requestOptions)
+      .then(response => {
+        if (response.status === 200) {
+          this.getPosts();
+        }
+      });
+  }
+
   renderPosts() {
     return this.state.posts.map((post) => (
-      <UserPost post={post} key={post.id}/>
+      <UserPost
+        post={post} key={post.id}
+        onDeletePost={() => this.deletePost(post.id)}
+      />
     ));
   }
 
@@ -35,5 +56,3 @@ class AllUserPosting extends Component {
     );
   }
 }
-
-export default AllUserPosting;
