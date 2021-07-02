@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import UserPost from "../../components/UserPost.jsx";
-import PostBoxComponent from "../../components/PostboxComponent.jsx";
+import PostBoxComponent from "../../components/PostBoxComponent.jsx";
 import { Link } from "react-router-dom";
 import AuthPageHeader from "../../components/AuthPageHeader.jsx";
 
