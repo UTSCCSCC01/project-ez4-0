@@ -7,7 +7,6 @@ import {
   SearchIcon,
   MenuIcon,
   BellIcon,
-  DotsVerticalIcon,
 } from "@heroicons/react/outline";
 
 const AuthPageHeader = ({ updateResult, currentTab }) => {
@@ -30,21 +29,19 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
   };
   const menuItemStyle =
     "px-7 py-2 flex items-center bg-black bg-opacity-0 hover:bg-opacity-20";
+
   const handleSearch = (e) => {
-    // e.preventDefault();
-    console.log("SEARCH FOR '%s'", keyword);
     const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     };
     fetch(
-      "http://localhost:5000/api/v1/posts?keyword=" + keyword,
+      `http://localhost:5000/api/v1/posts?keyword=${keyword}`,
       requestOptions
     )
       .then((response) => response.json())
       .then((result) => {
         updateResult(result.posts);
-        // updateResult();
       });
   };
 

@@ -35,8 +35,8 @@ export default function PostBoxComponent({ onCreatePost }) {
   };
 
   return (
-    <div className="max-w-xl flex items-center justify-center bg-gray-50">
-      <form className="w-full" action="#" method="post" onSubmit={onPostSubmit}>
+    <div className="bg-gray-50">
+      <form className="max-w-xl flex flex-wrap flex-col mx-auto" action="#" method="post" onSubmit={onPostSubmit}>
         <div>
           <label
             htmlFor="post-title"
