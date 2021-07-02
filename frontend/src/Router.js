@@ -1,14 +1,14 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import SignupPage from './pages/SignupPage/SignupPage';
-import ResetPasswordPage from './pages/ResetPasswordPage/ResetPasswordPage';
-import ResetPasswordConfirmPage from './pages/ResetPasswordConfirmPage/ResetPasswordConfirmPage';
-import LoginPage from './pages/LoginPage/LoginPage';
-import LandingPage from './pages/LandingPage/LandingPage';
-import ProfilePage from './pages/ProfilePage/ProfilePage';
-import DashboardPage from './pages/DashboardPage/DashboardPage';
-import AllPostsPage from './pages/AllPostsPage/AllPostsPage';
-import AuthRoute from './components/AuthRoute';
+import SignupPage from "./pages/SignupPage/SignupPage";
+import ResetPasswordPage from "./pages/ResetPasswordPage/ResetPasswordPage";
+import ResetPasswordConfirmPage from "./pages/ResetPasswordConfirmPage/ResetPasswordConfirmPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import LandingPage from "./pages/LandingPage/LandingPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import DashboardPage from "./pages/DashboardPage/DashboardPage";
+import AllPostsPage from "./pages/AllPostsPage/AllPostsPage";
+import AuthRoute from "./components/AuthRoute";
 
 import UnAuthPageHeader from "./components/UnAuthPageHeader";
 import AuthPageHeader from "./components/AuthPageHeader";
@@ -19,13 +19,13 @@ export default function AppRouter() {
       <Switch>
         <Route path="/dashboard">
           <AuthRoute>
-            <DashboardPage/>
+            <DashboardPage />
           </AuthRoute>
         </Route>
 
         <Route path="/posts">
           <AuthRoute>
-            <AllPostsPage/>
+            <AllPostsPage />
           </AuthRoute>
         </Route>
 
@@ -59,7 +59,6 @@ export default function AppRouter() {
           <UnAuthPageHeader />
           <LandingPage />
         </Route>
-
       </Switch>
     </Router>
   );

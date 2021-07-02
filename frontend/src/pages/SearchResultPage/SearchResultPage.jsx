@@ -3,17 +3,7 @@ import React, { useState } from "react";
 import UserPost from "../../components/UserPost";
 
 const LandingPage = () => {
-  const [result, setResult] = useState([
-    {
-      content: "",
-      id: "60de183661866e3893c59eca",
-      posted_at: "2021-07-01T15:32:06.572000+00:00",
-      resources: [],
-      tags: [],
-      title: "PLACEHOLDER",
-      user_id: "e8d62475-ba58-4f7d-ae39-c804b15c653c",
-    },
-  ]);
+  const [result, setResult] = useState([{}]);
 
   const onSearch = (newResult) => {
     setResult(newResult);
