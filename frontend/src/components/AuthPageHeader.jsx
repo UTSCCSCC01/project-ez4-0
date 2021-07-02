@@ -12,7 +12,7 @@ import {
 
 const AuthPageHeader = ({ updateResult, currentTab }) => {
   const buttonStyle =
-    "mx-2 py-2 px-5 rounded-md bg-opacity-20 hover:bg-opacity-20 hover:bg-black h-auto flex items-center ";
+    "mx-1 lg:mx-2 py-2 px-5 rounded-md bg-opacity-20 hover:bg-opacity-20 hover:bg-black h-auto flex items-center ";
   const buttonStyle1 =
     buttonStyle +
     (currentTab === "Home" ? "bg-black font-bold" : "font-medium");
@@ -21,7 +21,7 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
     (currentTab === "Learn" ? "bg-black font-bold" : "font-medium");
   const buttonStyle3 =
     buttonStyle +
-    (currentTab === "Notifications" ? "bg-black font-bold" : "font-medium");
+    (currentTab === "Jobs" ? "bg-black font-bold" : "font-medium");
   const [keyword, setKeyword] = useState("");
   // const [resultPosts, setResultPosts] = useState({});
 
@@ -92,13 +92,13 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
                         <div className="bg-white h-px opacity-30 inset-0 mx-5" />
                         <a className={menuItemStyle}>Jobs</a>
                         <div className="bg-white h-px opacity-30 inset-0 mx-5" />
-                        <a
+                        <div
                           href="#"
                           className="ml-7 mt-5 mr-6 font-medium text-sm flex items-center"
                         >
                           <img src={avatar} className="rounded-full w-6 mr-4" />
-                          <a>Alice Abebe</a>
-                        </a>
+                          <div>Alice Abebe</div>
+                        </div>
                       </div>
                     </div>
                   </Popover.Panel>
@@ -124,14 +124,16 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
             updateInput={updateInput}
             handleSearch={handleSearch}
           />
-          <div className="-ml-12 flex flex-grow justify-center">
-            <a className={buttonStyle1}>Home</a>
+          <div className="lg:-ml-12 flex flex-grow justify-center">
+            <a href="/dashboard" className={buttonStyle1}>
+              Home
+            </a>
             <a className={buttonStyle2}>Learn</a>
-            <a className={buttonStyle3}>Notifications</a>
+            <a className={buttonStyle3}>Jobs</a>
           </div>
           <a href="#" className="mr-6 font-medium text-sm flex items-center">
             <img src={avatar} className="rounded-full w-6 mr-4" />
-            <a>Alice Abebe</a>
+            <div>Alice Abebe</div>
             <div className="w-5 ml-2 mt-px text-xs">▼</div>
           </a>
         </div>

@@ -3,12 +3,16 @@ import UserPost from "../../components/UserPost.jsx";
 import PostBoxComponent from "../../components/PostBoxComponent.jsx";
 import { Link } from "react-router-dom";
 import AuthPageHeader from "../../components/AuthPageHeader.jsx";
+import SearchResultPage from "../SearchResultPage/SearchResultPage";
 
 export default class DashboardPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       posts: [],
+      searchResult: [],
+      hasSearched: false,
+      currentTab: "Home",
     };
   }
 
@@ -29,7 +33,11 @@ export default class DashboardPage extends Component {
   }
 
   onSearch = (searchResult) => {
-    this.setState({ posts: searchResult });
+    this.setState({
+      hasSearched: true,
+      searchResult: searchResult,
+      currentTab: "",
+    });
   };
 
   createPost = (content, title, tags) => {
@@ -78,25 +86,32 @@ export default class DashboardPage extends Component {
   render() {
     return (
       <div>
-        <AuthPageHeader updateResult={this.onSearch} currentTab={"Home"} />
-        <div className="pt-10 grid grid-cols-1 md:grid-cols-3 bg-gray-50">
-          <div>{/* Left thing here */}</div>
-          <div>
-            <div class="mb-7">
-              <PostBoxComponent onCreatePost={this.createPost} />
+        <AuthPageHeader
+          updateResult={this.onSearch}
+          currentTab={this.state.currentTab}
+        />
+        {this.state.hasSearched ? (
+          <SearchResultPage posts={this.state.searchResult} />
+        ) : (
+          <div className="pt-10 grid grid-cols-1 md:grid-cols-3 bg-gray-50">
+            <div>{/* Left thing here */}</div>
+            <div>
+              <div className="mb-7">
+                <PostBoxComponent onCreatePost={this.createPost} />
+              </div>
+              {this.renderPosts()}
+              <div className="grid justify-items-center mb-7">
+                <Link
+                  to="/posts"
+                  className="text-indigo-500 background-transparent font-bold px-3 py-1 text-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                >
+                  See More
+                </Link>
+              </div>
             </div>
-            {this.renderPosts()}
-            <div className="grid justify-items-center mb-7">
-              <Link
-                to="/posts"
-                className="text-indigo-500 background-transparent font-bold px-3 py-1 text-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-              >
-                See More
-              </Link>
-            </div>
+            <div>{/* Right thing here */}</div>
           </div>
-          <div>{/* Right thing here */}</div>
-        </div>
+        )}
       </div>
     );
   }
