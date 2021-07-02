@@ -93,23 +93,19 @@ export default class DashboardPage extends Component {
         {this.state.hasSearched ? (
           <SearchResultPage posts={this.state.searchResult} />
         ) : (
-          <div className="pt-10 grid grid-cols-1 md:grid-cols-3 bg-gray-50">
-            <div>{/* Left thing here */}</div>
-            <div>
-              <div className="mb-7">
-                <PostBoxComponent onCreatePost={this.createPost} />
-              </div>
-              {this.renderPosts()}
-              <div className="grid justify-items-center mb-7">
-                <Link
-                  to="/posts"
-                  className="text-indigo-500 background-transparent font-bold px-3 py-1 text-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                >
-                  See More
-                </Link>
-              </div>
+          <div className="grid justify-center pt-10 bg-gray-50">
+            <div className="w-screen px-5 md:w-post-width mb-7">
+              <PostBoxComponent onCreatePost={this.createPost} />
             </div>
-            <div>{/* Right thing here */}</div>
+            <div className="w-screen px-5 md:w-post-width">
+              {this.renderPosts()}
+            </div>
+            <Link
+              to="/posts"
+              className="text-indigo-500 background-transparent font-bold px-3 pb-10 text-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            >
+              See More
+            </Link>
           </div>
         )}
       </div>

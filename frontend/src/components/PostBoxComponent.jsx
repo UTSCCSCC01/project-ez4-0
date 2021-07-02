@@ -35,7 +35,7 @@ export default function PostBoxComponent({ onCreatePost }) {
   };
 
   return (
-    <div className="flex items-center justify-center bg-gray-50">
+    <div className="max-w-xl flex items-center justify-center bg-gray-50">
       <form className="w-full" action="#" method="post" onSubmit={onPostSubmit}>
         <div>
           <label
@@ -70,7 +70,7 @@ export default function PostBoxComponent({ onCreatePost }) {
           />
         </div>
 
-        <div className="grid justify-items-center">
+        <div className="grid justify-items-end">
           <button
             type="submit"
             disabled={title === ""}

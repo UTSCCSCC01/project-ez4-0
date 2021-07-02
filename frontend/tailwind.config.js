@@ -7,7 +7,7 @@ module.exports = {
         post: "0 2px 2px -1px rgba(0, 0, 0, 0.1), 0 2px 2px -1px rgba(0, 0, 0, 0.06)",
       },
       spacing: {
-        "post-width": "40rem",
+        "post-width": "36rem",
         "post-height": "30rem",
       },
       fontFamily: {
@@ -19,6 +19,6 @@ module.exports = {
   variants: {
     extend: {},
   },
-  
+
   plugins: [],
 };
