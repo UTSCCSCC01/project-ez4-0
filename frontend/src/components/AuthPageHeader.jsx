@@ -2,7 +2,13 @@ import logo from "../img/entree-logo-no-text.png";
 import SearchBar from "./SearchBar";
 import React, { useState, Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
-import { SearchIcon, MenuIcon, BellIcon } from "@heroicons/react/outline";
+import avatar from "../img/default-avatar.png";
+import {
+  SearchIcon,
+  MenuIcon,
+  BellIcon,
+  DotsVerticalIcon,
+} from "@heroicons/react/outline";
 
 const AuthPageHeader = ({ updateResult, currentTab }) => {
   const buttonStyle =
@@ -78,13 +84,21 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
                           handleSearch={handleSearch}
                         />
                       </div>
-                      <div className="font-medium pb-3">
+                      <div className="font-medium pb-5">
                         <div className="bg-white h-px opacity-30 inset-0 mx-5" />
                         <a className={menuItemStyle}>Home</a>
                         <div className="bg-white h-px opacity-30 inset-0 mx-5" />
                         <a className={menuItemStyle}>Learn</a>
                         <div className="bg-white h-px opacity-30 inset-0 mx-5" />
                         <a className={menuItemStyle}>Jobs</a>
+                        <div className="bg-white h-px opacity-30 inset-0 mx-5" />
+                        <a
+                          href="#"
+                          className="ml-7 mt-5 mr-6 font-medium text-sm flex items-center"
+                        >
+                          <img src={avatar} className="rounded-full w-6 mr-4" />
+                          <a>Alice Abebe</a>
+                        </a>
                       </div>
                     </div>
                   </Popover.Panel>
@@ -93,7 +107,7 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
             )}
           </Popover>
           <div className="flex flex-grow justify-center">
-            <img src={logo} className="h-6 px-5" />
+            <img src={logo} className="h-6 mx-5" />
           </div>
           <Popover className="px-5 flex content-center">
             <Popover.Button className="">
@@ -102,7 +116,7 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
             <Popover.Panel>Panel</Popover.Panel>
           </Popover>
         </div>
-        <div className="hidden md:flex items-center">
+        <div className="hidden md:flex w-screen items-center">
           <img src={logo} className="mx-8 h-7" />
           <SearchIcon className="h-6 w-6 md:hidden" />
           <SearchBar
@@ -110,11 +124,16 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
             updateInput={updateInput}
             handleSearch={handleSearch}
           />
-          <div className="flex ml-5">
+          <div className="-ml-12 flex flex-grow justify-center">
             <a className={buttonStyle1}>Home</a>
             <a className={buttonStyle2}>Learn</a>
             <a className={buttonStyle3}>Notifications</a>
           </div>
+          <a href="#" className="mr-6 font-medium text-sm flex items-center">
+            <img src={avatar} className="rounded-full w-6 mr-4" />
+            <a>Alice Abebe</a>
+            <div className="w-5 ml-2 mt-px text-xs">▼</div>
+          </a>
         </div>
       </div>
     </>

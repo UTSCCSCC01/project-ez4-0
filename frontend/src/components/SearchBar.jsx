@@ -8,7 +8,7 @@ const SearchBar = ({ input, updateInput, handleSearch }) => {
     }
   };
   return (
-    <div className="md:w-96 px-4 p-2 rounded-md bg-opacity-20 bg-white flex place-items-center">
+    <div className="md:w-80 px-4 p-2 rounded-md bg-opacity-20 bg-white flex place-items-center">
       <SearchIcon className="h-5" />
       <input
         className="focus:outline-none bg-transparent border-0 ring-0
