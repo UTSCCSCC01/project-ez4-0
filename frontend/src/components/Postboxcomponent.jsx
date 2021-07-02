@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import '../css/PostBoxComponent.css';
+import { useState } from "react";
+import "../css/PostBoxComponent.css";
 
 export default function PostBoxComponent({ onCreatePost }) {
   const [content, setContent] = useState("");
@@ -7,11 +7,11 @@ export default function PostBoxComponent({ onCreatePost }) {
 
   const onContentChange = (e) => {
     setContent(e.target.value);
-  }
+  };
 
   const onTitleChange = (e) => {
     setTitle(e.target.value);
-  }
+  };
 
   const onPostSubmit = (e) => {
     e.preventDefault();
@@ -19,7 +19,7 @@ export default function PostBoxComponent({ onCreatePost }) {
     onCreatePost(newContent, title, tags);
     setContent("");
     setTitle("");
-  }
+  };
 
   const splitTags = (content) => {
     let copied = content;
@@ -31,14 +31,19 @@ export default function PostBoxComponent({ onCreatePost }) {
         return m.replaceAll("#", "");
       });
     }
-    return { newContent: copied.trim(), tags: tags }
-  }
+    return { newContent: copied.trim(), tags: tags };
+  };
 
   return (
     <div className="flex items-center justify-center bg-gray-50">
       <form className="w-full" action="#" method="post" onSubmit={onPostSubmit}>
-      <div>
-          <label htmlFor="post-title" className="text-gray-700 text-sm font-bold">Title</label>
+        <div>
+          <label
+            htmlFor="post-title"
+            className="text-gray-700 text-sm font-bold"
+          >
+            Title
+          </label>
           <input
             id="post-title"
             required
@@ -49,7 +54,12 @@ export default function PostBoxComponent({ onCreatePost }) {
           />
         </div>
         <div>
-          <label htmlFor="post-content" className="text-gray-700 text-sm font-bold">Content</label>
+          <label
+            htmlFor="post-content"
+            className="text-gray-700 text-sm font-bold"
+          >
+            Content
+          </label>
           <textarea
             id="post-content"
             rows="4"
@@ -71,6 +81,5 @@ export default function PostBoxComponent({ onCreatePost }) {
         </div>
       </form>
     </div>
-  )
+  );
 }
-
