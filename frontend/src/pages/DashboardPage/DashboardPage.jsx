@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import AuthPageHeader from "../../components/AuthPageHeader.jsx";
 import SearchResultPage from "../SearchResultPage/SearchResultPage";
 import JobPost from "../../components/JobPostComponent.jsx";
+import CourseProgressReport from "../../components/CourseProgressReport.jsx";
 
 export default class DashboardPage extends Component {
   constructor(props) {
@@ -159,6 +160,9 @@ export default class DashboardPage extends Component {
             <div className="col-span-3 font-bold text-md">
               <div>Recent job posts</div>
               {this.renderJobPosts()}
+              <br></br>
+              <div>Course Learning Progress Report</div>
+              <CourseProgressReport />
             </div>
           </div>
         )}
