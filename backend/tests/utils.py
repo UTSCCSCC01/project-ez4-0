@@ -1,7 +1,8 @@
 from app import db
 from models import User
-from documents import Post
-from documents import JobPost
+from documents.post import Post
+from documents.job_post import JobPost
+from documents.post_like import PostLike
 from datetime import datetime
 import functools
 
@@ -42,16 +43,29 @@ def create_user(app, email, password, first_name="Foo", last_name="Bar"):
         return User.create(email, password, first_name, last_name)
 
 
-def create_post(app, content, user_id, **kwargs):
+def create_post(app, title, user_id, content="", **kwargs):
     """
     Helper method to create post
     """
     with app.app_context():
         return Post(
+            title=title,
             content=content,
             user_id=user_id,
             posted_at=datetime.now(),
             **kwargs
+        ).save()
+
+
+def create_like(app, user_id, post):
+    """
+    Helper method to like a post
+    """
+    with app.app_context():
+        return PostLike(
+            user_id=user_id,
+            liked_at=datetime.now(),
+            post=post
         ).save()
 
 

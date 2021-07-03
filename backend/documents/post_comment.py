@@ -4,18 +4,16 @@ from mongoengine import (
     ListField,
     DateTimeField,
     UUIDField,
+    ReferenceField,
 )
+import mongoengine
+from documents.post import Post
 from models import User
 
 
-class Post(Document):
+class PostComment(Document):
     """
-    Title of the post
-    """
-    title = StringField(required=True)
-
-    """
-    Content of the post
+    Content of the comment
     """
     content = StringField(required=True)
 
@@ -23,11 +21,6 @@ class Post(Document):
     A list of resource URLs
     """
     resources = ListField(StringField())
-
-    """
-    A list of tags
-    """
-    tags = ListField(StringField())
 
     """
     Poster id
@@ -38,6 +31,11 @@ class Post(Document):
     Post date
     """
     posted_at = DateTimeField(required=True)
+
+    """
+    A reference to the post
+    """
+    post = ReferenceField(Post, reverse_delete_rule=mongoengine.CASCADE)
 
     def get_poster(self):
         """

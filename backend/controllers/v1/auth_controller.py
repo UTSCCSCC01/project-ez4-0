@@ -21,6 +21,6 @@ class AuthController(BaseController):
         if not user:
             return {"description": f"User with email {email} does not exist"}, 404
         if user.verify_password(password):
-            return {"success": True}
+            return {"success": True, "user_id": user.id}
         else:
             return {"description": "Authentication failed"}, 401

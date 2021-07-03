@@ -1,7 +1,11 @@
-from app import create_app
+from app import create_app, db
 from models import User
-from documents import Post, JobPost
+from documents.post import Post
+from documents.job_post import JobPost
+from documents.post_like import PostLike
+from documents.post_comment import PostComment
 from datetime import datetime
+
 
 app = create_app()
 
@@ -13,11 +17,12 @@ def create_user(email, password, first_name, last_name):
     return User.create(email, password, first_name, last_name)
 
 
-def create_post(content, user_id, **kwargs):
+def create_post(title, user_id, content="", **kwargs):
     """
     Helper method to create post
     """
     return Post(
+        title=title,
         content=content,
         user_id=user_id,
         posted_at=datetime.now(),
@@ -38,6 +43,30 @@ def create_job_post(title, user_id, active=True, **kwargs):
     ).save()
 
 
+def create_post_like(user_id, post):
+    """
+    Helper method to like a post
+    """
+    return PostLike(
+        user_id=user_id,
+        liked_at=datetime.now(),
+        post=post
+    ).save()
+
+
+def create_post_comment(user_id, content, post, **kwargs):
+    """
+    Helper method to like a post
+    """
+    return PostComment(
+        content=content,
+        user_id=user_id,
+        posted_at=datetime.now(),
+        post=post,
+        **kwargs
+    ).save()
+
+
 def db_seed():
     with app.app_context():
         # Create users
@@ -46,15 +75,33 @@ def db_seed():
         bob = create_user("tester@utoronto.ca", "x8888", "Bob", "Wang")
 
         # Create post for Foo
-        create_post("Example post content", foo.id)
-        create_post("Post with some tags by foo", foo.id, tags=["cscc01", "post"])
-        create_post("One more post", foo.id, tags=["post"])
+        foo_post_1 = create_post("Example post content", foo.id)
+        foo_post_2 = create_post("Post with some tags by foo", foo.id, tags=["cscc01", "post"])
+        foo_post_3 = create_post("One more post", foo.id, tags=["post"])
 
         # Create post for Alice
-        create_post("Example post another content", alice.id)
-        create_post("Post with some tags to search for", alice.id, tags=["cscc01"])
-        create_post("One last post", alice.id, tags=["last"])
+        alice_post_1 = create_post("Example post another content", alice.id)
+        alice_post_2 = create_post("Post with some tags to search for", alice.id, tags=["cscc01"])
+        alice_post_3 = create_post("One last post", alice.id, tags=["last"])
+
+        # Create likes for Alice -> Foo posts
+        create_post_like(alice.id, foo_post_1)
+        create_post_like(alice.id, foo_post_2)
+        create_post_like(alice.id, foo_post_3)
+
+        # Create likes for Bob -> Foo posts
+        create_post_like(bob.id, foo_post_1)
+        create_post_like(bob.id, foo_post_2)
+        create_post_like(bob.id, foo_post_3)
+
+        # Create comment for Foo -> Alice posts
+        create_post_comment(foo.id, "I really like your post, do you think we can chat?", alice_post_1)
+        create_post_comment(foo.id, "This looks amazing.", alice_post_2)
         
+        # Create comment for Bob -> Alice posts
+        create_post_comment(bob.id, "What's your next plan?", alice_post_1)
+        create_post_comment(bob.id, "LGTM", alice_post_2)
+
         # Create job post for Bob
         create_job_post(
             "Software Engineer for UTSC",
@@ -74,5 +121,24 @@ def db_seed():
         )
 
 
+def clear_dbs():
+    """
+    Helper method to clear both mongodb and postgres
+    """
+    with app.app_context():
+        # Mongo
+        Post.drop_collection()
+        JobPost.drop_collection()
+        # Postgres
+        db.drop_all()
+        db.create_all()
+    
+
+
 if __name__ == "__main__":
+    import sys
+    if len(sys.argv) > 1 and sys.argv[1] == "--clear":
+        clear_dbs()
+        print("Successfully cleared MongoDB and Postgres")
     db_seed()
+    print("Successfully inserted seeds")

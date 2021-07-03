@@ -1,0 +1,8 @@
+.customize-post-box-post-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.customize-post-box-post-btn:disabled:hover {
+  background-color: rgba(79, 70, 229, 1);
+}

@@ -101,7 +101,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function LandingPageHeader() {
+export default function UnAuthPageHeader() {
   return (
     <>
       <Popover className="fixed bg-white w-full z-50">
@@ -429,7 +429,10 @@ function NarrowPanel({ open }) {
               </Link>
               <p className="mt-6 text-center text-base font-medium text-gray-500">
                 Existing customer?{" "}
-                <Link to="/login" className="text-indigo-500 hover:text-indigo-500">
+                <Link
+                  to="/login"
+                  className="text-indigo-500 hover:text-indigo-500"
+                >
                   Sign in
                 </Link>
               </p>
