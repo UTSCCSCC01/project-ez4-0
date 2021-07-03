@@ -15,6 +15,8 @@ export default class DashboardPage extends Component {
       searchResult: [],
       hasSearched: false,
       currentTab: "Home",
+      
+      viewMyPosts: false,
     };
   }
 
@@ -29,6 +31,19 @@ export default class DashboardPage extends Component {
       headers: { "Content-Type": "application/json" },
     };
     fetch("http://localhost:5000/api/v1/posts?limit=3", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        this.setState({ posts: result.posts });
+      });
+  }
+
+  getMyPosts() {
+    const userId = localStorage.getItem("userId");
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch(`http://localhost:5000/api/v1/posts?posted_by=${userId}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         this.setState({ posts: result.posts });
@@ -88,6 +103,17 @@ export default class DashboardPage extends Component {
     });
   };
 
+  onActionClick = (action) => {
+    if (action === "My Posts") {
+      if (this.state.viewMyPosts) {
+        this.getPosts();
+      } else {
+        this.getMyPosts();
+      }
+      this.setState({ viewMyPosts: !this.state.viewMyPosts });
+    }
+  }
+
   renderPosts() {
     return this.state.posts.map((post) => (
       <UserPost
@@ -106,6 +132,16 @@ export default class DashboardPage extends Component {
     });
   }
 
+  renderLeftSideActions() {
+    const inactiveClass = "cursor-pointer mb-1 m-2 p-2 border-transparent transition ease-out duration-300 hover:border-indigo-500 border-l-4 text-black";
+    const activeClass = "cursor-pointer mb-1 m-2 p-2 border-indigo-500 transition border-l-4 text-black bg-gray-200";
+    return ["My Posts"].map((action) => (
+      <div key={action} className={this.state.viewMyPosts? activeClass : inactiveClass} onClick={() => this.onActionClick(action)}>
+        {action}
+      </div>
+    ));
+  }
+
   render() {
     return (
       <div>
@@ -122,22 +158,14 @@ export default class DashboardPage extends Component {
               <div className="bg-white p-3 border-t-4 border-indigo-400">
                 <div className="image overflow-hidden">
                   <img
-                    className="h-auto w-full mx-auto"
+                    className="h-auto w-6/12 mx-auto"
                     src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80"
                     alt=""
                   />
                 </div>
-                <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">
-                  Jane Doe
-                </h1>
-                <h3 className="text-gray-600 font-lg text-semibold leading-6">
-                  Owner at Her Company Inc.
-                </h3>
-                <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Reprehenderit, eligendi dolorum sequi illum qui unde
-                  aspernatur non deserunt
-                </p>
+                <div className="flex flex-col mt-3 rounded-md border bg-gray-100 text-md font-medium">
+                  {this.renderLeftSideActions()}
+                </div>
               </div>
             </div>
             {/* Posts center section */}
