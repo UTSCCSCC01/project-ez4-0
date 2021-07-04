@@ -16,6 +16,7 @@ export default class DashboardPage extends Component {
       searchResult: [],
       hasSearched: false,
       currentTab: "Home",
+      avatar: "",
       
       viewMyPosts: false,
     };
@@ -24,6 +25,7 @@ export default class DashboardPage extends Component {
   componentDidMount() {
     this.getPosts();
     this.getJobPosts();
+    this.getUserInfo();
   }
 
   getPosts() {
@@ -60,6 +62,22 @@ export default class DashboardPage extends Component {
       .then((response) => response.json())
       .then((result) => {
         this.setState({ job_posts: result.job_posts });
+      });
+  }
+
+  getUserInfo() {
+    const userId = localStorage.getItem("userId");
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch(
+      `http://localhost:5000/api/v1/users/${userId}`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        this.setState({ avatar: result.avatar });
       });
   }
 
@@ -159,8 +177,8 @@ export default class DashboardPage extends Component {
               <div className="bg-white p-3 border-t-4 border-indigo-400">
                 <div className="image overflow-hidden">
                   <img
-                    className="h-auto w-6/12 mx-auto"
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80"
+                    className="h-auto w-full mx-auto"
+                    src={this.state.avatar}
                     alt=""
                   />
                 </div>

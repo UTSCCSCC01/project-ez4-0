@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 export default class JobPost extends Component {
   getTitle() {
-    console.log(this.props.jobPost);
     return this.props.jobPost.title || "";
   }
 

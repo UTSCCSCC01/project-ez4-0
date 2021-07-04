@@ -10,11 +10,17 @@ from datetime import datetime
 app = create_app()
 
 
-def create_user(email, password, first_name, last_name):
+def create_user(email, password, first_name, last_name, **kwargs):
     """
     Helper method to create user
     """
-    return User.create(email, password, first_name, last_name)
+    return User.create(
+        email,
+        password,
+        first_name,
+        last_name,
+        **kwargs
+    )
 
 
 def create_post(title, user_id, content="", **kwargs):
@@ -70,9 +76,27 @@ def create_post_comment(user_id, content, post, **kwargs):
 def db_seed():
     with app.app_context():
         # Create users
-        foo = create_user("example@utoronto.ca", "x1234", "Foo", "Bar")
-        alice = create_user("another@utoronto.ca", "x9999", "Alice", "Chen")
-        bob = create_user("tester@utoronto.ca", "x8888", "Bob", "Wang")
+        foo = create_user(
+            "example@utoronto.ca",
+            "x1234",
+            "Foo",
+            "Bar",
+            avatar="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200"
+        )
+        alice = create_user(
+            "another@utoronto.ca",
+            "x9999",
+            "Alice",
+            "Chen",
+            avatar="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
+        )
+        bob = create_user(
+            "tester@utoronto.ca",
+            "x8888",
+            "Bob",
+            "Wang",
+            avatar="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+        )
 
         # Create post for Foo
         foo_post_1 = create_post("Example post content", foo.id)

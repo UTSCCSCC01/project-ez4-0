@@ -38,6 +38,10 @@ class User(BaseModel):
         db.String
     )
 
+    avatar = db.Column(
+        db.String
+    )
+
     def verify_password(self, password):
         """
         Verify the given password with the hashed passowrd stored
@@ -45,15 +49,17 @@ class User(BaseModel):
         return check_password_hash(self.password, password)
 
     @classmethod
-    def create(cls, email, password, first_name, last_name):
+    def create(cls, email, password, first_name, last_name, **kwargs):
         """
         Create a new user given the email and raw(unhashed) password.
+        Any optional fields can be inserted to kwargs as well.
         """
         user = User(
             email=email,
             password=generate_password_hash(password),
             first_name=first_name,
-            last_name=last_name
+            last_name=last_name,
+            **kwargs
         )
         db.session.add(user)
         db.session.commit()

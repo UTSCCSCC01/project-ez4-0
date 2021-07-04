@@ -6,6 +6,7 @@ class UserSchema(Schema):
     email = fields.Str(description="User email")
     first_name = fields.Str(description="User first name")
     last_name = fields.Str(description="User last name")
+    avatar = fields.Str(description="The URL to the user avatar")
 
 
 class CreateUserSchema(Schema):

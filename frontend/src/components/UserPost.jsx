@@ -9,12 +9,33 @@ class UserPost extends Component {
       comments: [],
       comment: "",
       liked: false,
+
+      posterAvatar: "",
+      userAvatar: "",
+      likerAvatars: [],
+      commentAvatars: {},
     };
   }
 
   componentDidMount() {
     this.getLikes();
     this.getComments();
+    this.getPosterAvatar();
+
+    const userId = localStorage.getItem("userId");
+    this.getUserInfo(userId)
+      .then(response => response.json())
+      .then(result => {
+        this.setState({ userAvatar: result.avatar });
+      });
+  }
+
+  getPosterAvatar() {
+    this.getUserInfo(this.props.post.user_id)
+      .then(response => response.json())
+      .then(result => {
+        this.setState({ posterAvatar: result.avatar });
+      });
   }
 
   getLikes() {
@@ -24,9 +45,24 @@ class UserPost extends Component {
     };
     const id = this.props.post.id;
     const api = `http://localhost:5000/api/v1/posts/${id}/likes`;
+    let likerAvatars = [];
     fetch(api, requestOptions)
       .then((response) => response.json())
       .then((result) => {
+        // Get liker avatars
+        if (result.likes.length === 0) {
+          this.setState({ likerAvatars });
+        } else {
+          result.likes.forEach((like) => {
+            this.getUserInfo(like.user_id)
+            .then(response => response.json())
+            .then(result => {
+              likerAvatars.push(result.avatar);
+              this.setState({ likerAvatars });
+            });
+          });
+        }
+        // Set likes
         if (this.isUserLiked(result.likes)) {
           this.setState({ likes: result.likes, liked: true });
         } else {
@@ -74,9 +110,23 @@ class UserPost extends Component {
     };
     const id = this.props.post.id;
     const api = `http://localhost:5000/api/v1/posts/${id}/comments`;
+    let commentAvatars = {};
     fetch(api, requestOptions)
       .then((response) => response.json())
       .then((result) => {
+        // Get liker avatars
+        if (result.comments.length === 0) {
+          this.setState({ commentAvatars });
+        } else {
+          result.comments.forEach((comment) => {
+            this.getUserInfo(comment.user_id)
+            .then(response => response.json())
+            .then(result => {
+              commentAvatars[result.id] = result.avatar;
+              this.setState({ commentAvatars });
+            });
+          });
+        }
         this.setState({ comments: result.comments });
       });
   }
@@ -138,6 +188,17 @@ class UserPost extends Component {
     }
   };
 
+  getUserInfo(userId) {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    return fetch(
+      `http://localhost:5000/api/v1/users/${userId}`,
+      requestOptions
+    );
+  }
+
   onCommentChange = (e) => {
     this.setState({ comment: e.target.value });
   };
@@ -160,8 +221,7 @@ class UserPost extends Component {
           <img
             className="w-6 h-6 object-cover rounded-full shadow mr-2 cursor-pointer"
             alt="User avatar"
-            src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200"
-            alt="User avatar"
+            src={this.state.commentAvatars[comment.user_id]}
           />
           <span className="absolute inset-y-0 right-0 flex items-center pr-6"></span>
           <div className="flex flex-row justify-between w-full text-sm">
@@ -211,6 +271,17 @@ class UserPost extends Component {
     }
   };
 
+  renderLikers = () => {
+    return this.state.likerAvatars.map((a) => (
+      <img
+        key={a}
+        className="inline-block object-cover w-8 h-8 text-white border-2 border-white rounded-full shadow-sm cursor-pointer"
+        src={a}
+        alt=""
+      />
+    )).slice(0, 4);
+  }
+
   render() {
     const userId = localStorage.getItem("userId");
     return (
@@ -226,7 +297,7 @@ class UserPost extends Component {
                     <img
                       className="w-12 h-12 object-cover shadow cursor-pointer"
                       alt="User avatar"
-                      src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200"
+                      src={this.state.posterAvatar}
                     />
                   </div>
                   <div className="flex flex-col mb-2 ml-4 mt-1">
@@ -300,26 +371,7 @@ class UserPost extends Component {
                   </button>
                   {/* Show users who liked this post, at most four */}
                   <div className="flex ">
-                    <img
-                      className="inline-block object-cover w-8 h-8 text-white border-2 border-white rounded-full shadow-sm cursor-pointer"
-                      src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      alt=""
-                    />
-                    <img
-                      className="inline-block object-cover w-8 h-8 -ml-2 text-white border-2 border-white rounded-full shadow-sm cursor-pointer"
-                      src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      alt=""
-                    />
-                    <img
-                      className="inline-block object-cover w-8 h-8 -ml-2 text-white border-2 border-white rounded-full shadow-sm cursor-pointer"
-                      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
-                      alt=""
-                    />
-                    <img
-                      className="inline-block object-cover w-8 h-8 -ml-2 text-white border-2 border-white rounded-full shadow-sm cursor-pointer"
-                      src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
-                      alt=""
-                    />
+                    {this.renderLikers()}
                   </div>
                 </div>
               </div>
@@ -348,8 +400,7 @@ class UserPost extends Component {
                 <img
                   className="w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer"
                   alt="User avatar"
-                  src="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200"
-                  alt="User avatar"
+                  src={this.state.userAvatar}
                 />
                 <span className="absolute inset-y-0 right-0 flex items-center pr-6"></span>
                 <input
