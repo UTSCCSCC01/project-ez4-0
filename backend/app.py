@@ -106,7 +106,7 @@ def register_blueprints(app):
 def register_extensions(app):
     """Extensions(Databases) registrations"""
     # Import models from Flask Migrate
-    from models import User
+    from models import User, Course, Video
 
     # PostgreSQL
     db.init_app(app)
