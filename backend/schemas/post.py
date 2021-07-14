@@ -9,6 +9,9 @@ class PostSchema(Schema):
         fields.Str(),
         description="A list of resource URLs related to this post"
     )
+    image = fields.Str(
+        description="A base64 string of the image"
+    )
     tags = fields.List(
         fields.Str(),
         description="A list of tags related to this post"
@@ -22,7 +25,9 @@ class CreatePostSchema(Schema):
         description="Title of the post",
         required=True
     )
-
+    image = fields.Str(
+        description="A base64 string of the image"
+    )
     content = fields.Str(
         description="Text content of the post",
         required=True

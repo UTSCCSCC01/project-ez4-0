@@ -47,6 +47,7 @@ class PostsController(BaseController):
             posted_at=datetime.now(),
             resources=kwargs.get("resources", []),
             tags=kwargs.get("tags", []),
+            image=kwargs.get("image")
         )
         return post.save()
 
