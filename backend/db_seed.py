@@ -36,12 +36,14 @@ def create_post(title, user_id, content="", **kwargs):
     ).save()
 
 
-def create_job_post(title, user_id, active=True, **kwargs):
+def create_job_post(title, company, location, user_id, active=True, **kwargs):
     """
     Helper method to create job post
     """
     return JobPost(
         title=title,
+        company=company,
+        location=location,
         user_id=user_id,
         active=active,
         posted_at=datetime.now(),
@@ -128,18 +130,24 @@ def db_seed():
 
         # Create job post for Bob
         create_job_post(
-            "Software Engineer for UTSC",
+            "Software Engineer",
+            "UTSC",
+            "Remote",
             bob.id,
             tags=["job", "utsc"],
             description="Some random description about this"
         )
         create_job_post(
-            "Data Analyst for Amazon",
+            "Data Analyst",
+            "Amazon",
+            "1234 Foo Street",
             bob.id,
             tags=["data_analysis", "job"]
         )
         create_job_post(
-            "Full Stack Developer for Shopify",
+            "Full Stack Developer",
+            "Shopify",
+            "43 Vancouver Street",
             bob.id,
             description="Some random description about this"
         )
@@ -156,7 +164,6 @@ def clear_dbs():
         # Postgres
         db.drop_all()
         db.create_all()
-    
 
 
 if __name__ == "__main__":
