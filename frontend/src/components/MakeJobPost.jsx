@@ -28,17 +28,43 @@ export default function MakeJobPostComponent({ onCreateJobPost }) {
     setRequirement(e.target.value);
   };
 
-  const onPostSubmit = (e) => {
+  const onJobPostSubmit = (e) => {
     e.preventDefault();
-    // const { newContent, tags } = splitTags(content);
-    // onCreatePost(newContent, title, tags);
-    // setContent("");
-    // setTitle("");
+    const { newDescription, tags } = splitTags(description);
+    onCreateJobPost(
+      title,
+      location,
+      company,
+      newDescription,
+      requirement,
+      tags
+    );
+    setTitle("");
+    setLocation("");
+    setCompany("");
+    setDescription("");
+    setRequirement("");
+  };
+
+  const splitTags = (description) => {
+    let copied = description;
+    let tags = [];
+    const matches = description.match(/#.*?#/g);
+    if (matches) {
+      tags = matches.map((m) => {
+        copied = copied.replaceAll(m, "");
+        return m.replaceAll("#", "");
+      });
+    }
+    return { newdescription: copied.trim(), tags: tags };
   };
 
   return (
     <div className="h-screen bg-gray-100 overflow-hidden">
-      <div className=" max-w-2xl flex-col mx-auto my-auto mt-8 p-10 bg-white rounded shadow-xl leading-loose">
+      <form
+        className=" max-w-2xl flex-col mx-auto my-auto mt-8 p-10 bg-white rounded shadow-xl leading-loose"
+        onSubmit={onJobPostSubmit}
+      >
         <div>
           <p className="text-gray-800 font-medium text-xl text-center">
             Make a Job Post
@@ -123,7 +149,7 @@ export default function MakeJobPostComponent({ onCreateJobPost }) {
             Post
           </button>{" "}
         </div>
-      </div>
+      </form>
     </div>
   );
 }
