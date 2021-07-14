@@ -27,12 +27,14 @@ class JobPostsController(BaseController):
     @doc(description="Create a job post")
     @use_kwargs(CreateJobPostSchema)
     @marshal_with(JobPostSchema)
-    def post(self, title, user_id, active, **kwargs):
+    def post(self, title, user_id, company, location, active, **kwargs):
         user =  User.find_by_id(user_id)
         if not user:
             return {"description": f"User with id {user_id} not found"}, 404
         job_post = JobPost(
             title=title,
+            company=company,
+            location=location,
             description=kwargs.get("description", ""),
             requirements=kwargs.get("requirements", []),
             user_id=user_id,
@@ -91,6 +93,8 @@ class JobPostController(BaseController):
         if not job_post:
             return {"description": f"Job post with id {job_post_id} not found"}, 404
         job_post.title = kwargs.get("title", job_post.title)
+        job_post.company = kwargs.get("company", job_post.company)
+        job_post.location = kwargs.get("location", job_post.location)
         job_post.description = kwargs.get("description", job_post.description)
         job_post.requirements = kwargs.get("requirements", job_post.requirements)
         job_post.resources = kwargs.get("resources", job_post.resources)
