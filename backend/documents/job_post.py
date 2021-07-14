@@ -16,6 +16,16 @@ class JobPost(Document):
     title = StringField(required=True)
 
     """
+    Company name
+    """
+    company = StringField(required=True)
+
+    """
+    Work location
+    """
+    location = StringField(required=True)
+
+    """
     Job description
     """
     description = StringField()
