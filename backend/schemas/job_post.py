@@ -5,6 +5,8 @@ class JobPostSchema(Schema):
     id = fields.UUID(description="Job post ID")
     title = fields.Str(description="Job title")
     description = fields.Str(description="Description of the job")
+    company = fields.Str(description="Name of the company")
+    location = fields.Str(description="Work location")
     requirements = fields.List(
         fields.Str(),
         description="A list of job requirements"
@@ -25,6 +27,14 @@ class JobPostSchema(Schema):
 class CreateJobPostSchema(Schema):
     title = fields.Str(
         description="Job title",
+        required=True
+    )
+    company = fields.Str(
+        description="Name of the company",
+        required=True
+    )
+    location = fields.Str(
+        description="Work location",
         required=True
     )
     description = fields.Str(
@@ -70,6 +80,12 @@ class DeleteJobPostSchema(Schema):
 class UpdateJobPostSchema(Schema):
     title = fields.Str(
         description="Job title"
+    )
+    company = fields.Str(
+        description="Name of the company"
+    )
+    location = fields.Str(
+        description="Work location"
     )
     description = fields.Str(
         description="Description of the job"

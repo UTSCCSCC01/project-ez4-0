@@ -76,6 +76,8 @@ def create_job_post(app, title, user_id, active=True, **kwargs):
     with app.app_context():
         return JobPost(
             title=title,
+            company="Placeholder",
+            location="1234 Main Street",
             user_id=user_id,
             active=active,
             posted_at=datetime.now(),
