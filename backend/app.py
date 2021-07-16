@@ -65,6 +65,10 @@ def register_blueprints(app):
         set_post_routes,
         job_post_bp,
         set_job_post_routes,
+        course_bp,
+        set_course_routes,
+        video_bp,
+        set_video_routes,
     )
 
     APISPEC_SPEC = APISpec(
@@ -101,6 +105,16 @@ def register_blueprints(app):
     job_post_api = Api(job_post_bp)
     app.register_blueprint(job_post_bp)
     set_job_post_routes(job_post_api, docs)
+
+    # Course API
+    course_api = Api(course_bp)
+    app.register_blueprint(course_bp)
+    set_course_routes(course_api, docs)
+
+    # Video API
+    video_api = Api(video_bp)
+    app.register_blueprint(video_bp)
+    set_video_routes(video_api, docs)
 
 
 def register_extensions(app):
