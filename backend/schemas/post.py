@@ -26,7 +26,8 @@ class CreatePostSchema(Schema):
         required=True
     )
     image = fields.Str(
-        description="A base64 string of the image"
+        description="A base64 string of the image",
+        allow_none=True
     )
     content = fields.Str(
         description="Text content of the post",
