@@ -25,6 +25,11 @@ class Post(Document):
     resources = ListField(StringField())
 
     """
+    A base64 string of the image, for demo purpose only
+    """
+    image = StringField()
+
+    """
     A list of tags
     """
     tags = ListField(StringField())

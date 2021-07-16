@@ -8,15 +8,47 @@ import LandingPage from "./pages/LandingPage/LandingPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import AllPostsPage from "./pages/AllPostsPage/AllPostsPage";
+import MakeJobPostPage from "./pages/MakeJobPostPage/MakeJobPostPage";
+import AllCoursesPage from "./pages/AllCoursesPage/AllCoursesPage";
 import AuthRoute from "./components/AuthRoute";
 
 import UnAuthPageHeader from "./components/UnAuthPageHeader";
-import AuthPageHeader from "./components/AuthPageHeader";
+import JobPostDetail from "./components/JobPostDetail";
+import AllJobPostPage from "./pages/AllJobPostPage/AllJobPostPage"
+import SearchResultPage from "./pages/SearchResultPage/SearchResultPage";
 
 export default function AppRouter() {
   return (
     <Router>
       <Switch>
+        
+        <Route path="/all_jobs">
+          <AuthRoute>
+            <AllJobPostPage/>
+          </AuthRoute>
+        </Route>
+
+        <Route path="/job_detail">
+          <AuthRoute>
+            <JobPostDetail />
+          </AuthRoute>
+        </Route>
+
+        <Route path="/search_results" component={SearchResultPage}>
+        </Route>
+
+        <Route path="/make_job_post">
+          <AuthRoute>
+            <MakeJobPostPage />
+          </AuthRoute>
+        </Route>
+
+        <Route path="/courses">
+          <AuthRoute>
+            <AllCoursesPage />
+          </AuthRoute>
+        </Route>
+
         <Route path="/dashboard">
           <AuthRoute>
             <DashboardPage />

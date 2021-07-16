@@ -1,5 +1,5 @@
 from app import create_app, db
-from models import User
+from models import User, Course, Video
 from documents.post import Post
 from documents.job_post import JobPost
 from documents.post_like import PostLike
@@ -20,6 +20,28 @@ def create_user(email, password, first_name, last_name, **kwargs):
         first_name,
         last_name,
         **kwargs
+    )
+
+
+def create_course(name, description):
+    """
+    Helper method to create course
+    """
+    return Course.create(
+        name,
+        description,
+    )
+
+
+def create_video(name, description, url, course_id):
+    """
+    Helper method to create video
+    """
+    return Video.create(
+        name,
+        description,
+        url,
+        course_id
     )
 
 
@@ -151,6 +173,19 @@ def db_seed():
             bob.id,
             description="Some random description about this"
         )
+
+        # Courses
+        course_a = create_course("How to be successful in startup", "Teach you how to be successful")
+        course_b = create_course("How to be successful in startup II", "Second series")
+
+        # Videos for course_a
+        create_video("1. Step one", "Learn", "https://www.youtube.com/watch?v=QoqohmccTSc", course_a.id)
+        create_video("2. Step two", "Train", "https://www.youtube.com/watch?v=EctzLTFrktc", course_a.id)
+        create_video("3. Step three", "Repeat", "https://www.youtube.com/watch?v=Tuw8hxrFBH8", course_a.id)
+
+        # Videos for course_b
+        create_video("4. Step four", "Networking", "https://www.youtube.com/watch?v=E3yI_3NA6yQ", course_b.id)
+        create_video("5. Step five", "Expand", "https://www.youtube.com/watch?v=Y-7JVVZmSLg", course_b.id)
 
 
 def clear_dbs():
