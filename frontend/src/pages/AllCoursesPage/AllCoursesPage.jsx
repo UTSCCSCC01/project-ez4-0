@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import AuthPageHeader from "../../components/AuthPageHeader";
 import "../../css/PostBoxComponent.css";
 
@@ -23,8 +24,8 @@ export default function AllCourses({ onCreatePost }) {
 
   const renderCourses = () => {
     return courses.map((course) => (
-      <div className="xl:w-1/3 md:w-1/2 p-10" key={course.id}>
-        <div className="border border-gray-300 p-3 rounded-lg">
+      <Link to={`/course_videos/${course.id}`} className="xl:w-1/3 md:w-1/2 p-10" key={course.id}>
+        <div className="border border-gray-300 p-3 rounded-lg hover:bg-gray-200 transition ease-out duration-300">
           <img
             className="rounded"
             src="https://picsum.photos/536/354"
@@ -32,7 +33,7 @@ export default function AllCourses({ onCreatePost }) {
           />
           <h2 className="text-lg pt-2 font-medium title-font">{course.name}</h2>
         </div>
-      </div>
+      </Link>
     ));
   };
 
