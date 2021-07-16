@@ -361,7 +361,7 @@ class UserPost extends Component {
                 />
               </div>
               <div className="mx-3 w-min transition duration-300 ease-in-out rounded-2xl mr-1 px-2 py-1 hover:bg-blue-200 text-indigo-500 hover:text-gray-800">
-                {this.state.tags}
+                <div>#{this.state.tags}</div>
               </div>
               <div className="flex justify-start mb-4">
                 <div className="flex w-full mt-1 pt-2 pl-5">
