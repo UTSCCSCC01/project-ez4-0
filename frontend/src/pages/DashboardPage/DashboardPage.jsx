@@ -89,7 +89,7 @@ export default class DashboardPage extends Component {
     });
   };
 
-  createPost = (content, title, tags) => {
+  createPost = (content, title, tags, image) => {
     const userId = localStorage.getItem("userId");
     const requestOptions = {
       method: "POST",
@@ -99,6 +99,7 @@ export default class DashboardPage extends Component {
         content,
         tags,
         user_id: userId,
+        image: image,
       }),
     };
     const api = `http://localhost:5000/api/v1/posts`;
