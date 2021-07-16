@@ -16,8 +16,11 @@ export default class JobPost extends Component {
   renderTags() {
     if (this.props.jobPost.tags) {
       return this.props.jobPost.tags.map((t) => (
-        <div key={t} className="text-indigo-500 inline-flex items-center ml-3 mb-0 px-2 py-1 border-2 border-indigo-500 rounded-full text-xs font-normal">
-          { t }
+        <div
+          key={t}
+          className="text-indigo-500 inline-flex items-center ml-3 mb-0 px-2 py-1 border-2 border-indigo-500 rounded-full text-xs font-normal"
+        >
+          {t}
         </div>
       ));
     }
