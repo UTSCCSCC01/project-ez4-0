@@ -39,7 +39,7 @@ class MakeJobPostPage extends Component {
   render() {
     return (
       <div>
-        <AuthPageHeader />
+        <AuthPageHeader currentTab="Jobs"/>
         <MakeJobPost onCreateJobPost={this.createJobPost} />
       </div>
     );

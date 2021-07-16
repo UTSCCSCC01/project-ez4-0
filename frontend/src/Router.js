@@ -8,10 +8,10 @@ import LandingPage from "./pages/LandingPage/LandingPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import AllPostsPage from "./pages/AllPostsPage/AllPostsPage";
+import MakeJobPostPage from "./pages/MakeJobPostPage/MakeJobPostPage";
 import AuthRoute from "./components/AuthRoute";
 
 import UnAuthPageHeader from "./components/UnAuthPageHeader";
-import AuthPageHeader from "./components/AuthPageHeader";
 import JobPostDetail from "./components/JobPostDetail";
 import AllJobPostPage from "./pages/AllJobPostPage/AllJobPostPage"
 
@@ -20,9 +20,21 @@ export default function AppRouter() {
     <Router>
       <Switch>
         
-        <Route path="/JobPostDetail">
+        <Route path="/all_jobs">
+          <AuthRoute>
+            <AllJobPostPage/>
+          </AuthRoute>
+        </Route>
+
+        <Route path="/job_detail">
           <AuthRoute>
             <JobPostDetail />
+          </AuthRoute>
+        </Route>
+
+        <Route path="/make_job_post">
+          <AuthRoute>
+            <MakeJobPostPage />
           </AuthRoute>
         </Route>
 
