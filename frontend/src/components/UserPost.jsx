@@ -329,7 +329,7 @@ class UserPost extends Component {
     const userId = localStorage.getItem("userId");
     return (
       // <!-- This is an example component -->
-      <div className="">
+      <div className="w-full">
         <div className="flex flex-wrap max-w-xl mt-3 mb-10 bg-white border rounded-lg overflow-hidden mx-auto">
           {/* post */}
           <div className="flex items-center w-full">

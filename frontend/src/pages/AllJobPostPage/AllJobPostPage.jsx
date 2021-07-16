@@ -50,7 +50,7 @@ export default class AllJobPostPage extends Component {
           currentTab="Jobs"
         />
         <div>
-          <div class="flex justify-center my-3">
+          <div className="flex justify-center my-3">
             <button
               onClick={this.onMakeJobPostClick}
               className="customize-post-box-post-btn group relative w-1/3 flex justify-center py-2 px-1 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"

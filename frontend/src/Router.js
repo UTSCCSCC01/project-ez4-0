@@ -14,6 +14,7 @@ import AuthRoute from "./components/AuthRoute";
 import UnAuthPageHeader from "./components/UnAuthPageHeader";
 import JobPostDetail from "./components/JobPostDetail";
 import AllJobPostPage from "./pages/AllJobPostPage/AllJobPostPage"
+import SearchResultPage from "./pages/SearchResultPage/SearchResultPage";
 
 export default function AppRouter() {
   return (
@@ -30,6 +31,9 @@ export default function AppRouter() {
           <AuthRoute>
             <JobPostDetail />
           </AuthRoute>
+        </Route>
+
+        <Route path="/search_results" component={SearchResultPage}>
         </Route>
 
         <Route path="/make_job_post">
