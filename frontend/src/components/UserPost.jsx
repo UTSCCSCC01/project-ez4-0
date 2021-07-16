@@ -14,6 +14,7 @@ class UserPost extends Component {
       userAvatar: "",
       likerAvatars: [],
       commentAvatars: {},
+      tags: [],
     };
   }
 
@@ -21,20 +22,35 @@ class UserPost extends Component {
     this.getLikes();
     this.getComments();
     this.getPosterAvatar();
+    this.getTags();
 
     const userId = localStorage.getItem("userId");
     this.getUserInfo(userId)
-      .then(response => response.json())
-      .then(result => {
+      .then((response) => response.json())
+      .then((result) => {
         this.setState({ userAvatar: result.avatar });
       });
   }
 
   getPosterAvatar() {
     this.getUserInfo(this.props.post.user_id)
-      .then(response => response.json())
-      .then(result => {
+      .then((response) => response.json())
+      .then((result) => {
         this.setState({ posterAvatar: result.avatar });
+      });
+  }
+
+  getTags() {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    const id = this.props.post.id;
+    const api = `http://localhost:5000/api/v1/posts/${id}`;
+    fetch(api, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        this.setState({ tags: result.tags });
       });
   }
 
@@ -55,11 +71,11 @@ class UserPost extends Component {
         } else {
           result.likes.forEach((like) => {
             this.getUserInfo(like.user_id)
-            .then(response => response.json())
-            .then(result => {
-              likerAvatars.push(result.avatar);
-              this.setState({ likerAvatars });
-            });
+              .then((response) => response.json())
+              .then((result) => {
+                likerAvatars.push(result.avatar);
+                this.setState({ likerAvatars });
+              });
           });
         }
         // Set likes
@@ -120,11 +136,11 @@ class UserPost extends Component {
         } else {
           result.comments.forEach((comment) => {
             this.getUserInfo(comment.user_id)
-            .then(response => response.json())
-            .then(result => {
-              commentAvatars[result.id] = result.avatar;
-              this.setState({ commentAvatars });
-            });
+              .then((response) => response.json())
+              .then((result) => {
+                commentAvatars[result.id] = result.avatar;
+                this.setState({ commentAvatars });
+              });
           });
         }
         this.setState({ comments: result.comments });
@@ -272,15 +288,17 @@ class UserPost extends Component {
   };
 
   renderLikers = () => {
-    return this.state.likerAvatars.map((a) => (
-      <img
-        key={a}
-        className="inline-block object-cover w-8 h-8 text-white border-2 border-white rounded-full shadow-sm cursor-pointer"
-        src={a}
-        alt=""
-      />
-    )).slice(0, 4);
-  }
+    return this.state.likerAvatars
+      .map((a) => (
+        <img
+          key={a}
+          className="inline-block object-cover w-8 h-8 text-white border-2 border-white rounded-full shadow-sm cursor-pointer"
+          src={a}
+          alt=""
+        />
+      ))
+      .slice(0, 4);
+  };
 
   renderPostImage = () => {
     if (this.props.post.image) {
@@ -292,6 +310,17 @@ class UserPost extends Component {
             alt="User post image"
           />
         </div>
+      );
+    }
+  };
+
+  renderTags = () => {
+    if (this.props.post.tags) {
+      return this.props.post.tags.map((tag) => (
+          <div key={tag} className="mx-3 w-min transition duration-300 ease-in-out rounded-2xl mr-1 px-2 py-1 hover:bg-blue-200 text-indigo-500 hover:text-gray-800">
+            <div>#{tag}</div>
+          </div>
+        )
       )
     }
   }
@@ -351,6 +380,9 @@ class UserPost extends Component {
                 {this.getContent()}
               </div>
               {this.renderPostImage()}
+              <div className="flex flex-row">
+                {this.renderTags()}
+              </div>
               <div className="flex justify-start mb-4">
                 <div className="flex w-full mt-1 pt-2 pl-5">
                   <button
@@ -378,9 +410,7 @@ class UserPost extends Component {
                     </svg>
                   </button>
                   {/* Show users who liked this post, at most four */}
-                  <div className="flex ">
-                    {this.renderLikers()}
-                  </div>
+                  <div className="flex ">{this.renderLikers()}</div>
                 </div>
               </div>
               <div className="flex w-full ">

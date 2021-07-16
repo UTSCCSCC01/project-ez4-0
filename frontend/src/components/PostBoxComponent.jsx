@@ -36,12 +36,20 @@ export default function PostBoxComponent({ onCreatePost }) {
   const onPostSubmit = (e) => {
     e.preventDefault();
     const { newContent, tags } = splitTags(content);
-    readImageBase64(image.raw, (result) => {
-      onCreatePost(newContent, title, tags, result);
+    if (image.raw) {
+      readImageBase64(image.raw, (result) => {
+        onCreatePost(newContent, title, tags, result);
+        setContent("");
+        setTitle("");
+        setImage({ preview: "", raw: "" });
+      });
+    }
+    else {
+      onCreatePost(newContent, title, tags, null);
       setContent("");
       setTitle("");
       setImage({ preview: "", raw: "" });
-    });
+    }
   }
 
   const readImageBase64 = (file, callback) => {
