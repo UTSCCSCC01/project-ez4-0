@@ -10,6 +10,7 @@ import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import AllPostsPage from "./pages/AllPostsPage/AllPostsPage";
 import MakeJobPostPage from "./pages/MakeJobPostPage/MakeJobPostPage";
 import AllCoursesPage from "./pages/AllCoursesPage/AllCoursesPage";
+import CourseVideosPage from "./pages/CourseVideosPage/CourseVideosPage";
 import AuthRoute from "./components/AuthRoute";
 
 import UnAuthPageHeader from "./components/UnAuthPageHeader";
@@ -41,6 +42,9 @@ export default function AppRouter() {
           <AuthRoute>
             <MakeJobPostPage />
           </AuthRoute>
+        </Route>
+
+        <Route path="/course_videos/:id" component={CourseVideosPage}>
         </Route>
 
         <Route path="/courses">

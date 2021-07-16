@@ -8,7 +8,7 @@ import { Redirect, Link } from "react-router-dom";
 
 const AuthPageHeader = ({ updateResult, currentTab }) => {
   const buttonStyle =
-    "mx-1 lg:mx-2 py-2 px-5 rounded-md bg-opacity-20 hover:bg-opacity-20 hover:bg-black h-auto flex items-center ";
+    "transition ease-out duration-300 mx-1 lg:mx-2 py-2 px-5 rounded-md bg-opacity-20 hover:bg-opacity-20 hover:bg-black h-auto flex items-center ";
   const buttonStyle1 =
     buttonStyle +
     (currentTab === "Home" ? "bg-black font-bold" : "font-medium");
