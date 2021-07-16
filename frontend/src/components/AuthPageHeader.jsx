@@ -4,7 +4,7 @@ import React, { useState, Fragment, useEffect } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import defaultAvatar from "../img/default-avatar.png";
 import { SearchIcon, MenuIcon, BellIcon } from "@heroicons/react/outline";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 const AuthPageHeader = ({ updateResult, currentTab }) => {
   const buttonStyle =
@@ -23,6 +23,9 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [logout, setLogout] = useState(false);
+  const [isSearch, setIsSearch] = useState(false);
+  const [searchTags, setSearchTags] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   const updateInput = async (keyword) => {
     setKeyword(keyword);
@@ -31,18 +34,15 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
     "px-7 py-2 flex items-center bg-black bg-opacity-0 hover:bg-opacity-20";
 
   const handleSearch = (e) => {
-    const requestOptions = {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    };
-    fetch(
-      `http://localhost:5000/api/v1/posts?keyword=${keyword}`,
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        updateResult(keyword, result.posts);
-      });
+    setIsSearch(true);
+    if (keyword.indexOf("#") === -1) {
+      setSearchKeyword(keyword);
+    } else {
+      const tags = keyword.split(",").map((t) => {
+        return t.replace("#", "").trim();
+      })
+      setSearchTags(tags.join(","));
+    }
   };
 
   const getUserInfo = () => {
@@ -71,6 +71,13 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
 
   if (logout) {
     return <Redirect to="/login" />;
+  }
+
+  if (isSearch) {
+    if (searchTags) {
+      return <Redirect to={`/search_results?tags=${searchTags}`} push />
+    }
+    return <Redirect to={`/search_results?keyword=${searchKeyword}`} push />
   }
 
   return (
@@ -173,11 +180,15 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
             handleSearch={handleSearch}
           />
           <div className="lg:-ml-12 flex flex-grow justify-center">
-            <a href="/dashboard" className={buttonStyle1}>
+            <Link to="/dashboard" className={buttonStyle1}>
               Home
-            </a>
-            <a className={buttonStyle2}>Learn</a>
-            <a className={buttonStyle3}>Jobs</a>
+            </Link>
+            <Link to="#" className={buttonStyle2}>
+              Learn
+            </Link>
+            <Link to="/all_jobs" className={buttonStyle3}>
+              Jobs
+            </Link>
           </div>
           <div className="mr-6 font-medium text-sm flex items-center">
             <img

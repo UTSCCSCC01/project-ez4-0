@@ -83,27 +83,7 @@ export default class DashboardPage extends Component {
       });
   }
 
-  onSearch = (keyword, searchResult) => {
-    this.setState({
-      hasSearched: true,
-      keyword: keyword,
-      searchResult: searchResult,
-      currentTab: "",
-    });
-  };
-
-  onSearchByTag = (tagName) => {
-    const requestOptions = {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    };
-    fetch(`http://localhost:5000/api/v1/posts?tags=${tagName}`, requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        this.setState({ searchResult: result.posts });
-      });
-  };
-  createPost = (content, title, tags) => {
+  createPost = (content, title, tags, image) => {
     const userId = localStorage.getItem("userId");
     const requestOptions = {
       method: "POST",
@@ -113,6 +93,7 @@ export default class DashboardPage extends Component {
         content,
         tags,
         user_id: userId,
+        image: image,
       }),
     };
     const api = `http://localhost:5000/api/v1/posts`;
@@ -184,65 +165,47 @@ export default class DashboardPage extends Component {
   render() {
     return (
       <div>
-        <AuthPageHeader
-          updateResult={this.onSearch}
-          currentTab={this.state.currentTab}
-        />
-        {this.state.hasSearched ? (
-          <div className="flex flex-col items-center">
-            <button
-              onClick={() => this.onSearchByTag(this.state.keyword)}
-              className=" mt-10 w-32 rounded-full px-4 py-1 text-white text-sm font-medium bg-indigo-500"
-            >
-              Search by tag
-            </button>
-            <SearchResultPage
-              tags={this.state.tags}
-              posts={this.state.searchResult}
-            />
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md-grid-cols-12 lg:grid-cols-12 justify-center pt-10 bg-gray-50 px-2">
-            {/* Profile left section */}
-            <div className="col-span-3">
-              <div className="bg-white p-3 border-t-4 border-indigo-400">
-                <div className="image overflow-hidden">
-                  <img
-                    className="h-auto w-full mx-auto"
-                    src={this.state.avatar}
-                    alt=""
-                  />
-                </div>
-                <div className="flex flex-col mt-3 rounded-md border bg-gray-100 text-md font-medium">
-                  {this.renderLeftSideActions()}
-                </div>
+        <AuthPageHeader currentTab={this.state.currentTab} />
+        <div className="grid grid-cols-1 md-grid-cols-12 lg:grid-cols-12 justify-center pt-10 bg-gray-50 px-2">
+          {/* Profile left section */}
+          <div className="col-span-3">
+            <div className="bg-white p-3 border-t-4 border-indigo-400">
+              <div className="image overflow-hidden">
+                <img
+                  className="h-auto w-full mx-auto"
+                  src={this.state.avatar}
+                  alt=""
+                />
               </div>
-            </div>
-            {/* Posts center section */}
-            <div className="col-span-6">
-              <div>
-                <PostBoxComponent onCreatePost={this.createPost} />
+              <div className="flex flex-col mt-3 rounded-md border bg-gray-100 text-md font-medium">
+                {this.renderLeftSideActions()}
               </div>
-              <div>{this.renderPosts()}</div>
-              <div className="grid justify-items-center mb-7">
-                <Link
-                  to="/posts"
-                  className="text-indigo-500 background-transparent font-bold px-3 py-1 text-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                >
-                  See More Posts
-                </Link>
-              </div>
-            </div>
-            {/* Others right section */}
-            <div className="col-span-3 font-bold text-md">
-              <div>Recent job posts</div>
-              {this.renderJobPosts()}
-              <br></br>
-              <div>Course Learning Progress Report</div>
-              <CourseProgressReport />
             </div>
           </div>
-        )}
+          {/* Posts center section */}
+          <div className="col-span-6">
+            <div>
+              <PostBoxComponent onCreatePost={this.createPost} />
+            </div>
+            <div>{this.renderPosts()}</div>
+            <div className="grid justify-items-center mb-7">
+              <Link
+                to="/posts"
+                className="text-indigo-500 background-transparent font-bold px-3 py-1 text-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              >
+                See More Posts
+              </Link>
+            </div>
+          </div>
+          {/* Others right section */}
+          <div className="col-span-3 font-bold text-md">
+            <div>Recent job posts</div>
+            {this.renderJobPosts()}
+            <br></br>
+            <div>Course Learning Progress Report</div>
+            <CourseProgressReport />
+          </div>
+        </div>
       </div>
     );
   }
