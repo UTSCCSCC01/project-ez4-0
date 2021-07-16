@@ -9,7 +9,7 @@ import MakeJobPostPage from "./pages/MakeJobPostPage/MakeJobPostPage";
 function App() {
   return (
     <div>
-      <MakeJobPostPage />
+      <Router />
     </div>
   );
 }
