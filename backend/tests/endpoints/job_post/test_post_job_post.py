@@ -19,6 +19,8 @@ def test_create_job_post(app):
         JOB_POST_ENDPOINT,
         data={
             "title": "Example job post",
+            "company": "UTSC",
+            "location": "Remote",
             "user_id": user.id,
             "active": True
         }

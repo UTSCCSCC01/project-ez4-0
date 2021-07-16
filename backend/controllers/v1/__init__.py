@@ -15,6 +15,8 @@ from .post_controller import (
     PostCommentsController,
     PostCommentController,
 )
+from .course_controller import CourseController, CoursesController
+from .video_controller import VideoController, VideosController
 from .job_post_controller import JobPostsController, JobPostController
 
 
@@ -77,3 +79,29 @@ def set_job_post_routes(api, docs):
 
     api.add_resource(JobPostController, "/job_posts/<job_post_id>")
     docs.register(JobPostController, blueprint=job_post_bp_name)
+
+
+course_bp_name = "course"
+course_bp = Blueprint(course_bp_name, __name__, url_prefix="/api/v1")
+def set_course_routes(api, docs):
+    """
+    Setup routes for the Course API
+    """
+    api.add_resource(CoursesController, "/courses")
+    docs.register(CoursesController, blueprint=course_bp_name)
+
+    api.add_resource(CourseController, "/courses/<course_id>")
+    docs.register(CourseController, blueprint=course_bp_name)
+
+
+video_bp_name = "video"
+video_bp = Blueprint(video_bp_name, __name__, url_prefix="/api/v1")
+def set_video_routes(api, docs):
+    """
+    Setup routes for the Video API
+    """
+    api.add_resource(VideosController, "/videos")
+    docs.register(VideosController, blueprint=video_bp_name)
+
+    api.add_resource(VideoController, "/videos/<video_id>")
+    docs.register(VideoController, blueprint=video_bp_name)
