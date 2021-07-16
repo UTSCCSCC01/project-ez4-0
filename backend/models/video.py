@@ -35,3 +35,19 @@ class Video(BaseModel):
         db.ForeignKey('course.id', ondelete="CASCADE"),
         nullable=False
     )
+
+    @classmethod
+    def create(cls, name, description, url, course_id, **kwargs):
+        """
+        Shorcut to create a new video
+        """
+        video = Video(
+            name=name,
+            description=description,
+            url=url,
+            course_id=course_id,
+            **kwargs
+        )
+        db.session.add(video)
+        db.session.commit()
+        return video

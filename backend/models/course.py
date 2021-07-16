@@ -32,3 +32,17 @@ class Course(BaseModel):
         backref='course',
         lazy=True
     )
+
+    @classmethod
+    def create(cls, name, description, **kwargs):
+        """
+        Shorcut to create a new course
+        """
+        course = Course(
+            name=name,
+            description=description,
+            **kwargs
+        )
+        db.session.add(course)
+        db.session.commit()
+        return course
