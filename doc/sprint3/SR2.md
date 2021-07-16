@@ -1,7 +1,7 @@
 # Sprint 2 Retrospective
 
 ### Meeting Date
-July 19, 2021
+July 5, 2021
 
 ### Participants
 - JunXing Xu

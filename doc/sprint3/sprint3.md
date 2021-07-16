@@ -2,7 +2,7 @@
 The following are information about our sprint3 planning
 
 ### Meeting Date
-June 22, 2021
+July 5, 2021
 
 ### Participants
 - JunXing Xu
