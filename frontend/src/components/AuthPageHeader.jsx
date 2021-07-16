@@ -67,7 +67,7 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
 
   useEffect(() => {
     getUserInfo();
-  });
+  }, []);
 
   if (logout) {
     return <Redirect to="/login" />;
@@ -183,7 +183,7 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
             <Link to="/dashboard" className={buttonStyle1}>
               Home
             </Link>
-            <Link to="#" className={buttonStyle2}>
+            <Link to="/courses" className={buttonStyle2}>
               Learn
             </Link>
             <Link to="/all_jobs" className={buttonStyle3}>

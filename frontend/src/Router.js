@@ -9,6 +9,7 @@ import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import AllPostsPage from "./pages/AllPostsPage/AllPostsPage";
 import MakeJobPostPage from "./pages/MakeJobPostPage/MakeJobPostPage";
+import AllCoursesPage from "./pages/AllCoursesPage/AllCoursesPage";
 import AuthRoute from "./components/AuthRoute";
 
 import UnAuthPageHeader from "./components/UnAuthPageHeader";
@@ -39,6 +40,12 @@ export default function AppRouter() {
         <Route path="/make_job_post">
           <AuthRoute>
             <MakeJobPostPage />
+          </AuthRoute>
+        </Route>
+
+        <Route path="/courses">
+          <AuthRoute>
+            <AllCoursesPage />
           </AuthRoute>
         </Route>
 
