@@ -14,6 +14,7 @@ class UserPost extends Component {
       userAvatar: "",
       likerAvatars: [],
       commentAvatars: {},
+      tags: [],
     };
   }
 
@@ -21,6 +22,7 @@ class UserPost extends Component {
     this.getLikes();
     this.getComments();
     this.getPosterAvatar();
+    this.getTags();
 
     const userId = localStorage.getItem("userId");
     this.getUserInfo(userId)
@@ -36,6 +38,21 @@ class UserPost extends Component {
       .then(result => {
         this.setState({ posterAvatar: result.avatar });
       });
+  }
+
+  getTags() {
+      const requestOptions = {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+      };
+      const id = this.props.post.id;
+      const api = `http://localhost:5000/api/v1/posts/${id}`;
+      fetch(api, requestOptions)
+        .then((response) => response.json())
+        .then(result => {
+            console.log(result);
+            this.setState({ tags: result.tags });
+        });
   }
 
   getLikes() {
@@ -342,6 +359,9 @@ class UserPost extends Component {
                   src="https://picsum.photos/536/354"
                   alt="User post image"
                 />
+              </div>
+              <div className="mx-3 w-min transition duration-300 ease-in-out rounded-2xl mr-1 px-2 py-1 hover:bg-blue-200 text-indigo-500 hover:text-gray-800">
+                {this.state.tags}
               </div>
               <div className="flex justify-start mb-4">
                 <div className="flex w-full mt-1 pt-2 pl-5">
