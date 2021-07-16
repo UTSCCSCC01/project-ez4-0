@@ -282,6 +282,20 @@ class UserPost extends Component {
     )).slice(0, 4);
   }
 
+  renderPostImage = () => {
+    if (this.props.post.image) {
+      return (
+        <div className="text-gray-400 font-medium text-sm mb-7 mt-6 mx-3 px-2">
+          <img
+            className="rounded"
+            src={this.props.post.image}
+            alt="User post image"
+          />
+        </div>
+      )
+    }
+  }
+
   render() {
     const userId = localStorage.getItem("userId");
     return (
@@ -336,13 +350,7 @@ class UserPost extends Component {
               <div className="text-gray-500 font-normal text-sm mb-6 mx-3 px-2">
                 {this.getContent()}
               </div>
-              <div className="text-gray-400 font-medium text-sm mb-7 mt-6 mx-3 px-2">
-                <img
-                  className="rounded"
-                  src="https://picsum.photos/536/354"
-                  alt="User post image"
-                />
-              </div>
+              {this.renderPostImage()}
               <div className="flex justify-start mb-4">
                 <div className="flex w-full mt-1 pt-2 pl-5">
                   <button
