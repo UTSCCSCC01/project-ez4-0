@@ -12,11 +12,20 @@ import AuthRoute from "./components/AuthRoute";
 
 import UnAuthPageHeader from "./components/UnAuthPageHeader";
 import AuthPageHeader from "./components/AuthPageHeader";
+import JobPostDetail from "./components/JobPostDetail";
+import AllJobPostPage from "./pages/AllJobPostPage/AllJobPostPage"
 
 export default function AppRouter() {
   return (
     <Router>
       <Switch>
+        
+        <Route path="/JobPostDetail">
+          <AuthRoute>
+            <JobPostDetail />
+          </AuthRoute>
+        </Route>
+
         <Route path="/dashboard">
           <AuthRoute>
             <DashboardPage />
