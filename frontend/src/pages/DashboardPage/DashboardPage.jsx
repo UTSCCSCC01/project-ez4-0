@@ -17,7 +17,9 @@ export default class DashboardPage extends Component {
       hasSearched: false,
       currentTab: "Home",
       avatar: "",
-      
+      tags: [],
+      keyword: "",
+
       viewMyPosts: false,
     };
   }
@@ -46,7 +48,10 @@ export default class DashboardPage extends Component {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     };
-    fetch(`http://localhost:5000/api/v1/posts?posted_by=${userId}`, requestOptions)
+    fetch(
+      `http://localhost:5000/api/v1/posts?posted_by=${userId}`,
+      requestOptions
+    )
       .then((response) => response.json())
       .then((result) => {
         this.setState({ posts: result.posts });
@@ -71,24 +76,33 @@ export default class DashboardPage extends Component {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     };
-    fetch(
-      `http://localhost:5000/api/v1/users/${userId}`,
-      requestOptions
-    )
+    fetch(`http://localhost:5000/api/v1/users/${userId}`, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         this.setState({ avatar: result.avatar });
       });
   }
 
-  onSearch = (searchResult) => {
+  onSearch = (keyword, searchResult) => {
     this.setState({
       hasSearched: true,
+      keyword: keyword,
       searchResult: searchResult,
       currentTab: "",
     });
   };
 
+  onSearchByTag = (tagName) => {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch(`http://localhost:5000/api/v1/posts?tags=${tagName}`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        this.setState({ searchResult: result.posts });
+      });
+  };
   createPost = (content, title, tags) => {
     const userId = localStorage.getItem("userId");
     const requestOptions = {
@@ -131,7 +145,7 @@ export default class DashboardPage extends Component {
       }
       this.setState({ viewMyPosts: !this.state.viewMyPosts });
     }
-  }
+  };
 
   renderPosts() {
     return this.state.posts.map((post) => (
@@ -152,10 +166,16 @@ export default class DashboardPage extends Component {
   }
 
   renderLeftSideActions() {
-    const inactiveClass = "cursor-pointer mb-1 m-2 p-2 border-transparent transition ease-out duration-300 hover:border-indigo-500 border-l-4 text-black";
-    const activeClass = "cursor-pointer mb-1 m-2 p-2 border-indigo-500 transition border-l-4 text-black bg-gray-200";
+    const inactiveClass =
+      "cursor-pointer mb-1 m-2 p-2 border-transparent transition ease-out duration-300 hover:border-indigo-500 border-l-4 text-black";
+    const activeClass =
+      "cursor-pointer mb-1 m-2 p-2 border-indigo-500 transition border-l-4 text-black bg-gray-200";
     return ["My Posts"].map((action) => (
-      <div key={action} className={this.state.viewMyPosts? activeClass : inactiveClass} onClick={() => this.onActionClick(action)}>
+      <div
+        key={action}
+        className={this.state.viewMyPosts ? activeClass : inactiveClass}
+        onClick={() => this.onActionClick(action)}
+      >
         {action}
       </div>
     ));
@@ -169,7 +189,18 @@ export default class DashboardPage extends Component {
           currentTab={this.state.currentTab}
         />
         {this.state.hasSearched ? (
-          <SearchResultPage posts={this.state.searchResult} />
+          <div className="flex flex-col items-center">
+            <button
+              onClick={() => this.onSearchByTag(this.state.keyword)}
+              className=" mt-10 w-32 rounded-full px-4 py-1 text-white text-sm font-medium bg-indigo-500"
+            >
+              Search by tag
+            </button>
+            <SearchResultPage
+              tags={this.state.tags}
+              posts={this.state.searchResult}
+            />
+          </div>
         ) : (
           <div className="grid grid-cols-1 md-grid-cols-12 lg:grid-cols-12 justify-center pt-10 bg-gray-50 px-2">
             {/* Profile left section */}

@@ -1,13 +1,19 @@
 import AuthPageHeader from "../../components/AuthPageHeader";
 import React, { useState } from "react";
 import UserPost from "../../components/UserPost";
+import TagBadge from "../../components/TagBadge";
 
-const LandingPage = ({ posts }) => {
+const SearchResultPage = ({ tags, posts }) => {
   if (posts.length) {
     return (
       <>
         <main>
-          <div className="flex flex-col space-y-8 pt-12 pb-24 items-center">
+          <div className="flex space-x-4">
+            {/* {tags.map((tagName) => (
+              <TagBadge isSelected={false} tagName={tagName} key={tagName} />
+            ))} */}
+          </div>
+          <div className="flex flex-col space-y-8 pt-6 pb-24 items-center">
             {posts.map((post) => (
               <UserPost post={post} key={post.id} />
             ))}
@@ -20,4 +26,4 @@ const LandingPage = ({ posts }) => {
   }
 };
 
-export default LandingPage;
+export default SearchResultPage;
