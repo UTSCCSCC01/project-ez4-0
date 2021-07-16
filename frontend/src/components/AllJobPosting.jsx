@@ -27,7 +27,6 @@ class AllJobPosting extends Component {
       <div>
         {this.state.job_posts.map((post) => {
           if (post.active === true) {
-            console.log(post);
             return <JobPost key={post.id} title={post.title} />;
           }
         })}

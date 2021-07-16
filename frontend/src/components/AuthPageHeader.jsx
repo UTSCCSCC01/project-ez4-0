@@ -8,7 +8,7 @@ import {
   MenuIcon,
   BellIcon,
 } from "@heroicons/react/outline";
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 const AuthPageHeader = ({ updateResult, currentTab }) => {
   const buttonStyle =
@@ -163,11 +163,9 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
             handleSearch={handleSearch}
           />
           <div className="lg:-ml-12 flex flex-grow justify-center">
-            <a href="/dashboard" className={buttonStyle1}>
-              Home
-            </a>
-            <a className={buttonStyle2}>Learn</a>
-            <a className={buttonStyle3}>Jobs</a>
+            <Link to="/dashboard" className={buttonStyle1}>Home</Link>
+            <Link to="#" className={buttonStyle2}>Learn</Link>
+            <Link to="/all_jobs" className={buttonStyle3}>Jobs</Link>
           </div>
           <div className="mr-6 font-medium text-sm flex items-center">
             <img src={avatar || defaultAvatar} className="rounded-full w-7 h-7 mr-4" />
