@@ -3,15 +3,14 @@ import { Link } from "react-router-dom";
 import AuthPageHeader from "../../components/AuthPageHeader";
 import "../../css/PostBoxComponent.css";
 import SearchBar from "../../components/SearchBar2";
-import { SearchIcon, MenuIcon, BellIcon } from "@heroicons/react/outline";
+import qs from "qs";
+import { resetWarningCache } from "prop-types";
 
 export default function AllCourses({ onCreatePost }) {
   const [courses, setCourses] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [isSearch, setIsSearch] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState("");
-  const [category, setCategory] = useState("");
-  const [isFilter, setIsFilter] = useState(false);
 
   const updateInput = async (keyword) => {
     setKeyword(keyword);
@@ -33,6 +32,23 @@ export default function AllCourses({ onCreatePost }) {
         setCourses(result.courses);
       });
   };
+
+  const getSearchCourses = () => {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch(`http://localhost:5000/api/v1/courses`, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setCourses(result.courses);
+      });
+  };
+
+  if (isSearch) {
+    getSearchCourses();
+    console.warn("searched");
+  }
 
   useEffect(() => {
     getCourses();
