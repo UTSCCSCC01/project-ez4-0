@@ -44,6 +44,10 @@ class UserController(BaseController):
             email = kwargs.get("email", None)
             first_name = kwargs.get("first_name", None)
             last_name = kwargs.get("last_name", None)
+            gender = kwargs.get("gender", None)
+            phone_number = kwargs.get("phone_number", None)
+            birthdate = kwargs.get("birthdate", None)
+            address = kwargs.get("address", None)
             # Update user email
             if email:
                 if User.email_exists(email):
@@ -54,6 +58,14 @@ class UserController(BaseController):
                 user.first_name = first_name
             if last_name:
                 user.last_name = last_name
+            if gender:
+                user.gender = gender
+            if phone_number:
+                user.phone_number = phone_number
+            if birthdate:
+                user.birthdate = birthdate
+            if address:
+                user.address = address
             user.save()
             return user
         return {"description": "User not found"}, 404

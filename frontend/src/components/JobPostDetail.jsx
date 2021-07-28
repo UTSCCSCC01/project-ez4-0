@@ -8,8 +8,9 @@ class JobPostDetail extends Component {
       company: [],
       description: [],
       location: [],
-      requiremet: [],
+      requirement: [],
       title: [],
+      tags: [],
     };
   }
 
@@ -31,13 +32,14 @@ class JobPostDetail extends Component {
         this.setState({ company: result.company });
         this.setState({ location: result.location });
         this.setState({ description: result.description });
-        this.setState({ requirement: result.requirement });
+        this.setState({ requirement: result.requirements.join(",") });
+        this.setState({ tags: result.tags.join(",") })
       });
   }
 
   render() {
     return (
-      <div className="flex flex-wrap max-w-xl bg-white shadow sm:rounded-lg mt-3 mx-auto">
+      <div className="flex flex-wrap max-w-xl bg-white shadow sm:rounded-lg mt-7 mx-auto">
         <div className="px-4 py-5 sm:px-6">
           {/* Company Name */}
           <h3 className="text-lg leading-6 font-medium text-gray-900">
@@ -76,6 +78,12 @@ class JobPostDetail extends Component {
               <dt className="text-sm font-medium text-gray-500">Job Requirement</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 {this.state.requirement}
+              </dd>
+            </div>
+            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">Tags</dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {this.state.tags}
               </dd>
             </div>
           </dl>

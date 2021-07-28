@@ -4,7 +4,8 @@ from documents.post import Post
 from documents.job_post import JobPost
 from documents.post_like import PostLike
 from documents.post_comment import PostComment
-from datetime import datetime
+from documents.enrollment import Enrollment
+from datetime import datetime, date
 
 
 app = create_app()
@@ -23,12 +24,13 @@ def create_user(email, password, first_name, last_name, **kwargs):
     )
 
 
-def create_course(name, description):
+def create_course(name, category, description):
     """
     Helper method to create course
     """
     return Course.create(
         name,
+        category,
         description,
     )
 
@@ -97,6 +99,15 @@ def create_post_comment(user_id, content, post, **kwargs):
     ).save()
 
 
+def create_enrollment(user_id, course_id, finished, **kwargs):
+    return Enrollment(
+        course_id=course_id,
+        user_id=user_id,
+        finished=finished,
+        **kwargs
+    ).save()
+
+
 def db_seed():
     with app.app_context():
         # Create users
@@ -105,21 +116,33 @@ def db_seed():
             "x1234",
             "Foo",
             "Bar",
-            avatar="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200"
+            avatar="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200",
+            gender="Male",
+            phone_number="6476666611",
+            birthdate=date(1999, 4, 4),
+            address="1234 Foo Street"
         )
         alice = create_user(
             "another@utoronto.ca",
             "x9999",
             "Alice",
             "Chen",
-            avatar="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
+            avatar="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80",
+            gender="Female",
+            phone_number="6470208879",
+            birthdate=date(1987, 5, 6),
+            address="76 Consumer road"
         )
         bob = create_user(
             "tester@utoronto.ca",
             "x8888",
             "Bob",
             "Wang",
-            avatar="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            avatar="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+            gender="Male",
+            phone_number="6471872619",
+            birthdate=date(1970, 12, 1),
+            address="46 Finch Ave"
         )
 
         # Create post for Foo
@@ -175,17 +198,27 @@ def db_seed():
         )
 
         # Courses
-        course_a = create_course("How to be successful in startup", "Teach you how to be successful")
-        course_b = create_course("How to be successful in startup II", "Second series")
+        course_a = create_course("How to be successful in startup", "Startup", "Teach you how to be successful")
+        course_b = create_course("How to be successful in startup II", "Startup", "Second series")
 
         # Videos for course_a
-        create_video("1. Step one", "Learn", "https://www.youtube.com/watch?v=QoqohmccTSc", course_a.id)
-        create_video("2. Step two", "Train", "https://www.youtube.com/watch?v=EctzLTFrktc", course_a.id)
-        create_video("3. Step three", "Repeat", "https://www.youtube.com/watch?v=Tuw8hxrFBH8", course_a.id)
+        course_a_vid_a = create_video("1. Step one", "Learn", "https://www.youtube.com/watch?v=QoqohmccTSc", course_a.id)
+        course_a_vid_b = create_video("2. Step two", "Train", "https://www.youtube.com/watch?v=EctzLTFrktc", course_a.id)
+        course_a_vid_c = create_video("3. Step three", "Repeat", "https://www.youtube.com/watch?v=Tuw8hxrFBH8", course_a.id)
 
         # Videos for course_b
-        create_video("4. Step four", "Networking", "https://www.youtube.com/watch?v=E3yI_3NA6yQ", course_b.id)
-        create_video("5. Step five", "Expand", "https://www.youtube.com/watch?v=Y-7JVVZmSLg", course_b.id)
+        course_b_vid_a = create_video("4. Step four", "Networking", "https://www.youtube.com/watch?v=E3yI_3NA6yQ", course_b.id)
+        course_b_vid_b = create_video("5. Step five", "Expand", "https://www.youtube.com/watch?v=Y-7JVVZmSLg", course_b.id)
+
+        # Enrollment for Foo, course_a, finished vid_a, vid_b
+        create_enrollment(foo.id, course_a.id, [course_a_vid_a.id, course_a_vid_b.id])
+
+        # Enrollment for Alice, course_b, finished vid_a
+        create_enrollment(alice.id, course_b.id, [course_b_vid_a.id])
+
+        # Enrollment for Bob, course_a, finished vid_c, course_b, finished vid_a, vid_b
+        create_enrollment(bob.id, course_a.id, [course_a_vid_c.id])
+        create_enrollment(bob.id, course_b.id, [course_b_vid_a.id, course_b_vid_b.id])
 
 
 def clear_dbs():
