@@ -200,6 +200,8 @@ def db_seed():
         # Courses
         course_a = create_course("How to be successful in startup", "Startup", "Teach you how to be successful")
         course_b = create_course("How to be successful in startup II", "Startup", "Second series")
+        course_c = create_course("Java Tutorial", "Programming", "A series of Java tutorial")
+        course_d = create_course("Python Tutorial", "Programming", "A series of Python tutorial")
 
         # Videos for course_a
         course_a_vid_a = create_video("1. Step one", "Learn", "https://www.youtube.com/watch?v=QoqohmccTSc", course_a.id)
@@ -209,6 +211,12 @@ def db_seed():
         # Videos for course_b
         course_b_vid_a = create_video("4. Step four", "Networking", "https://www.youtube.com/watch?v=E3yI_3NA6yQ", course_b.id)
         course_b_vid_b = create_video("5. Step five", "Expand", "https://www.youtube.com/watch?v=Y-7JVVZmSLg", course_b.id)
+
+        # Videos for course_c
+        create_video("Beginner", "Tutorial for beginner", "https://www.youtube.com/watch?v=eIrMbAQSU34", course_c.id)
+
+        # Videos for course_d
+        create_video("Full Course", "Full courses for beginner", "https://www.youtube.com/watch?v=rfscVS0vtbw", course_d.id)
 
         # Enrollment for Foo, course_a, finished vid_a, vid_b
         create_enrollment(foo.id, course_a.id, [course_a_vid_a.id, course_a_vid_b.id])
