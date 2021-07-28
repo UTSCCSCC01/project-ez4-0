@@ -42,6 +42,22 @@ class User(BaseModel):
         db.String
     )
 
+    gender = db.Column(
+        db.String
+    )
+
+    phone_number = db.Column(
+        db.String
+    )
+
+    birthdate = db.Column(
+        db.Date
+    )
+
+    address = db.Column(
+        db.String
+    )
+
     def verify_password(self, password):
         """
         Verify the given password with the hashed passowrd stored
