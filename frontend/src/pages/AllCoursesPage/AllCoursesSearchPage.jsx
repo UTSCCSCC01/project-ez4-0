@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import AuthPageHeader from "../../components/AuthPageHeader";
 import "../../css/PostBoxComponent.css";
 import SearchBar from "../../components/SearchBar2";
-import qs from "qs";
-import { resetWarningCache } from "prop-types";
+import CourseCategoryDropdown from "../../components/CouseCategoryDropdown";
 
 export default function AllCourses({ onCreatePost }) {
   const [courses, setCourses] = useState([]);
@@ -75,6 +74,7 @@ export default function AllCourses({ onCreatePost }) {
 
   return (
     <div>
+      <CourseCategoryDropdown className="" />
       <AuthPageHeader currentTab="Learn" />
       <div className="bg-gray-50">
         <SearchBar
