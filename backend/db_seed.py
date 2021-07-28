@@ -4,7 +4,7 @@ from documents.post import Post
 from documents.job_post import JobPost
 from documents.post_like import PostLike
 from documents.post_comment import PostComment
-from datetime import datetime
+from datetime import datetime, date
 
 
 app = create_app()
@@ -105,21 +105,33 @@ def db_seed():
             "x1234",
             "Foo",
             "Bar",
-            avatar="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200"
+            avatar="https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200",
+            gender="Male",
+            phone_number="6476666611",
+            birthdate=date(1999, 4, 4),
+            address="1234 Foo Street"
         )
         alice = create_user(
             "another@utoronto.ca",
             "x9999",
             "Alice",
             "Chen",
-            avatar="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80"
+            avatar="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80",
+            gender="Female",
+            phone_number="6470208879",
+            birthdate=date(1987, 5, 6),
+            address="76 Consumer road"
         )
         bob = create_user(
             "tester@utoronto.ca",
             "x8888",
             "Bob",
             "Wang",
-            avatar="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            avatar="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+            gender="Male",
+            phone_number="6471872619",
+            birthdate=date(1970, 12, 1),
+            address="46 Finch Ave"
         )
 
         # Create post for Foo
