@@ -22,7 +22,7 @@ class MakeJobPostPage extends Component {
         company: company,
         description: description,
         location: location,
-        requirement: [requirement],
+        requirements: [requirement],
         tags: tags,
         title: title,
         user_id: userId,
