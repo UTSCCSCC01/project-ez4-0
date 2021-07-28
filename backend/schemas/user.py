@@ -7,6 +7,10 @@ class UserSchema(Schema):
     first_name = fields.Str(description="User first name")
     last_name = fields.Str(description="User last name")
     avatar = fields.Str(description="The URL to the user avatar")
+    gender = fields.Str(description="User geneder")
+    phone_number = fields.Str(description="User phone number")
+    birthdate = fields.Date(description="User birthdate")
+    address = fields.Str(description="User address")
 
 
 class CreateUserSchema(Schema):
@@ -20,6 +24,10 @@ class UpdateUserSchema(Schema):
     email = fields.Str(description="User email")
     first_name = fields.Str(description="User first name")
     last_name = fields.Str(description="User last name")
+    gender = fields.Str(description="User geneder")
+    phone_number = fields.Str(description="User phone number")
+    birthdate = fields.Date(description="User birthdate")
+    address = fields.Str(description="User address")
 
 
 class DeleteUserResponseSchema(Schema):
