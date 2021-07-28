@@ -56,7 +56,7 @@ export default function MakeJobPostComponent({ onCreateJobPost }) {
         return m.replaceAll("#", "");
       });
     }
-    return { newdescription: copied.trim(), tags: tags };
+    return { newDescription: copied.trim(), tags: tags };
   };
 
   return (
