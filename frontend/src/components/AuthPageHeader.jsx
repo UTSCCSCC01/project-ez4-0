@@ -40,7 +40,7 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
     } else {
       const tags = keyword.split(",").map((t) => {
         return t.replace("#", "").trim();
-      })
+      });
       setSearchTags(tags.join(","));
     }
   };
@@ -75,9 +75,9 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
 
   if (isSearch) {
     if (searchTags) {
-      return <Redirect to={`/search_results?tags=${searchTags}`} push />
+      return <Redirect to={`/search_results?tags=${searchTags}`} push />;
     }
-    return <Redirect to={`/search_results?keyword=${searchKeyword}`} push />
+    return <Redirect to={`/search_results?keyword=${searchKeyword}`} push />;
   }
 
   return (

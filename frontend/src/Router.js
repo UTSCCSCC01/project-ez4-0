@@ -10,22 +10,22 @@ import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import AllPostsPage from "./pages/AllPostsPage/AllPostsPage";
 import MakeJobPostPage from "./pages/MakeJobPostPage/MakeJobPostPage";
 import AllCoursesPage from "./pages/AllCoursesPage/AllCoursesPage";
+import AllCoursesSearchPage from "./pages/AllCoursesPage/AllCoursesSearchPage";
 import CourseVideosPage from "./pages/CourseVideosPage/CourseVideosPage";
 import AuthRoute from "./components/AuthRoute";
 
 import UnAuthPageHeader from "./components/UnAuthPageHeader";
 import JobPostDetail from "./components/JobPostDetail";
-import AllJobPostPage from "./pages/AllJobPostPage/AllJobPostPage"
+import AllJobPostPage from "./pages/AllJobPostPage/AllJobPostPage";
 import SearchResultPage from "./pages/SearchResultPage/SearchResultPage";
 
 export default function AppRouter() {
   return (
     <Router>
       <Switch>
-        
         <Route path="/all_jobs">
           <AuthRoute>
-            <AllJobPostPage/>
+            <AllJobPostPage />
           </AuthRoute>
         </Route>
 
@@ -35,8 +35,7 @@ export default function AppRouter() {
           </AuthRoute>
         </Route>
 
-        <Route path="/search_results" component={SearchResultPage}>
-        </Route>
+        <Route path="/search_results" component={SearchResultPage}></Route>
 
         <Route path="/make_job_post">
           <AuthRoute>
@@ -44,12 +43,11 @@ export default function AppRouter() {
           </AuthRoute>
         </Route>
 
-        <Route path="/course_videos/:id" component={CourseVideosPage}>
-        </Route>
+        <Route path="/course_videos/:id" component={CourseVideosPage}></Route>
 
         <Route path="/courses">
           <AuthRoute>
-            <AllCoursesPage />
+            <AllCoursesSearchPage />
           </AuthRoute>
         </Route>
 
