@@ -5,3 +5,4 @@ from .post import *
 from .job_post import *
 from .course import *
 from .video import *
+from .enrollment import *

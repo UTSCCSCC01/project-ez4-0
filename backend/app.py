@@ -69,6 +69,8 @@ def register_blueprints(app):
         set_course_routes,
         video_bp,
         set_video_routes,
+        enrollment_bp,
+        set_enrollment_routes,
     )
 
     APISPEC_SPEC = APISpec(
@@ -115,6 +117,11 @@ def register_blueprints(app):
     video_api = Api(video_bp)
     app.register_blueprint(video_bp)
     set_video_routes(video_api, docs)
+
+    # Enrollment API
+    enrollment_api = Api(enrollment_bp)
+    app.register_blueprint(enrollment_bp)
+    set_enrollment_routes(enrollment_api, docs)
 
 
 def register_extensions(app):
