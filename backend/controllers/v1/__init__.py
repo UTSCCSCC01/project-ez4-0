@@ -18,6 +18,7 @@ from .post_controller import (
 from .course_controller import CourseController, CoursesController
 from .video_controller import VideoController, VideosController
 from .job_post_controller import JobPostsController, JobPostController
+from .enrollment_controller import EnrollmentController, UserEnrollmentsController
 
 
 user_bp_name = "user"
@@ -105,3 +106,16 @@ def set_video_routes(api, docs):
 
     api.add_resource(VideoController, "/videos/<video_id>")
     docs.register(VideoController, blueprint=video_bp_name)
+
+
+enrollment_bp_name = "enrollment"
+enrollment_bp = Blueprint(enrollment_bp_name, __name__, url_prefix="/api/v1")
+def set_enrollment_routes(api, docs):
+    """
+    Setup routes for the Enrollment API
+    """
+    api.add_resource(EnrollmentController, "/enrollment")
+    docs.register(EnrollmentController, blueprint=enrollment_bp_name)
+
+    api.add_resource(UserEnrollmentsController, "/users/<user_id>/enrollments")
+    docs.register(UserEnrollmentsController, blueprint=enrollment_bp_name)
