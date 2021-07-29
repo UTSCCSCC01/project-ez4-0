@@ -1,6 +1,7 @@
 import LandingPageContent from "../../components/LandingPageContent";
 import UnAuthPageHeader from "../../components/UnAuthPageHeader";
 import SearchBar from "../../components/SearchBar";
+import CourseTimeline from "../../components/CourseTimeline";
 
 const LandingPage = () => {
   return (
@@ -8,6 +9,7 @@ const LandingPage = () => {
       <main>
         {/* <UnAuthPageHeader /> */}
         <div className=" pt-32">
+          <CourseTimeline />
           <LandingPageContent />
         </div>
       </main>
