@@ -9,7 +9,7 @@ export default class CourseVideosPage extends React.Component {
     this.state = {
       courseId: this.props.match.params.id,
       videos: [],
-      currIndex: 2,
+      currIndex: 3,
     };
   }
 
@@ -52,7 +52,7 @@ export default class CourseVideosPage extends React.Component {
               {this.state.videos[this.state.currIndex].name}
             </div>
           </div>
-          <div className="-mt-40">
+          <div className="">
             <CourseTimeline
               videos={this.state.videos}
               index={this.state.currIndex}

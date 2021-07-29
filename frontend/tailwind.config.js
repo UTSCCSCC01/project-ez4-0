@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       margin: {
-        1.75: "0.38rem",
+        1.75: "0.4rem",
       },
       borderWidth: {
         3: "3px",
