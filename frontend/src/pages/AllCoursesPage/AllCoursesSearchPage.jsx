@@ -16,8 +16,9 @@ export default function AllCourses({ onCreatePost }) {
   };
 
   const handleSearch = (e) => {
-    setIsSearch(true);
     setSearchKeyword(keyword);
+    getSearchCourses();
+    console.warn("searched");
   };
 
   const getCourses = () => {
@@ -37,17 +38,15 @@ export default function AllCourses({ onCreatePost }) {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     };
-    fetch(`http://localhost:5000/api/v1/courses`, requestOptions)
+    fetch(
+      `http://localhost:5000/api/v1/courses?keyword=${searchKeyword}`,
+      requestOptions
+    )
       .then((response) => response.json())
       .then((result) => {
         setCourses(result.courses);
       });
   };
-
-  if (isSearch) {
-    getSearchCourses();
-    console.warn("searched");
-  }
 
   useEffect(() => {
     getCourses();
@@ -74,21 +73,26 @@ export default function AllCourses({ onCreatePost }) {
 
   return (
     <div>
-      <CourseCategoryDropdown className="" />
       <AuthPageHeader currentTab="Learn" />
-      <div className="bg-gray-50">
+
+      <div className="bg-gray-50 flex flex-row justify-center">
         <SearchBar
           className=""
           input={keyword}
           updateInput={updateInput}
           handleSearch={handleSearch}
         />
+        <CourseCategoryDropdown className="" />
       </div>
 
       <div className="bg-gray-50">
         <div>
           <div className="max-w-6xl mx-auto px-5 py-3 ">
-            <div className="flex flex-wrap -m-4">{renderCourses()}</div>
+            {courses.length > 0 ? (
+              <div className="flex flex-wrap -m-4">{renderCourses()}</div>
+            ) : (
+              <div className="mt-3">No matching posts found</div>
+            )}
           </div>
         </div>
       </div>
