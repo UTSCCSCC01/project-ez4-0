@@ -5,6 +5,7 @@ from .video import VideoSchema
 class CourseSchema(Schema):
     id = fields.UUID(description="Course ID")
     name = fields.Str(description="Course name")
+    category = fields.Str(description="Course category")
     description = fields.Str(description="Description of the course")
     videos = fields.List(
         fields.Nested(VideoSchema),
@@ -12,8 +13,20 @@ class CourseSchema(Schema):
     )
 
 
+class CourseQuerySchema(Schema):
+    keyword = fields.Str(description="The keyword to search for")
+    category = fields.Str(description="The category to search for")
+
+
 class GetCoursesSchema(Schema):
     courses = fields.List(
         fields.Nested(CourseSchema),
         description="A list of courses"
+    )
+
+
+class GetCourseCategoriesSchema(Schema):
+    categories = fields.List(
+        fields.Str(),
+        description="A list of categories"
     )

@@ -47,9 +47,6 @@ export default class JobPost extends Component {
             </div>
             <div className="flex items-center flex-wrap">
               {this.renderTags()}
-              <span className="text-indigo-800 mr-3 inline-flex items-center ml-auto leading-none text-sm py-1">
-                6 days
-              </span>
             </div>
           </div>
         </div>

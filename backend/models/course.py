@@ -23,6 +23,10 @@ class Course(BaseModel):
         nullable=False,
     )
 
+    category = db.Column(
+        db.String
+    )
+
     description = db.Column(
         db.String
     )
@@ -34,12 +38,13 @@ class Course(BaseModel):
     )
 
     @classmethod
-    def create(cls, name, description, **kwargs):
+    def create(cls, name, category, description, **kwargs):
         """
         Shorcut to create a new course
         """
         course = Course(
             name=name,
+            category=category,
             description=description,
             **kwargs
         )
