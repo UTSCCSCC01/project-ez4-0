@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 class UserPost extends Component {
   constructor(props) {
@@ -36,7 +37,6 @@ class UserPost extends Component {
     this.getUserInfo(this.props.post.user_id)
       .then((response) => response.json())
       .then((result) => {
-        console.log(this.props.post.user_id);
         this.setState({ posterAvatar: result.avatar });
       });
   }
@@ -140,6 +140,7 @@ class UserPost extends Component {
               .then((response) => response.json())
               .then((result) => {
                 commentAvatars[result.id] = result.avatar;
+                
                 this.setState({ commentAvatars });
               });
           });
@@ -235,11 +236,15 @@ class UserPost extends Component {
           key={comment.id}
           className="relative flex items-center self-center w-full max-w-xl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400"
         >
-          <img
-            className="w-6 h-6 object-cover rounded-full shadow mr-2 cursor-pointer"
-            alt="User avatar"
-            src={this.state.commentAvatars[comment.user_id]}
-          />
+          <Link to={`/personal_profile/${comment.user_id}`} className="" key={comment.user_id}>
+            
+            <img
+              className="w-6 h-6 object-cover rounded-full shadow mr-2 cursor-pointer"
+              alt="User avatar"
+              src={this.state.commentAvatars[comment.user_id]}
+            />
+          </Link>
+
           <span className="absolute inset-y-0 right-0 flex items-center pr-6"></span>
           <div className="flex flex-row justify-between w-full text-sm">
             <div>{comment.content}</div>
@@ -338,11 +343,13 @@ class UserPost extends Component {
               <div className="flex flex-row mt-2 px-2 py-3 mx-3 justify-between">
                 <div className="flex flex-row">
                   <div className="w-auto h-auto border-2 border-white-500">
-                    <img
-                      className="w-12 h-12 object-cover shadow cursor-pointer"
-                      alt="User avatar"
-                      src={this.state.posterAvatar}
-                    />
+                    <Link to={`/personal_profile/${this.props.post.user_id}`} className="" key={this.props.post.user_id}>
+                      <img
+                        className="w-12 h-12 object-cover shadow cursor-pointer"
+                        alt="User avatar"
+                        src={this.state.posterAvatar}
+                      />
+                    </Link>
                   </div>
                   <div className="flex flex-col mb-2 ml-4 mt-1">
                     <div className="text-gray-600 text-sm font-semibold">
