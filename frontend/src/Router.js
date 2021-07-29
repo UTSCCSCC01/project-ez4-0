@@ -47,6 +47,9 @@ export default function AppRouter() {
         <Route path="/course_videos/:id" component={CourseVideosPage}>
         </Route>
 
+        <Route path="/personal_profile/:id" component={ProfilePage}>
+        </Route>
+
         <Route path="/courses">
           <AuthRoute>
             <AllCoursesPage />

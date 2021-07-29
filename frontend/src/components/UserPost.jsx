@@ -36,6 +36,7 @@ class UserPost extends Component {
     this.getUserInfo(this.props.post.user_id)
       .then((response) => response.json())
       .then((result) => {
+        console.log(this.props.post.user_id);
         this.setState({ posterAvatar: result.avatar });
       });
   }
