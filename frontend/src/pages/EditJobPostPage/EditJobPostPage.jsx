@@ -4,8 +4,6 @@ import AuthPageHeader from "../../components/AuthPageHeader";
 import EditJobPost from "../../components/EditJobPost";
 
 class EditJobPostPage extends Component {
-  state = {};
-
   updateJobPost = (
     title,
     location,
@@ -29,10 +27,9 @@ class EditJobPostPage extends Component {
         user_id: userId,
       }),
     };
-    const api = `http://localhost:5000/api/v1/job_posts`;
+    const api = `http://localhost:5000/api/v1/job_posts/${this.props.match.params.id}`;
     fetch(api, requestOptions).then((response) => {
       if (response.status === 200) {
-        console.log("Job Post created successfully!");
       }
     });
   };
@@ -41,7 +38,7 @@ class EditJobPostPage extends Component {
     return (
       <div>
         <AuthPageHeader currentTab="Jobs"/>
-        <EditJobPost onUpdateJobPost={this.updateJobPost} />
+        <EditJobPost onUpdateJobPost={this.updateJobPost} jobPostId={this.props.match.params.id} />
       </div>
     );
   }

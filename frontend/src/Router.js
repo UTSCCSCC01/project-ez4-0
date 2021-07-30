@@ -48,7 +48,6 @@ export default function AppRouter() {
         <Route path="/edit_job_post/:id" component ={EditJobPostPage}>
         </Route>
 
-
         <Route path="/course_videos/:id" component={CourseVideosPage}>
         </Route>
 

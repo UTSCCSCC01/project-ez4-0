@@ -1,36 +1,36 @@
 import { useEffect, useState } from "react";
+import { Redirect } from 'react-router-dom';
 import "../css/PostBoxComponent.css";
 
-export default function EditJobPostComponent({onUpdateJobPost,match}) {
+export default function EditJobPostComponent({ onUpdateJobPost, jobPostId }) {
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
   const [company, setCompany] = useState("");
   const [description, setDescription] = useState("");
   const [requirement, setRequirement] = useState("");
-  
+  const [successRedirect, setSuccessRedirect] = useState(false);
 
-  const getInfo= () => {
+  const getInfo = () => {
     const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     };
-    const id = match.params.id;
-    const api = `http://localhost:5000/api/v1/job_posts/${id}`;
+    const api = `http://localhost:5000/api/v1/job_posts/${jobPostId}`;
     fetch(api, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setTitle(result.title);
         setLocation(result.location);
         setCompany(result.company);
-        setDescription(result.description);
-        setRequirement(result.requirement.join(","));
+        setDescription(result.description || "");
+        setRequirement(result.requirements?.join(",") || "");
       });
-  }
-  
-  useEffect(() =>{
+  };
+
+  useEffect(() => {
     getInfo();
-  },[]
-  );
+  }, []);
+
   const onTitleChange = (e) => {
     setTitle(e.target.value);
   };
@@ -62,11 +62,7 @@ export default function EditJobPostComponent({onUpdateJobPost,match}) {
       requirement,
       tags
     );
-    setTitle("");
-    setLocation("");
-    setCompany("");
-    setDescription("");
-    setRequirement("");
+    setSuccessRedirect(true);
   };
 
   const splitTags = (description) => {
@@ -82,7 +78,9 @@ export default function EditJobPostComponent({onUpdateJobPost,match}) {
     return { newDescription: copied.trim(), tags: tags };
   };
 
-  
+  if (successRedirect) {
+    return <Redirect to="/all_jobs"/>
+  }
 
   return (
     <div className="h-screen bg-gray-100 overflow-hidden">
@@ -165,8 +163,7 @@ export default function EditJobPostComponent({onUpdateJobPost,match}) {
               title === "" ||
               company === "" ||
               location === "" ||
-              description === "" ||
-              requirement === ""
+              description === ""
             }
             className="customize-post-box-post-btn group relative w-1/6 flex justify-center py-2 px-1 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             //type="submit"
