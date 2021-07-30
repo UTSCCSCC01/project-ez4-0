@@ -2,7 +2,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 
-export default function Example() {
+export default function CourseCategoryDropdown({ onFilterCategory }) {
   return (
     <div className="">
       <Menu as="div" className="relative inline-block text-left">

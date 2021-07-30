@@ -5,10 +5,9 @@ import "../../css/PostBoxComponent.css";
 import SearchBar from "../../components/SearchBar2";
 import CourseCategoryDropdown from "../../components/CouseCategoryDropdown";
 
-export default function AllCourses({ onCreatePost }) {
+export default function AllCourses() {
   const [courses, setCourses] = useState([]);
   const [keyword, setKeyword] = useState("");
-  const [isSearch, setIsSearch] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState("");
 
   const updateInput = async (keyword) => {
@@ -18,7 +17,11 @@ export default function AllCourses({ onCreatePost }) {
   const handleSearch = (e) => {
     setSearchKeyword(keyword);
     getSearchCourses();
-    console.warn("searched");
+    console.log("searched");
+  };
+
+  const onFilterCategory = (category) => {
+    getCategoryCourses(category);
   };
 
   const getCourses = () => {
@@ -40,6 +43,21 @@ export default function AllCourses({ onCreatePost }) {
     };
     fetch(
       `http://localhost:5000/api/v1/courses?keyword=${searchKeyword}`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        setCourses(result.courses);
+      });
+  };
+
+  const getCategoryCourses = (category) => {
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch(
+      `http://localhost:5000/api/v1/courses?category=${category}`,
       requestOptions
     )
       .then((response) => response.json())
@@ -82,7 +100,10 @@ export default function AllCourses({ onCreatePost }) {
           updateInput={updateInput}
           handleSearch={handleSearch}
         />
-        <CourseCategoryDropdown className="" />
+        <CourseCategoryDropdown
+          className=""
+          onFilterCategory={onFilterCategory}
+        />
       </div>
 
       <div className="bg-gray-50">
