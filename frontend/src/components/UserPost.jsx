@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import moment from "moment";
+import { Link } from "react-router-dom";
 
 class UserPost extends Component {
   constructor(props) {
@@ -139,6 +140,7 @@ class UserPost extends Component {
               .then((response) => response.json())
               .then((result) => {
                 commentAvatars[result.id] = result.avatar;
+
                 this.setState({ commentAvatars });
               });
           });
@@ -234,11 +236,18 @@ class UserPost extends Component {
           key={comment.id}
           className="relative flex items-center self-center w-full max-w-xl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400"
         >
-          <img
-            className="w-6 h-6 object-cover rounded-full shadow mr-2 cursor-pointer"
-            alt="User avatar"
-            src={this.state.commentAvatars[comment.user_id]}
-          />
+          <Link
+            to={`/personal_profile/${comment.user_id}`}
+            className=""
+            key={comment.user_id}
+          >
+            <img
+              className="w-6 h-6 object-cover rounded-full shadow mr-2 cursor-pointer"
+              alt="User avatar"
+              src={this.state.commentAvatars[comment.user_id]}
+            />
+          </Link>
+
           <span className="absolute inset-y-0 right-0 flex items-center pr-6"></span>
           <div className="flex flex-row justify-between w-full text-sm">
             <div>{comment.content}</div>
@@ -317,13 +326,15 @@ class UserPost extends Component {
   renderTags = () => {
     if (this.props.post.tags) {
       return this.props.post.tags.map((tag) => (
-          <div key={tag} className="mx-3 w-min transition duration-300 ease-in-out rounded-2xl mr-1 px-2 py-1 hover:bg-blue-200 text-indigo-500 hover:text-gray-800">
-            <div>#{tag}</div>
-          </div>
-        )
-      )
+        <div
+          key={tag}
+          className="mx-3 w-min transition duration-300 ease-in-out rounded-2xl mr-1 px-2 py-1 hover:bg-blue-200 text-indigo-500 hover:text-gray-800"
+        >
+          <div>#{tag}</div>
+        </div>
+      ));
     }
-  }
+  };
 
   render() {
     const userId = localStorage.getItem("userId");
@@ -337,11 +348,17 @@ class UserPost extends Component {
               <div className="flex flex-row mt-2 px-2 py-3 mx-3 justify-between">
                 <div className="flex flex-row">
                   <div className="w-auto h-auto border-2 border-white-500">
-                    <img
-                      className="w-12 h-12 object-cover shadow cursor-pointer"
-                      alt="User avatar"
-                      src={this.state.posterAvatar}
-                    />
+                    <Link
+                      to={`/personal_profile/${this.props.post.user_id}`}
+                      className=""
+                      key={this.props.post.user_id}
+                    >
+                      <img
+                        className="w-12 h-12 object-cover shadow cursor-pointer"
+                        alt="User avatar"
+                        src={this.state.posterAvatar}
+                      />
+                    </Link>
                   </div>
                   <div className="flex flex-col mb-2 ml-4 mt-1">
                     <div className="text-gray-600 text-sm font-semibold">
@@ -380,9 +397,7 @@ class UserPost extends Component {
                 {this.getContent()}
               </div>
               {this.renderPostImage()}
-              <div className="flex flex-row">
-                {this.renderTags()}
-              </div>
+              <div className="flex flex-row">{this.renderTags()}</div>
               <div className="flex justify-start mb-4">
                 <div className="flex w-full mt-1 pt-2 pl-5">
                   <button

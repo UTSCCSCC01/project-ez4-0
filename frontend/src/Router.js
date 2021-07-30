@@ -17,7 +17,7 @@ import UnAuthPageHeader from "./components/UnAuthPageHeader";
 import JobPostDetail from "./components/JobPostDetail";
 import AllJobPostPage from "./pages/AllJobPostPage/AllJobPostPage";
 import SearchResultPage from "./pages/SearchResultPage/SearchResultPage";
-import EditJobPostPage from "./pages/EditJobPostPage/EditJobPostPage"
+import EditJobPostPage from "./pages/EditJobPostPage/EditJobPostPage";
 
 export default function AppRouter() {
   return (
@@ -43,10 +43,11 @@ export default function AppRouter() {
           </AuthRoute>
         </Route>
 
-        <Route path="/edit_job_post/:id" component ={EditJobPostPage}>
-        </Route>
+        <Route path="/edit_job_post/:id" component={EditJobPostPage}></Route>
 
-        <Route path="/course_videos/:id" component={CourseVideosPage}>
+        <Route path="/course_videos/:id" component={CourseVideosPage}></Route>
+
+        <Route path="/personal_profile/:id" component={ProfilePage}>
         </Route>
 
         <Route path="/courses">
