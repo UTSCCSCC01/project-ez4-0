@@ -66,7 +66,8 @@ class UserEnrollmentsController(BaseController):
         enrollment = Enrollment.objects(id=enrollment_id).first()
         if not enrollment:
             return {"description": "Enrollment not found"}, 404
-        finished = enrollment.finished
-        finished.append(video_id)
-        enrollment.finished = finished
+        if video_id not in enrollment.finished:
+            finished = enrollment.finished
+            finished.append(video_id)
+            enrollment.finished = finished
         return enrollment.save()
