@@ -207,9 +207,11 @@ def db_seed():
         course_d = create_course("Python Tutorial", "Tutorial", "A series of Python tutorial")
 
         # Videos for course_a
-        course_a_vid_a = create_video("1. Step one", "Learn", "https://www.youtube.com/watch?v=QoqohmccTSc", course_a.id)
-        course_a_vid_b = create_video("2. Step two", "Train", "https://www.youtube.com/watch?v=EctzLTFrktc", course_a.id)
-        course_a_vid_c = create_video("3. Step three", "Repeat", "https://www.youtube.com/watch?v=Tuw8hxrFBH8", course_a.id)
+        course_a_vid_a = create_video("50 Entrepreneurs share priceless advice", "Learn", "https://www.youtube.com/watch?v=QoqohmccTSc", course_a.id)
+        course_a_vid_b = create_video("One of the Greatest Speeches Ever | Jeff Bezos", "Train", "https://www.youtube.com/watch?v=EctzLTFrktc", course_a.id)
+        course_a_vid_c = create_video("One of the Greatest Speeches Ever | Steve Jobs", "Repeat", "https://www.youtube.com/watch?v=Tuw8hxrFBH8", course_a.id)
+        course_a_vid_d = create_video("Unleash Your Super Brain To Learn Faster | Jim Kwik", "Repeat", "https://www.youtube.com/watch?v=uT_GcOGEFsk", course_a.id)
+
 
         # Videos for course_b
         course_b_vid_a = create_video("4. Step four", "Networking", "https://www.youtube.com/watch?v=E3yI_3NA6yQ", course_b.id)
