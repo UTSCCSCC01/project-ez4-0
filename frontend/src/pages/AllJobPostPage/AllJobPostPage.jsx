@@ -31,11 +31,27 @@ export default class AllJobPostPage extends Component {
   onMakeJobPostClick = () => {
     this.setState({ makeJobPost: true });
   }
+  
+  deleteJobPost = (id) => {
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    };
+    const api = `http://localhost:5000/api/v1/job_posts/${id}`;
+    fetch(api, requestOptions)
+      .then(response => {
+        if (response.status === 200) {
+          this.getJobPosts();
+        }
+      });
+  }
 
   renderJobPosts() {
     return this.state.job_posts.map((post) => {
       if (post.active === true) {
-        return <JobPostDetail key={post.id} jobPost={post} />;
+        return <JobPostDetail key={post.id} jobPost={post} 
+                onDeleteJobPost = {() => this.deleteJobPost(post.id)}
+                />;
       }
     });
   }

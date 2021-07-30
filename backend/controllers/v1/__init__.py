@@ -15,7 +15,7 @@ from .post_controller import (
     PostCommentsController,
     PostCommentController,
 )
-from .course_controller import CourseController, CoursesController
+from .course_controller import CourseController, CoursesController, CourseCategoryController
 from .video_controller import VideoController, VideosController
 from .job_post_controller import JobPostsController, JobPostController
 from .enrollment_controller import EnrollmentController, UserEnrollmentsController
@@ -93,6 +93,9 @@ def set_course_routes(api, docs):
 
     api.add_resource(CourseController, "/courses/<course_id>")
     docs.register(CourseController, blueprint=course_bp_name)
+
+    api.add_resource(CourseCategoryController, "/courses/categories")
+    docs.register(CourseCategoryController, blueprint=course_bp_name)
 
 
 video_bp_name = "video"

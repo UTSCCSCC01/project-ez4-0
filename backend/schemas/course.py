@@ -23,3 +23,10 @@ class GetCoursesSchema(Schema):
         fields.Nested(CourseSchema),
         description="A list of courses"
     )
+
+
+class GetCourseCategoriesSchema(Schema):
+    categories = fields.List(
+        fields.Str(),
+        description="A list of categories"
+    )

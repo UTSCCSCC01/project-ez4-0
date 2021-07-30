@@ -6,7 +6,8 @@ This controller handles the following APIs:
 from flask_apispec import doc, marshal_with, use_kwargs
 from schemas import (
     CourseSchema,
-    GetCoursesSchema
+    GetCoursesSchema,
+    GetCourseCategoriesSchema,
 )
 from schemas.course import CourseQuerySchema
 from .base_controller import BaseController
@@ -44,3 +45,17 @@ class CoursesController(BaseController):
         else:
             courses = Course.query.all()
         return {"courses": courses}
+
+
+@doc(tags=["Course Category"])
+class CourseCategoryController(BaseController):
+    @doc(description="Get all possible categories")
+    @marshal_with(GetCourseCategoriesSchema)
+    def get(self, **_):
+        categories = []
+        courses = Course.query.all()
+        for course in courses:
+            c = course.category
+            if c and c not in categories:
+                categories.append(c)
+        return {"categories": categories}
