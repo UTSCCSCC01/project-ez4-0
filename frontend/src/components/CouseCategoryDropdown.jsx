@@ -3,12 +3,19 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 
 export default function CourseCategoryDropdown({ onFilterCategory }) {
+  const [selectCategory, setSelectCategory] = useState("Categories");
+
+  const activeCategory = (c) => {
+    setSelectCategory(c);
+    onFilterCategory(c);
+  };
+
   return (
     <div className="">
       <Menu as="div" className="relative inline-block text-left">
         <div>
           <Menu.Button className="mt-7 inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-            Categories
+            {selectCategory}
             <ChevronDownIcon
               className="w-5 h-5 ml-2 -mr-1 text-violet-200 hover:text-violet-100"
               aria-hidden="true"
@@ -32,7 +39,7 @@ export default function CourseCategoryDropdown({ onFilterCategory }) {
                     className={`${
                       active ? "bg-gray-200" : "text-gray-900"
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                    onClick={onFilterCategory("Startup")}
+                    onClick={() => activeCategory("Startup")}
                   >
                     {active ? (
                       <AcademicsActiveIcon
@@ -55,7 +62,7 @@ export default function CourseCategoryDropdown({ onFilterCategory }) {
                     className={`${
                       active ? "bg-gray-200" : "text-gray-900"
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                    onClick={onFilterCategory("Programming")}
+                    onClick={() => activeCategory("Programming")}
                   >
                     {active ? (
                       <TutorialActiveIcon
@@ -78,7 +85,7 @@ export default function CourseCategoryDropdown({ onFilterCategory }) {
                     className={`${
                       active ? "bg-gray-200" : "text-gray-900"
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                    onClick={onFilterCategory("Encyclopedia")}
+                    onClick={() => activeCategory("Encyclopedia")}
                   >
                     {active ? (
                       <EncyclopediaActiveIcon
@@ -101,7 +108,7 @@ export default function CourseCategoryDropdown({ onFilterCategory }) {
                     className={`${
                       active ? "bg-gray-200" : "text-gray-900"
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                    onClick={onFilterCategory("Others")}
+                    onClick={() => activeCategory("Others")}
                   >
                     {active ? (
                       <OthersActiveIcon
@@ -126,7 +133,7 @@ export default function CourseCategoryDropdown({ onFilterCategory }) {
                     className={`${
                       active ? "bg-gray-200" : "text-gray-900"
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                    onClick={onFilterCategory("All")}
+                    onClick={() => activeCategory("All")}
                   >
                     {active ? (
                       <AllActiveIcon
