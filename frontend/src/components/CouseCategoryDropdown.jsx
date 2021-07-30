@@ -32,6 +32,7 @@ export default function CourseCategoryDropdown({ onFilterCategory }) {
                     className={`${
                       active ? "bg-gray-200" : "text-gray-900"
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                    onClick={onFilterCategory("Startup")}
                   >
                     {active ? (
                       <AcademicsActiveIcon
@@ -54,6 +55,7 @@ export default function CourseCategoryDropdown({ onFilterCategory }) {
                     className={`${
                       active ? "bg-gray-200" : "text-gray-900"
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                    onClick={onFilterCategory("Programming")}
                   >
                     {active ? (
                       <TutorialActiveIcon
@@ -76,6 +78,7 @@ export default function CourseCategoryDropdown({ onFilterCategory }) {
                     className={`${
                       active ? "bg-gray-200" : "text-gray-900"
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                    onClick={onFilterCategory("Encyclopedia")}
                   >
                     {active ? (
                       <EncyclopediaActiveIcon
@@ -98,6 +101,7 @@ export default function CourseCategoryDropdown({ onFilterCategory }) {
                     className={`${
                       active ? "bg-gray-200" : "text-gray-900"
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                    onClick={onFilterCategory("Others")}
                   >
                     {active ? (
                       <OthersActiveIcon
@@ -122,6 +126,7 @@ export default function CourseCategoryDropdown({ onFilterCategory }) {
                     className={`${
                       active ? "bg-gray-200" : "text-gray-900"
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
+                    onClick={onFilterCategory("All")}
                   >
                     {active ? (
                       <AllActiveIcon
