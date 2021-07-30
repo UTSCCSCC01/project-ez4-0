@@ -120,7 +120,8 @@ def db_seed():
             gender="Male",
             phone_number="6476666611",
             birthdate=date(1999, 4, 4),
-            address="1234 Foo Street"
+            address="1234 Foo Street",
+            bio="This is my favouite profile!"
         )
         alice = create_user(
             "another@utoronto.ca",
@@ -131,7 +132,8 @@ def db_seed():
             gender="Female",
             phone_number="6470208879",
             birthdate=date(1987, 5, 6),
-            address="76 Consumer road"
+            address="76 Consumer road",
+            bio="No pain, no gain."
         )
         bob = create_user(
             "tester@utoronto.ca",
@@ -142,7 +144,8 @@ def db_seed():
             gender="Male",
             phone_number="6471872619",
             birthdate=date(1970, 12, 1),
-            address="46 Finch Ave"
+            address="46 Finch Ave",
+            bio="Let's go."
         )
 
         # Create post for Foo
