@@ -22,6 +22,51 @@ export default class Profile extends Component {
     };
   }
 
+  onFnameChange = (e) => {
+    this.setState({ first_name: e.target.value });
+  };
+
+  onLnameChange = (e) => {
+    this.setState({ last_name: e.target.value });
+  };
+
+  onGenderChange = (e) => {
+    this.setState({ gender: e.target.value });
+  };
+
+  onProfileSubmit = (e) => {
+    e.preventDefault();
+    this.setState({ editProfile: false });
+    this.updateProfile();
+  };
+
+  updateProfile = (first_name, last_name, gender) => {
+    const id = this.state.profileId;
+    const requestOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        address: "",
+        birthdate: "2001-08-17",
+        email: "",
+        first_name: first_name,
+        gender: gender,
+        last_name: last_name,
+        phone_number: "",
+      }),
+    };
+    const api = `http://localhost:5000/api/v1/users/${id}`;
+    fetch(api, requestOptions).then((response) => {
+      if (response.status === 200) {
+        console.log("Updated");
+      }
+    });
+  };
+
+  onEditProfileClick = () => {
+    this.setState({ editProfile: true });
+  };
+
   componentDidMount() {
     this.getInfo();
     this.getPosts();
@@ -55,7 +100,10 @@ export default class Profile extends Component {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     };
-    fetch(`http://localhost:5000/api/v1/posts?posted_by=${userId}`, requestOptions)
+    fetch(
+      `http://localhost:5000/api/v1/posts?posted_by=${userId}`,
+      requestOptions
+    )
       .then((response) => response.json())
       .then((result) => {
         this.setState({ myPosts: result.posts });
@@ -82,7 +130,7 @@ export default class Profile extends Component {
         key={post.id}
         onDeletePost={() => this.deletePost(post.id)}
       />
-    ))
+    ));
   }
 
   render() {
@@ -186,9 +234,7 @@ export default class Profile extends Component {
                 {/* <!-- Experience and education --> */}
                 <div className="bg-gray-100 p-3 shadow-sm rounded-sm">
                   <div className="grid grid-cols-1">
-                    <div>
-                      {this.renderMyPosts()}
-                    </div>
+                    <div>{this.renderMyPosts()}</div>
                   </div>
                   {/* <!-- End of Experience and education grid --> */}
                 </div>
