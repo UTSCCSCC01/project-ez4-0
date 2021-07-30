@@ -90,7 +90,7 @@ export default function AllCourses() {
         </Link>
       ));
     } else {
-      return <div className="mt-3">No matching posts found</div>;
+      return <div className="mt-6 w-full text-center">No courses found</div>;
     }
   };
 

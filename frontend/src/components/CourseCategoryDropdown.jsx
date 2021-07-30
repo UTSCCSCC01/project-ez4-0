@@ -3,7 +3,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 
 export default function CourseCategoryDropdown({ onFilterCategory }) {
-  const [selectCategory, setSelectCategory] = useState("Categories");
+  const [selectCategory, setSelectCategory] = useState("All");
 
   const activeCategory = (c) => {
     setSelectCategory(c);
@@ -14,7 +14,7 @@ export default function CourseCategoryDropdown({ onFilterCategory }) {
     <div className="">
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <Menu.Button className="mt-7 inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+          <Menu.Button className="bg-indigo-500 mt-7 inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-black rounded-md bg-opacity-100 hover:bg-opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
             {selectCategory}
             <ChevronDownIcon
               className="w-5 h-5 ml-2 -mr-1 text-violet-200 hover:text-violet-100"
@@ -39,7 +39,7 @@ export default function CourseCategoryDropdown({ onFilterCategory }) {
                     className={`${
                       active ? "bg-gray-200" : "text-gray-900"
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                    onClick={() => activeCategory("Startup")}
+                    onClick={() => activeCategory("Academics")}
                   >
                     {active ? (
                       <AcademicsActiveIcon
@@ -62,7 +62,7 @@ export default function CourseCategoryDropdown({ onFilterCategory }) {
                     className={`${
                       active ? "bg-gray-200" : "text-gray-900"
                     } group flex rounded-md items-center w-full px-2 py-2 text-sm`}
-                    onClick={() => activeCategory("Programming")}
+                    onClick={() => activeCategory("Tutorial")}
                   >
                     {active ? (
                       <TutorialActiveIcon
