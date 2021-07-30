@@ -11,6 +11,7 @@ class UserSchema(Schema):
     phone_number = fields.Str(description="User phone number")
     birthdate = fields.Date(description="User birthdate")
     address = fields.Str(description="User address")
+    bio = fields.Str(description="User bio")
 
 
 class CreateUserSchema(Schema):

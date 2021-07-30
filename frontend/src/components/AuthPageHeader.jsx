@@ -33,6 +33,8 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
   const menuItemStyle =
     "px-7 py-2 flex items-center bg-black bg-opacity-0 hover:bg-opacity-20";
 
+  const userId = localStorage.getItem("userId");
+
   const handleSearch = (e) => {
     setIsSearch(true);
     if (keyword.indexOf("#") === -1) {
@@ -40,13 +42,12 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
     } else {
       const tags = keyword.split(",").map((t) => {
         return t.replace("#", "").trim();
-      })
+      });
       setSearchTags(tags.join(","));
     }
   };
 
   const getUserInfo = () => {
-    const userId = localStorage.getItem("userId");
     const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -75,9 +76,9 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
 
   if (isSearch) {
     if (searchTags) {
-      return <Redirect to={`/search_results?tags=${searchTags}`} push />
+      return <Redirect to={`/search_results?tags=${searchTags}`} push />;
     }
-    return <Redirect to={`/search_results?keyword=${searchKeyword}`} push />
+    return <Redirect to={`/search_results?keyword=${searchKeyword}`} push />;
   }
 
   return (
@@ -126,10 +127,12 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
                         <div className="bg-white h-px opacity-30 inset-0 mx-5" />
                         <div className="flex flex-row ml-7 mt-5 mr-6 justify-between">
                           <div className="font-medium text-sm flex items-center">
-                            <img
-                              src={avatar || defaultAvatar}
-                              className="rounded-full w-7 h-7 mr-4"
-                            />
+                            <Link to={`/personal_profile/${userId}`} push>
+                              <img
+                                src={avatar || defaultAvatar}
+                                className="rounded-full w-7 h-7 mr-4 cursor-pointer"
+                              />
+                            </Link>
                             <div>
                               {firstName} {lastName}
                             </div>
@@ -191,10 +194,12 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
             </Link>
           </div>
           <div className="mr-6 font-medium text-sm flex items-center">
-            <img
-              src={avatar || defaultAvatar}
-              className="rounded-full w-7 h-7 mr-4"
-            />
+            <Link to={`/personal_profile/${userId}`}>
+              <img
+                src={avatar || defaultAvatar}
+                className="rounded-full w-7 h-7 mr-4 cursor-pointer"
+              />
+            </Link>
             <div>
               {firstName} {lastName}
             </div>
