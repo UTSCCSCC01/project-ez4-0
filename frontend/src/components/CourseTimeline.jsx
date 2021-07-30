@@ -1,7 +1,7 @@
 import React, { Component, useEffect } from "react";
-import { Link } from "react-router-dom";
 
 const TimelineComponent = ({
+  id,
   title,
   timelineState,
   videoIndex,
@@ -10,9 +10,9 @@ const TimelineComponent = ({
   if (timelineState === 0) {
     return (
       <div className="pt-4">
-        <Link
-          className="flex items-center -mt-2"
-          onClick={() => jumpToVideo(videoIndex)}
+        <div
+          className="flex items-center -mt-2 cursor-pointer"
+          onClick={() => jumpToVideo(videoIndex, id)}
         >
           <div
             className="w-3 h-3 rounded-full 
@@ -21,15 +21,15 @@ const TimelineComponent = ({
           <div className="hover:text-gray-400 text-left text-gray-300 h-12 w-48 leading-snug flex items-center text-sm font-medium ml-8">
             <div>{title}</div>
           </div>
-        </Link>
+        </div>
       </div>
     );
   } else if (timelineState === 1) {
     return (
       <div className="">
-        <Link
-          className="flex items-center -mt-2"
-          onClick={() => jumpToVideo(videoIndex)}
+        <div
+          className="flex items-center -mt-2 cursor-pointer"
+          onClick={() => jumpToVideo(videoIndex, id)}
         >
           <div
             className="w-3 h-3 rounded-full 
@@ -38,15 +38,15 @@ const TimelineComponent = ({
           <div className="hover:text-indigo-600 text-indigo-500 h-12 w-48 leading-snug flex items-center text-sm font-medium ml-8">
             <div>{title}</div>
           </div>
-        </Link>
+        </div>
       </div>
     );
   } else if (timelineState === 2) {
     return (
       <div className="">
-        <Link
-          className="flex items-center -mt-2"
-          onClick={() => jumpToVideo(videoIndex)}
+        <div
+          className="flex items-center -mt-2 cursor-pointer"
+          onClick={() => jumpToVideo(videoIndex, id)}
         >
           <div
             className="w-4 h-4 rounded-full 
@@ -55,7 +55,7 @@ border-4 bg-gray-50 absolute border-indigo-500 z-30"
           <div className="hover:text-indigo-600 text-indigo-500 h-12 w-48 leading-snug flex items-center text-sm font-bold ml-8">
             <div>{title}</div>
           </div>
-        </Link>
+        </div>
       </div>
     );
   }
@@ -80,6 +80,7 @@ const CourseTimeline = ({ videos, index, jumpToVideo }) => {
               videoIndex={videos.indexOf(video)}
               jumpToVideo={jumpToVideo}
               id={video.id}
+              key={video.id}
             />
           ) : index > videos.indexOf(video) ? (
             <TimelineComponent
@@ -88,6 +89,7 @@ const CourseTimeline = ({ videos, index, jumpToVideo }) => {
               jumpToVideo={jumpToVideo}
               videoIndex={videos.indexOf(video)}
               id={video.id}
+              key={video.id}
             />
           ) : (
             <></>
@@ -104,6 +106,7 @@ const CourseTimeline = ({ videos, index, jumpToVideo }) => {
               videoIndex={videos.indexOf(video)}
               jumpToVideo={jumpToVideo}
               id={video.id}
+              key={video.id}
             />
           ) : (
             <></>
@@ -119,6 +122,7 @@ const CourseTimeline = ({ videos, index, jumpToVideo }) => {
               <div className="w-0.75 ml-1.75 h-full bottom-5 bg-indigo-500 absolute"></div>
             )}
             <TimelineComponent
+              id={last.id}
               title={last.name}
               timelineState={2}
               videoIndex={videos.indexOf(last)}
@@ -129,6 +133,7 @@ const CourseTimeline = ({ videos, index, jumpToVideo }) => {
           <div>
             <div className="w-0.75 ml-1.75 h-full bottom-5 bg-gray-300 absolute"></div>
             <TimelineComponent
+              id={last.id}
               title={last.name}
               timelineState={0}
               videoIndex={videos.indexOf(last)}

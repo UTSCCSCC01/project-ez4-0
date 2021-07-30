@@ -11,18 +11,20 @@ export default class CourseVideosPage extends React.Component {
       courseId: this.props.match.params.id,
       videos: [],
       currIndex: 0,
+      enrollmentId: "",
     };
   }
 
   componentDidMount() {
     this.getCourseVideos();
+    this.getEnrollment();
   }
 
-  jumpToVideo = (newIndex) => {
-    console.log("jump");
+  jumpToVideo = (newIndex, vid) => {
     this.setState({ currIndex: newIndex });
-    return 0;
+    this.updateEnrollment(vid);
   };
+
   getCourseVideos() {
     const requestOptions = {
       method: "GET",
@@ -34,8 +36,77 @@ export default class CourseVideosPage extends React.Component {
     )
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
         this.setState({ videos: result.videos });
+      });
+  }
+
+  getEnrollment() {
+    const userId = localStorage.getItem("userId");
+    const requestOptions = {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    };
+    fetch(
+      `http://localhost:5000/api/v1/users/${userId}/enrollments`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        // If already enroled
+        const enrollments = result.enrollments;
+        for (let i = 0; i < enrollments.length; i++) {
+          if (enrollments[i].course_id === this.props.match.params.id) {
+            const idx = enrollments[i].finished.length;
+            this.setState({
+              enrollmentId: enrollments[i].id,
+              currIndex: idx === this.state.videos.length? idx - 1: idx,
+            });
+            return;
+          }
+        }
+        // Not enroled then enrol :D
+        this.enrolCourse();
+      });
+  }
+
+  enrolCourse() {
+    const userId = localStorage.getItem("userId");
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        course_id: this.props.match.params.id
+      })
+    };
+    fetch(
+      `http://localhost:5000/api/v1/users/${userId}/enrollments`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        this.setState({ enrollmentId: result.id, currIndex: 0 });
+      });
+  }
+
+  updateEnrollment(videoId) {
+    if (!this.state.enrollmentId) {
+      return;
+    }
+    const userId = localStorage.getItem("userId");
+    const requestOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        enrollment_id: this.state.enrollmentId,
+        video_id: videoId,
+      }),
+    };
+    fetch(
+      `http://localhost:5000/api/v1/users/${userId}/enrollments`,
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
       });
   }
 
