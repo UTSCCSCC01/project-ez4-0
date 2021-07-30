@@ -2,24 +2,12 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthPageHeader from "../../components/AuthPageHeader";
 import "../../css/PostBoxComponent.css";
-import SearchBar from "../../components/SearchBar2";
-import CourseCategoryDropdown from "../../components/CouseCategoryDropdown";
+import { SearchIcon } from "@heroicons/react/outline";
+import CourseCategoryDropdown from "../../components/CourseCategoryDropdown";
 
 export default function AllCourses({ onCreatePost }) {
   const [courses, setCourses] = useState([]);
   const [keyword, setKeyword] = useState("");
-  const [isSearch, setIsSearch] = useState(false);
-  const [searchKeyword, setSearchKeyword] = useState("");
-
-  const updateInput = async (keyword) => {
-    setKeyword(keyword);
-  };
-
-  const handleSearch = (e) => {
-    setSearchKeyword(keyword);
-    getSearchCourses();
-    console.warn("searched");
-  };
 
   const getCourses = () => {
     const requestOptions = {
@@ -39,7 +27,7 @@ export default function AllCourses({ onCreatePost }) {
       headers: { "Content-Type": "application/json" },
     };
     fetch(
-      `http://localhost:5000/api/v1/courses?keyword=${searchKeyword}`,
+      `http://localhost:5000/api/v1/courses?keyword=${keyword}`,
       requestOptions
     )
       .then((response) => response.json())
@@ -47,6 +35,13 @@ export default function AllCourses({ onCreatePost }) {
         setCourses(result.courses);
       });
   };
+
+  const onSearchKeyDown = (e) => {
+    console.log(e);
+    if (e.code === "Enter") {
+      getSearchCourses();
+    }
+  }
 
   useEffect(() => {
     getCourses();
@@ -76,13 +71,17 @@ export default function AllCourses({ onCreatePost }) {
       <AuthPageHeader currentTab="Learn" />
 
       <div className="bg-gray-50 flex flex-row justify-center">
-        <SearchBar
-          className=""
-          input={keyword}
-          updateInput={updateInput}
-          handleSearch={handleSearch}
-        />
-        <CourseCategoryDropdown className="" />
+        <div className="pt-6 px-4 rounded-md bg-opacity-20 bg-white flex place-items-center md:w-1/2">
+          <SearchIcon className="h-5 bg-white mr-3" />
+          <input
+            className=" flex-auto mx-auto ml-1 my-auto p-2 bg-white rounded shadow-md"
+            value={keyword}
+            placeholder={"Search courses by keyword"}
+            onChange={(e) => setKeyword(e.target.value)}
+            onKeyDown={onSearchKeyDown}
+          />
+        </div>
+        <CourseCategoryDropdown />
       </div>
 
       <div className="bg-gray-50">
