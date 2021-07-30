@@ -8,10 +8,7 @@ import CourseCategoryDropdown from "../../components/CourseCategoryDropdown";
 export default function AllCourses() {
   const [courses, setCourses] = useState([]);
   const [keyword, setKeyword] = useState("");
-
-  const onFilterCategory = (category) => {
-    getCategoryCourses(category);
-  };
+  const [category, setCategory] = useState("");
 
   const getCourses = () => {
     const requestOptions = {
@@ -25,25 +22,65 @@ export default function AllCourses() {
       });
   };
 
-  const getSearchCourses = () => {
+  const onSearchKeyDown = (e) => {
+    if (e.code === "Enter") {
+      const requestOptions = {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      };
+      let reqUrl = "";
+      if (category === "All") {
+        if (keyword) {
+          reqUrl = `http://localhost:5000/api/v1/courses?keyword=${keyword}`;
+        } else {
+          getCourses();
+        }
+      } else {
+        if (keyword) {
+          reqUrl = `http://localhost:5000/api/v1/courses?keyword=${keyword}&category=${category}`;
+        } else {
+          reqUrl = `http://localhost:5000/api/v1/courses?category=${category}`;
+        }
+      }
+      fetch(
+        reqUrl,
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          setCourses(result.courses);
+        });
+    }
+  }
+
+  const setSelectedCategory = (category) => {
+    setCategory(category);
     const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     };
+    let reqUrl = "";
+    if (category === "All") {
+      if (keyword) {
+        reqUrl = `http://localhost:5000/api/v1/courses?keyword=${keyword}`;
+      } else {
+        getCourses();
+      }
+    } else {
+      if (keyword) {
+        reqUrl = `http://localhost:5000/api/v1/courses?keyword=${keyword}&category=${category}`;
+      } else {
+        reqUrl = `http://localhost:5000/api/v1/courses?category=${category}`;
+      }
+    }
     fetch(
-      `http://localhost:5000/api/v1/courses?keyword=${keyword}`,
+      reqUrl,
       requestOptions
     )
       .then((response) => response.json())
       .then((result) => {
         setCourses(result.courses);
       });
-  };
-
-  const onSearchKeyDown = (e) => {
-    if (e.code === "Enter") {
-      getSearchCourses();
-    }
   }
 
   const getCategoryCourses = (category) => {
@@ -109,7 +146,7 @@ export default function AllCourses() {
             onKeyDown={onSearchKeyDown}
           />
         </div>
-        <CourseCategoryDropdown onFilterCategory={onFilterCategory}/>
+        <CourseCategoryDropdown onFilterCategory={setSelectedCategory}/>
       </div>
 
       <div className="bg-gray-50">
