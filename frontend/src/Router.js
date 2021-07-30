@@ -10,7 +10,6 @@ import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import AllPostsPage from "./pages/AllPostsPage/AllPostsPage";
 import MakeJobPostPage from "./pages/MakeJobPostPage/MakeJobPostPage";
 import AllCoursesPage from "./pages/AllCoursesPage/AllCoursesPage";
-import AllCoursesSearchPage from "./pages/AllCoursesPage/AllCoursesSearchPage";
 import CourseVideosPage from "./pages/CourseVideosPage/CourseVideosPage";
 import AuthRoute from "./components/AuthRoute";
 
@@ -47,7 +46,7 @@ export default function AppRouter() {
 
         <Route path="/courses">
           <AuthRoute>
-            <AllCoursesSearchPage />
+            <AllCoursesPage />
           </AuthRoute>
         </Route>
 
