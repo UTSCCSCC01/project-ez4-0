@@ -25,6 +25,10 @@ class User(BaseModel):
         unique=True
     )
 
+    bio = db.Column(
+        db.String
+    )
+
     password = db.Column(
         db.String,
         nullable=False,
