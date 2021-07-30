@@ -201,10 +201,10 @@ def db_seed():
         )
 
         # Courses
-        course_a = create_course("How to be successful in startup", "Startup", "Teach you how to be successful")
-        course_b = create_course("How to be successful in startup II", "Startup", "Second series")
-        course_c = create_course("Java Tutorial", "Programming", "A series of Java tutorial")
-        course_d = create_course("Python Tutorial", "Programming", "A series of Python tutorial")
+        course_a = create_course("How to be successful in startup", "Academics", "Teach you how to be successful")
+        course_b = create_course("How to be successful in startup II", "Academics", "Second series")
+        course_c = create_course("Java Tutorial", "Tutorial", "A series of Java tutorial")
+        course_d = create_course("Python Tutorial", "Tutorial", "A series of Python tutorial")
 
         # Videos for course_a
         course_a_vid_a = create_video("1. Step one", "Learn", "https://www.youtube.com/watch?v=QoqohmccTSc", course_a.id)
