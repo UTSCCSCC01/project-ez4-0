@@ -59,7 +59,7 @@ export default class CourseVideosPage extends React.Component {
             const idx = enrollments[i].finished.length;
             this.setState({
               enrollmentId: enrollments[i].id,
-              currIndex: idx === this.state.videos.length? idx - 1: idx,
+              currIndex: idx === 0? 0 : idx - 1,
             });
             return;
           }
