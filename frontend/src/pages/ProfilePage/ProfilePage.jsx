@@ -273,13 +273,12 @@ export default class Profile extends Component {
   };
 
   getPosts() {
-    const userId = localStorage.getItem("userId");
     const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     };
     fetch(
-      `http://localhost:5000/api/v1/posts?posted_by=${userId}`,
+      `http://localhost:5000/api/v1/posts?posted_by=${this.props.match.params.id}`,
       requestOptions
     )
       .then((response) => response.json())
