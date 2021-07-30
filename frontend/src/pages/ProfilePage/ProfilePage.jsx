@@ -15,7 +15,63 @@ export default class Profile extends Component{
       last_name: [],
       phone: [],
       gender:[],
+      editProfile:false,
     }
+  }
+
+
+  onFnameChange = (e) =>{
+    this.setState({first_name:e.target.value})
+  } 
+
+  onLnameChange = (e) =>{
+    this.setState({last_name:e.target.value})
+  }
+
+  onGenderChange = (e) =>{
+    this.setState({gender:e.target.value})
+  }
+
+
+  onProfileSubmit = (e) => {
+    e.preventDefault();
+    this.setState({editProfile:false});
+    this.updateProfile();
+  }
+
+  updateProfile = (
+    first_name,
+    last_name,
+    gender,
+  ) => {
+      const id = this.state.profileId;
+      const requestOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        address: "",
+        birthdate: "2001-08-17",
+        email: "",
+        first_name: first_name,
+        gender: gender,
+        last_name: last_name,
+        phone_number: "",
+      }),
+    };
+    const api = `http://localhost:5000/api/v1/users/${id}`;
+    fetch(api, requestOptions)
+      .then((response) =>{
+        if (response.status === 200) {
+          console.log("Updated");
+        }
+      });
+  }
+
+
+
+
+  onEditProfileClick = () => {
+    this.setState({ editProfile: true });
   }
 
   componentDidMount() {
@@ -42,9 +98,225 @@ export default class Profile extends Component{
       });
   }
 
+  renderAbout = () => {
+    const userId = localStorage.getItem("userId");
+    return(
+      <div className="bg-white p-3 shadow-sm rounded-sm">
+      <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
+        <span className="text-indigo-600">
+          <svg
+            className="h-5"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+            />
+          </svg>
+        </span>
+        <span className="tracking-wide">About</span>
+  
+        <div>
+          {this.state.profileId === userId && (
+          <button
+            onClick={this.onEditProfileClick}
+            className="focus:outline-none bg-white transition ease-out duration-300 hover:text-red-500 w-9 h-9 px-2 border-none text-center rounded-full text-gray-400 cursor-pointer mr-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              viewBox="0 0 25 25"
+              fill="none"
+              stroke="currentColor"
+            >
+            <path 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              stroke-width="2" 
+              d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+              </svg>
+            </button>
+          )}
+        </div>
+  
+      </div>
+      <div>
+      {this.renderInfo()}
+      </div>
 
 
+    </div>
+    );
+  }
+
+
+  renderInfo = ()=>{
+    if(!this.state.editProfile){
+      return(
+        <div className="text-gray-700">
+    
+        <div className="grid md:grid-cols-2 text-sm">
+          <div className="grid grid-cols-2">
+            <div className="px-4 py-2 font-semibold">First Name</div>
+            <div className="px-4 py-2">{this.state.first_name}</div>
+          </div>
+          <div className="grid grid-cols-2">
+            <div className="px-4 py-2 font-semibold">Last Name</div>
+            <div className="px-4 py-2">{this.state.last_name}</div>
+          </div>
+          <div className="grid grid-cols-2">
+            <div className="px-4 py-2 font-semibold">Gender</div>
+            <div className="px-4 py-2">{this.state.gender}</div>
+          </div>
+          <div className="grid grid-cols-2">
+            <div className="px-4 py-2 font-semibold">Contact No.</div>
+            <div className="px-4 py-2">{this.state.phone}</div>
+          </div>
+          <div className="grid grid-cols-2">
+            <div className="px-4 py-2 font-semibold">
+              Current Address
+            </div>
+            <div className="px-4 py-2">{this.state.address}</div>
+          </div>
+          <div className="grid grid-cols-2">
+            <div className="px-4 py-2 font-semibold">
+              Permanant Address
+            </div>
+            <div className="px-4 py-2">{this.state.address}</div>
+          </div>
+          <div className="grid grid-cols-2">
+            <div className="px-4 py-2 font-semibold">Email.</div>
+            <div className="px-4 py-2">
+              <a
+                className="text-blue-800"
+                href="mailto:jane@example.com"
+              >
+                {this.state.email}
+              </a>
+            </div>
+          </div>
+          <div className="grid grid-cols-2">
+            <div className="px-4 py-2 font-semibold">Birthday</div>
+            <div className="px-4 py-2">{this.state.birthdate}</div>
+          </div>
+        </div>
+  
+  
+      </div>
+      );
+    }
+    else{
+      return(
+        <div className="text-gray-700">
+        <form
+          onSubmit={this.onProfileSubmit}
+        >
+          <div className="grid md:grid-cols-2 text-sm">
+            <div className="grid grid-cols-2">
+              <div className="px-4 py-2 font-semibold">First Name</div>
+              <div className="px-4 py-2">
+                
+                <input
+                  className="w-full px-5 py-2 text-gray-700 bg-gray-100 rounded"
+                  id="first_name"
+                  name="first_name"
+                  placeholder="first_name"
+                  onChange={this.onFnameChange}
+                  value={this.state.first_name}
+
+                ></input>
+
+              </div>
+            </div>
+            <div className="grid grid-cols-2">
+              <div className="px-4 py-2 font-semibold">Last Name</div>
+              <div className="px-4 py-2">
+                
+                <input
+                    className="w-full px-5 py-2 text-gray-700 bg-gray-100 rounded"
+                    id="last_name"
+                    name="last_name"
+                    placeholder="last_name"
+                    onChange={this.onLnameChange}
+                    value={this.state.last_name}
+
+                  ></input>
+                
+              </div>
+            </div>
+            <div className="grid grid-cols-2">
+              <div className="px-4 py-2 font-semibold">Gender</div>
+              <div className="px-4 py-2">
+                <input
+                      className="w-full px-5 py-2 text-gray-700 bg-gray-100 rounded"
+                      id="gender"
+                      name="gender"
+                      placeholder="gender"
+                      onChange={this.onGenderChange}
+                      value={this.state.gender}
+                ></input>             
+              </div>
+            </div>
+            <div className="grid grid-cols-2">
+              <div className="px-4 py-2 font-semibold">Contact No.</div>
+              <div className="px-4 py-2">{this.state.phone}</div>
+            </div>
+            <div className="grid grid-cols-2">
+              <div className="px-4 py-2 font-semibold">
+                Current Address
+              </div>
+              <div className="px-4 py-2">{this.state.address}</div>
+            </div>
+            <div className="grid grid-cols-2">
+              <div className="px-4 py-2 font-semibold">
+                Permanant Address
+              </div>
+              <div className="px-4 py-2">{this.state.address}</div>
+            </div>
+            <div className="grid grid-cols-2">
+              <div className="px-4 py-2 font-semibold">Email.</div>
+              <div className="px-4 py-2">
+                <a
+                  className="text-blue-800"
+                  href="mailto:jane@example.com"
+                >
+                  {this.state.email}
+                </a>
+              </div>
+            </div>
+            <div className="grid grid-cols-2">
+              <div className="px-4 py-2 font-semibold">Birthday</div>
+              <div className="px-4 py-2">{this.state.birthdate}</div>
+            </div>
+
+            <div className="w-1/2 grid justify-items-start">
+              <button
+                type="submit"
+                className="customize-post-box-post-btn group relative w-1/3 flex justify-center py-2 px-1 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              >
+                Save
+              </button>
+            </div>
+
+
+           
+
+
+          </div>
+        </form>
+      </div>
+      );
+    }
+  }
+
+  
   render(){
+    const userId = localStorage.getItem("userId");
     return (
       <div>
         <link
@@ -150,77 +422,8 @@ export default class Profile extends Component{
               <div className="w-full md:w-9/12 mx-2 h-64">
                 {/* <!-- Profile tab -->
                         <!-- About Section --> */}
-                <div className="bg-white p-3 shadow-sm rounded-sm">
-                  <div className="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
-                    <span className="text-indigo-600">
-                      <svg
-                        className="h-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                        />
-                      </svg>
-                    </span>
-                    <span className="tracking-wide">About</span>
-                  </div>
-                  <div className="text-gray-700">
-                    <div className="grid md:grid-cols-2 text-sm">
-                      <div className="grid grid-cols-2">
-                        <div className="px-4 py-2 font-semibold">First Name</div>
-                        <div className="px-4 py-2">{this.state.first_name}</div>
-                      </div>
-                      <div className="grid grid-cols-2">
-                        <div className="px-4 py-2 font-semibold">Last Name</div>
-                        <div className="px-4 py-2">{this.state.last_name}</div>
-                      </div>
-                      <div className="grid grid-cols-2">
-                        <div className="px-4 py-2 font-semibold">Gender</div>
-                        <div className="px-4 py-2">{this.state.gender}</div>
-                      </div>
-                      <div className="grid grid-cols-2">
-                        <div className="px-4 py-2 font-semibold">Contact No.</div>
-                        <div className="px-4 py-2">{this.state.phone}</div>
-                      </div>
-                      <div className="grid grid-cols-2">
-                        <div className="px-4 py-2 font-semibold">
-                          Current Address
-                        </div>
-                        <div className="px-4 py-2">{this.state.address}</div>
-                      </div>
-                      <div className="grid grid-cols-2">
-                        <div className="px-4 py-2 font-semibold">
-                          Permanant Address
-                        </div>
-                        <div className="px-4 py-2">{this.state.address}</div>
-                      </div>
-                      <div className="grid grid-cols-2">
-                        <div className="px-4 py-2 font-semibold">Email.</div>
-                        <div className="px-4 py-2">
-                          <a
-                            className="text-blue-800"
-                            href="mailto:jane@example.com"
-                          >
-                            {this.state.email}
-                          </a>
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-2">
-                        <div className="px-4 py-2 font-semibold">Birthday</div>
-                        <div className="px-4 py-2">{this.state.birthdate}</div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* <button
-                                className="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">Show
-                                Full Information</button> */}
-                </div>
+
+                  {this.renderAbout()}
                 {/* <!-- End of about section --> */}
 
                 <div className="my-4"></div>
