@@ -119,11 +119,17 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
                       </div>
                       <div className="font-medium pb-5">
                         <div className="bg-white h-px opacity-30 inset-0 mx-5" />
-                        <a className={menuItemStyle}>Home</a>
+                        <Link to="/dashboard" className={menuItemStyle}>
+                          Home
+                        </Link>
                         <div className="bg-white h-px opacity-30 inset-0 mx-5" />
-                        <a className={menuItemStyle}>Learn</a>
+                        <Link to="/courses" className={menuItemStyle}>
+                          Learn
+                        </Link>
                         <div className="bg-white h-px opacity-30 inset-0 mx-5" />
-                        <a className={menuItemStyle}>Jobs</a>
+                        <Link to="/all_jobs" className={menuItemStyle}>
+                          Jobs
+                        </Link>
                         <div className="bg-white h-px opacity-30 inset-0 mx-5" />
                         <div className="flex flex-row ml-7 mt-5 mr-6 justify-between">
                           <div className="font-medium text-sm flex items-center">
@@ -167,12 +173,12 @@ const AuthPageHeader = ({ updateResult, currentTab }) => {
           <div className="flex flex-grow justify-center">
             <img src={logo} className="h-6 mx-5" />
           </div>
-          <Popover className="px-5 flex content-center">
+          {/* <Popover className="px-5 flex content-center">
             <Popover.Button className="">
               <BellIcon className="h-6 w-6" />
             </Popover.Button>
             <Popover.Panel>Panel</Popover.Panel>
-          </Popover>
+          </Popover> */}
         </div>
         <div className="hidden md:flex w-screen items-center">
           <img src={logo} className="mx-8 h-7" />
