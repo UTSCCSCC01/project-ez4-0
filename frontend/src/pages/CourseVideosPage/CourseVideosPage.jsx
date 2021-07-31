@@ -10,6 +10,8 @@ export default class CourseVideosPage extends React.Component {
     this.state = {
       courseId: this.props.match.params.id,
       videos: [],
+      category: "Learn",
+      courseName: "Course Name",
       currIndex: 0,
       enrollmentId: "",
     };
@@ -36,7 +38,11 @@ export default class CourseVideosPage extends React.Component {
     )
       .then((response) => response.json())
       .then((result) => {
-        this.setState({ videos: result.videos });
+        this.setState({
+          videos: result.videos,
+          category: result.category,
+          courseName: result.name,
+        });
       });
   }
 
@@ -59,7 +65,7 @@ export default class CourseVideosPage extends React.Component {
             const idx = enrollments[i].finished.length;
             this.setState({
               enrollmentId: enrollments[i].id,
-              currIndex: idx === 0? 0 : idx - 1,
+              currIndex: idx === 0 ? 0 : idx - 1,
             });
             return;
           }
@@ -75,8 +81,8 @@ export default class CourseVideosPage extends React.Component {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        course_id: this.props.match.params.id
-      })
+        course_id: this.props.match.params.id,
+      }),
     };
     fetch(
       `http://localhost:5000/api/v1/users/${userId}/enrollments`,
@@ -106,8 +112,7 @@ export default class CourseVideosPage extends React.Component {
       requestOptions
     )
       .then((response) => response.json())
-      .then((result) => {
-      });
+      .then((result) => {});
   }
 
   render() {
@@ -117,8 +122,8 @@ export default class CourseVideosPage extends React.Component {
     return (
       <div>
         <AuthPageHeader currentTab="Learn" />
-        <div className="flex flex-col justify-center mt-3">
-          <div className="bg-gray-50 h-screen -mt-5">
+        <div className="bg-gray-50 h-screen -mt-5">
+          <div className="flex flex-col justify-center mt-3">
             <div
               className="mt-20 flex justify-center"
               key={this.state.videos[this.state.currIndex].id}
@@ -128,13 +133,12 @@ export default class CourseVideosPage extends React.Component {
                   url={this.state.videos[this.state.currIndex].url}
                   controls={true}
                 />
-                <div className="mt-5 text-2xl font-bold text-gray-600 ">
-                  {this.state.videos[this.state.currIndex].name}
+                <div className="flex items-baseline mt-5 text-md font-bold text-gray-400 uppercase space-x-4">
+                  <div>{this.state.courseName}</div>
+                  <div className="text-indigo-400">#{this.state.category}</div>
                 </div>
-                <div className="flex mt-2 space-x-2">
-                  <TagBadge isSelected={true} tagName="Speech" />
-                  <TagBadge isSelected={true} tagName="Learn" />
-                  <TagBadge isSelected={true} tagName="Ideas" />
+                <div className="mt-0.5 text-2xl font-bold text-gray-700 capitalize">
+                  {this.state.videos[this.state.currIndex].name}
                 </div>
               </div>
               <div className="mt-5">
