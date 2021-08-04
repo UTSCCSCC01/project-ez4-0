@@ -60,18 +60,20 @@ export default class CourseVideosPage extends React.Component {
       .then((result) => {
         // If already enroled
         const enrollments = result.enrollments;
-        for (let i = 0; i < enrollments.length; i++) {
-          if (enrollments[i].course_id === this.props.match.params.id) {
-            const idx = enrollments[i].finished.length;
-            this.setState({
-              enrollmentId: enrollments[i].id,
-              currIndex: idx === 0 ? 0 : idx - 1,
-            });
-            return;
+        if (enrollments) {
+          for (let i = 0; i < enrollments.length; i++) {
+            if (enrollments[i].course_id === this.props.match.params.id) {
+              const idx = enrollments[i].finished.length;
+              this.setState({
+                enrollmentId: enrollments[i].id,
+                currIndex: idx === 0 ? 0 : idx - 1,
+              });
+              return;
+            }
           }
+          // Not enroled then enrol :D
+          this.enrolCourse();
         }
-        // Not enroled then enrol :D
-        this.enrolCourse();
       });
   }
 
@@ -122,14 +124,16 @@ export default class CourseVideosPage extends React.Component {
     return (
       <div>
         <AuthPageHeader currentTab="Learn" />
-        <div className="bg-gray-50 h-screen -mt-5">
-          <div className="flex flex-col justify-center mt-3">
+        <div className="bg-gray-50 h-screen">
+          <div className="flex justify-center pb-20">
             <div
-              className="mt-20 flex justify-center"
+              className="mt-10 flex flex-col md:flex-row justify-center"
               key={this.state.videos[this.state.currIndex].id}
             >
-              <div className="py-10 px-8 bg-white border border-grey-500 rounded-md shadow-md">
+              <div className="py-10 px-8 m-5 bg-white border border-grey-500 rounded-md shadow-md">
                 <ReactPlayer
+                  className=" md:min-w-forReactPlayer"
+                  width="auto"
                   url={this.state.videos[this.state.currIndex].url}
                   controls={true}
                 />

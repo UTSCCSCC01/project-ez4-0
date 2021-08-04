@@ -9,7 +9,7 @@ module.exports = {
       borderWidth: {
         3: "3px",
       },
-      width: {},
+      minWidth: { forReactPlayer: "38rem" },
       boxShadow: {
         post: "0 2px 2px -1px rgba(0, 0, 0, 0.1), 0 2px 2px -1px rgba(0, 0, 0, 0.06)",
       },

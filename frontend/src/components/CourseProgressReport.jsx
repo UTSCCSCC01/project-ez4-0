@@ -25,9 +25,11 @@ class CourseProgessReport extends Component {
     )
       .then((response) => response.json())
       .then((result) => {
-        result.enrollments.forEach((e) => {
-          this.getCourse(e.finished, e.course_id);
-        });
+        if (result.enrollments) {
+          result.enrollments.forEach((e) => {
+            this.getCourse(e.finished, e.course_id);
+          });
+        }
       });
   }
 
@@ -58,21 +60,25 @@ class CourseProgessReport extends Component {
           return (
             <Link to={`/course_videos/${courseId}`} key={courseId}>
               <div className="mb-4 hover:bg-gray-200 p-2 cursor-pointer rounded-md transition ease-out duration-300">
-                <div className="font-normal text-md mb-2 text-gray-700">{courseName}</div>
+                <div className="font-normal text-md mb-2 text-gray-700">
+                  {courseName}
+                </div>
                 <div className="flex shadow text-gray-700 font-normal text-sm self-center w-full rounded-lg bg-gray-100 mb-2 justify-center">
                   No Progress Yet
                 </div>
               </div>
             </Link>
-          )
+          );
         }
         return (
           <Link to={`/course_videos/${courseId}`} key={courseId}>
             <div className="mb-4 hover:bg-gray-200 p-2 cursor-pointer rounded-md transition ease-out duration-300">
-              <div className="font-normal text-md mb-2 text-gray-700">{courseName}</div>
-              <div className="flex shadow self-center w-full rounded-lg bg-gray-100 mb-2">
+              <div className="font-bold text-sm mb-2 text-gray-500">
+                {courseName}
+              </div>
+              <div className="flex shadow self-center w-full rounded-lg bg-gray-100">
                 <div
-                  className="bg-blue-500 text-sm w-auto font-bold rounded-lg leading-4 py-1 text-center text-white"
+                  className="bg-indigo-400 text-xs w-auto font-bold rounded-md leading-4 py-0.5 text-center text-white"
                   style={{ width: `${percent}%` }}
                 >
                   {percent}%
@@ -87,7 +93,7 @@ class CourseProgessReport extends Component {
 
   render() {
     return (
-      <div className="flex-col mx-auto justify-self-center max-w-xl mt-2">
+      <div className="p-4 flex-col mx-auto border rounded-md shadow-sm bg-white justify-self-center max-w-xl mt-2">
         {this.renderProgress()}
       </div>
     );
