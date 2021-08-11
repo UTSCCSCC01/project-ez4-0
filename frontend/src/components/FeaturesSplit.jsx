@@ -1,5 +1,6 @@
-import img1 from "../img/UI-Bob's Scenario.png";
-import img2 from "../img/UI-Alice's Scenario.png";
+import img1 from "../img/img1.png";
+import img2 from "../img/img2.png";
+import img3 from "../img/img3.png";
 import Fade from "react-reveal/Fade";
 const Card = ({ title, subtitle, content, img }) => {
   return (
@@ -26,24 +27,24 @@ const FeaturesSplit = () => {
         <Card
           img={img1}
           title="Community for Everyone"
-          subtitle="COMMUNITY FOR EVERYONE"
-          content="It is a long established fact that a reader will be distracted by
-        the readable content of a page when looking at its layout. The point
-        of using Lorem Ipsum is that it has a more-or-less normal
-        distribution of letters, as opposed to using 'Content here, content
-        here', making it look like readable English."
+          subtitle="POST ANYTHING"
+          content="You can post anything you want for your business and future, no matter you are a startup entrepreuner, learner or a recruiter."
+        />
+      </Fade>
+      <Fade left>
+        <Card
+          img={img3}
+          title="Find Your Partners"
+          subtitle="FIND YOUR PARTNERS"
+          content="Find your partners on our website. You can post anything you want for your business and future, no matter you are a startup entrepreuner, learner or a recruiter."
         />
       </Fade>
       <Fade left>
         <Card
           img={img2}
-          title="Find Your Partners"
-          subtitle="FIND YOUR PARTNERS"
-          content="It is a long established fact that a reader will be distracted by
-        the readable content of a page when looking at its layout. The point
-        of using Lorem Ipsum is that it has a more-or-less normal
-        distribution of letters, as opposed to using 'Content here, content
-        here', making it look like readable English."
+          title="Learn New Things"
+          subtitle="LEARNING COMUNITY"
+          content="You can post anything you want for your business and future, no matter you are a startup entrepreuner, learner or a recruiter."
         />
       </Fade>
       <Fade left>
@@ -51,23 +52,7 @@ const FeaturesSplit = () => {
           img={img1}
           title="Community for Everyone"
           subtitle="COMMUNITY FOR EVERYONE"
-          content="It is a long established fact that a reader will be distracted by
-        the readable content of a page when looking at its layout. The point
-        of using Lorem Ipsum is that it has a more-or-less normal
-        distribution of letters, as opposed to using 'Content here, content
-        here', making it look like readable English."
-        />
-      </Fade>
-      <Fade left>
-        <Card
-          img={img1}
-          title="Community for Everyone"
-          subtitle="COMMUNITY FOR EVERYONE"
-          content="It is a long established fact that a reader will be distracted by
-        the readable content of a page when looking at its layout. The point
-        of using Lorem Ipsum is that it has a more-or-less normal
-        distribution of letters, as opposed to using 'Content here, content
-        here', making it look like readable English."
+          content="You can post anything you want for your business and future, no matter you are a startup entrepreuner, learner or a recruiter."
         />
       </Fade>
     </div>
