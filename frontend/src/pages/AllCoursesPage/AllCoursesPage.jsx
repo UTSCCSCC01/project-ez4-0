@@ -42,16 +42,13 @@ export default function AllCourses() {
           reqUrl = `http://localhost:5000/api/v1/courses?category=${category}`;
         }
       }
-      fetch(
-        reqUrl,
-        requestOptions
-      )
+      fetch(reqUrl, requestOptions)
         .then((response) => response.json())
         .then((result) => {
           setCourses(result.courses);
         });
     }
-  }
+  };
 
   const setSelectedCategory = (category) => {
     setCategory(category);
@@ -73,15 +70,12 @@ export default function AllCourses() {
         reqUrl = `http://localhost:5000/api/v1/courses?category=${category}`;
       }
     }
-    fetch(
-      reqUrl,
-      requestOptions
-    )
+    fetch(reqUrl, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setCourses(result.courses);
       });
-  }
+  };
 
   const getCategoryCourses = (category) => {
     if (category == "All") {
@@ -146,10 +140,10 @@ export default function AllCourses() {
             onKeyDown={onSearchKeyDown}
           />
         </div>
-        <CourseCategoryDropdown onFilterCategory={setSelectedCategory}/>
+        <CourseCategoryDropdown onFilterCategory={setSelectedCategory} />
       </div>
 
-      <div className="bg-gray-50">
+      <div className="h-screen bg-gray-50">
         <div>
           <div className="max-w-6xl mx-auto px-5 py-3 ">
             <div className="flex flex-wrap -m-4">{renderCourses()}</div>
