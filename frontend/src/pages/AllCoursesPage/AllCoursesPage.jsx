@@ -42,16 +42,13 @@ export default function AllCourses() {
           reqUrl = `http://localhost:5000/api/v1/courses?category=${category}`;
         }
       }
-      fetch(
-        reqUrl,
-        requestOptions
-      )
+      fetch(reqUrl, requestOptions)
         .then((response) => response.json())
         .then((result) => {
           setCourses(result.courses);
         });
     }
-  }
+  };
 
   const setSelectedCategory = (category) => {
     setCategory(category);
@@ -73,15 +70,12 @@ export default function AllCourses() {
         reqUrl = `http://localhost:5000/api/v1/courses?category=${category}`;
       }
     }
-    fetch(
-      reqUrl,
-      requestOptions
-    )
+    fetch(reqUrl, requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setCourses(result.courses);
       });
-  }
+  };
 
   const getCategoryCourses = (category) => {
     if (category == "All") {
@@ -115,11 +109,11 @@ export default function AllCourses() {
           key={course.id}
         >
           <div className="border border-gray-300 p-3 rounded-lg hover:bg-gray-200 transition ease-out duration-300">
-            <img
+            {/* <img
               className="rounded"
               src="https://picsum.photos/536/354"
               alt="User post image"
-            />
+            /> */}
             <h2 className="text-lg pt-2 font-medium title-font">
               {course.name}
             </h2>
@@ -146,7 +140,7 @@ export default function AllCourses() {
             onKeyDown={onSearchKeyDown}
           />
         </div>
-        <CourseCategoryDropdown onFilterCategory={setSelectedCategory}/>
+        <CourseCategoryDropdown onFilterCategory={setSelectedCategory} />
       </div>
 
       <div className="bg-gray-50">
