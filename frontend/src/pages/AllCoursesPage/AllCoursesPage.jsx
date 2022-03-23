@@ -109,11 +109,11 @@ export default function AllCourses() {
           key={course.id}
         >
           <div className="border border-gray-300 p-3 rounded-lg hover:bg-gray-200 transition ease-out duration-300">
-            <img
+            {/* <img
               className="rounded"
               src="https://picsum.photos/536/354"
               alt="User post image"
-            />
+            /> */}
             <h2 className="text-lg pt-2 font-medium title-font">
               {course.name}
             </h2>
